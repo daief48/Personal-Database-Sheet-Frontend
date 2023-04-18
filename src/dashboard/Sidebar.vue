@@ -1,0 +1,121 @@
+<template>
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="">
+
+    <!-- Admin-Panel-View-Top-Left -->
+    <a href="#" class="brand-link" style="background-color: #eeeeee; border: none">
+      
+      <span class="brand-text admin-panel-view-top-left">Admin Panel</span>
+    </a>
+
+    <div class="sidebar" style="padding: 0px 7px;height: 100%;width: 100%;background-color: #00497a;opacity: .8;">
+      <nav class="mt-3">
+
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item nav-item-design" :class="$route.path == '/dashboard' ? 'active' : ''">
+            <router-link to="/dashboard" class="nav-link"><i class="fa fa-tachometer"></i> Dashboard</router-link>
+          </li>
+          <!-- User[Main Menu] -->
+          <li class="nav-item nav-item-design" :class="$route.path == '/users' ? 'active' : ''">
+            <router-link to="/users" class="nav-link"><i class="fa fa-users nav-icon"></i> Users List</router-link>
+          </li>
+          <li class="nav-item nav-item-design" :class="$route.path == '/profile' ? 'active' : ''">
+            <router-link to="/profile" class="nav-link"><i class="fa fa-user nav-icon"></i> Profile</router-link>
+          </li>
+          <li class="nav-item nav-item-design" :class="$route.path == '/transfer' ? 'active' : ''">
+            <router-link to="/transfer" class="nav-link"><i class="fa fa-exchange nav-icon"></i> Transfer</router-link>
+          </li>
+          <li class="nav-item nav-item-design" :class="$route.path == '/training' ? 'active' : ''">
+            <router-link to="/training" class="nav-link"><i class="fa fa-graduation-cap nav-icon"></i> Tranining</router-link>
+          </li>
+
+          <li class="nav-item nav-item-design" :class="$route.path == '/promotion' ? 'active' : ''">
+            <router-link to="/promotion" class="nav-link"><i class="fa fa-trophy nav-icon"></i> Promotion</router-link>
+          </li>
+          <li class="nav-item nav-item-design" :class="$route.path == '/leave' ? 'active' : ''">
+            <router-link to="/leave" class="nav-link"><i class="fa fa-snowflake-o nav-icon"></i> Leave</router-link>
+          </li>
+
+          <li class="nav-item nav-item-design" :class="$route.path == '/acr' ? 'active' : ''">
+            <router-link to="/acr" class="nav-link"><i class="fa fa-newspaper-o nav-icon"></i> ACR</router-link>
+          </li>
+
+          <li class="nav-item nav-item-design" :class="$route.path == '/Report' ? 'active' : ''">
+            <router-link to="/report" class="nav-link"><i class="fa fa-file nav-icon"></i> Reporot</router-link>
+          </li>
+          
+        </ul>
+
+      </nav>
+
+    </div>
+
+  </aside>
+
+</template>
+
+<script>
+import $ from 'jquery';
+export default {
+
+
+  methods: {
+
+    close(){
+      
+    },
+    
+    checkRoute(routeArr, curentRoute){
+        return routeArr.includes(curentRoute);
+    },
+    
+    
+  },
+  mounted() {
+    //$('[data-widget="treeview"]').Treeview('init');
+    
+    $(document).on('click', '.parent-nav', function(){
+        setTimeout(() => { 
+          var selector = $(this); 
+          if(selector.hasClass('menu-open2')){
+            selector.removeClass('menu-open2').removeClass('menu-is-opening menu-open');
+            selector.find('ul').addClass('d-none').removeClass('d-block');
+          }else{
+            selector.addClass('menu-open2').addClass('menu-is-opening');
+            selector.find('ul').removeClass('d-none').addClass('d-block');
+            selector.find('ul').css('height', 'auto');
+          }
+        }, 400);
+    });
+
+    $(document).on('click', '.child-nav-item', function(){
+      setTimeout(() => { 
+          var selector = $(this); 
+            selector.closest('ul').addClass('d-block').removeClass('d-none');
+        }, 500);
+    });
+  }
+};
+
+
+
+
+</script>
+
+<style scoped>
+
+
+
+.admin-panel-view-top-left {
+    font-family: 'Russo One', sans-serif;
+    font-size: 15px;
+    font-style: oblique;
+    color: midnightblue;
+}
+
+.nav-item-design{
+      font-family: 'Russo One', sans-serif;
+      font-size: 14px;
+      font-variant: small-caps;
+      font-style: oblique;
+}
+</style>
