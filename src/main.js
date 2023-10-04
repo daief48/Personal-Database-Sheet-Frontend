@@ -15,6 +15,8 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
 import moment from 'moment';
 import VOtpInput from "vue3-otp-input";
 
+
+
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -51,6 +53,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { faMapLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
 
+
 /* add icons to the library */
 library.add(faTwitter,faFacebook, faEnvelope, faKey, faTrash, faPencil, faPlus
     , faList,faFileCircleExclamation,faInfo,faInfoCircle,faReply,faSquareUpRight
@@ -68,16 +71,7 @@ import '../src/assets/css/admin-lte.css';
 import '../src/assets/css/custom.css';
 import  VueHtmlToPaper from '../plugins/VueHtmlToPaper.js';
 import VueApexCharts from "vue3-apexcharts";
-//Data table 
-import "datatables.net-dt/js/dataTables.dataTables";
-import "datatables.net-dt/css/jquery.dataTables.min.css";
-//Data table print
-import "datatables.net-dt/js/dataTables.dataTables";
-import "datatables.net-buttons/js/dataTables.buttons.js";
-import "datatables.net-buttons/js/buttons.colVis.js";
-import "datatables.net-buttons/js/buttons.flash.js";
-import "datatables.net-buttons/js/buttons.html5.js";
-import "datatables.net-buttons/js/buttons.print.js";
+
 
 
 const app = createApp(App);
@@ -96,18 +90,18 @@ app.use(store)
 .component('font-awesome-icon', FontAwesomeIcon)
 .component('SummernoteEditor', SummernoteEditor)
 .component('v-otp-input', VOtpInput)
-//app.config.globalProperties.backendUrl = 'http://203.76.123.197/asfBackend';
-//app.config.globalProperties.base_url_for_resource = 'http://203.76.123.197/asfBackend/public/';
+//app.config.globalProperties.backendUrl = 'http://203.76.123.197/pds-backend';
+//app.config.globalProperties.base_url_for_resource = 'http://203.76.123.197/pds-backend/public/';
 app.config.globalProperties.backendUrl = 'http://localhost/pds-backend';
 app.config.globalProperties.base_url_for_resource = 'http://localhost/pds-backend/public/';
 app.config.globalProperties.$filters = {
-
     myDateFormate(date){
         return moment(date).format("DD MMM YYYY"); 
     },
     fullMonthDateFormate(date){
         return moment(date).format("DD MMMM YYYY"); 
-    }
+    },
+    
 }
 
 app.mount('#app')

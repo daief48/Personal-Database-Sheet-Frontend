@@ -11,11 +11,12 @@
       <nav class="mt-3">
 
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item nav-item-design" :class="$route.path == '/dashboard' ? 'active' : ''">
-            <router-link to="/dashboard" class="nav-link"><i class="fa fa-tachometer"></i> Dashboard</router-link>
+
+          <li v-for="(menu, index)  in sidebarMenu" :key="index" class="nav-item nav-item-design" :class="$route.path == menu.slug ? 'active' : ''">
+            <router-link :to="menu.slug" class="nav-link"><i :class="menu.icon"></i>{{ menu.title }}</router-link>
           </li>
           <!-- User[Main Menu] -->
-          <li class="nav-item nav-item-design" :class="$route.path == '/users' ? 'active' : ''">
+          <!-- <li class="nav-item nav-item-design" :class="$route.path == '/users' ? 'active' : ''">
             <router-link to="/users" class="nav-link"><i class="fa fa-users nav-icon"></i> Users List</router-link>
           </li>
           <li class="nav-item nav-item-design" :class="$route.path == '/profile' ? 'active' : ''">
@@ -41,7 +42,7 @@
 
           <li class="nav-item nav-item-design" :class="$route.path == '/Report' ? 'active' : ''">
             <router-link to="/report" class="nav-link"><i class="fa fa-file nav-icon"></i> Reporot</router-link>
-          </li>
+          </li> -->
           
         </ul>
 
@@ -57,7 +58,11 @@
 import $ from 'jquery';
 export default {
 
-
+  data() {
+    return {
+        sidebarMenu:[],
+    }
+  },
   methods: {
 
     close(){
@@ -67,9 +72,20 @@ export default {
     checkRoute(routeArr, curentRoute){
         return routeArr.includes(curentRoute);
     },
+
+    getSidebarMenu(){
+      const userData = localStorage.getItem('user');
+      this.sidebarMenu = JSON.parse(userData).menu;
+      //console.log(userData);
+    }
     
     
   },
+
+  created(){
+    this.getSidebarMenu();
+  },
+
   mounted() {
     //$('[data-widget="treeview"]').Treeview('init');
     
@@ -102,9 +118,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-
 .admin-panel-view-top-left {
     font-family: 'Russo One', sans-serif;
     font-size: 15px;
