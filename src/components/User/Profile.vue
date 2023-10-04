@@ -173,127 +173,60 @@
             </div>
 
             <div class="tab-pane fade show p-2" id="education-history" role="tabpanel" aria-labelledby="pills-education-history">
-              <div class="" style="max-height: 500px; overflow-y: auto; overflow-x: hidden; max-width: 100%;">
-                <h5>SSC Status</h5><hr>
-              <div class="row">
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Institute Name</strong></td>
-                        <td>Jahangirpur Model High School</td>
-                      </tr>
-                      <tr>
-                        <td><strong>District:</strong></td>
-                        <td>Naogaon</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Subject</strong></td>
-                        <td>Science</td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <button type="button" class="btn btn-outline-primary float-right mt-2 mb-2" @click="addNewEducationHistory">Add Education</button>
+              <div class="" style="max-height: 700px; overflow-y: auto; overflow-x: hidden; max-width: 100%; clear:both">
+                <draggable class="dragArea list-group w-full" :list="educationArr" @change="onDrag">
+                <div class="bg-light mb-3 border-left-cz" v-for="(education,index) in educationArr" :key="index">
+                  <div class="input-group m-0 p-3" style="width:calc( 100% - 30px )">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="">Exam Name</span>
+                    </div>
+                    <input type="text" v-model="education.exam_name" class="form-control" autocomplete="off"/>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <table class="table table-borderless d-flex">
+                        <tbody>
+                          <tr>
+                            <td><strong>Institute Name</strong></td>
+                            <td><input type="text" v-model="education.institute_name" class="form-control" autocomplete="off"/></td>
+                          </tr>
+                          <tr>
+                            <td><strong>District:</strong></td>
+                            <td><input type="text" v-model="education.district" class="form-control" autocomplete="off"/></td>
+                          </tr>
+                          <tr>
+                            <td><strong>Subject</strong></td>
+                            <td><input type="text" v-model="education.subject" class="form-control" autocomplete="off"/></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-6">
+                      <table class="table table-borderless d-flex">
+                        <tbody>
+                          <tr>
+                            <td><strong>Upazila</strong></td>
+                            <td><input type="text" v-model="education.upazila" class="form-control" autocomplete="off"/></td>
+                          </tr>
+                          <tr>
+                            <td><strong>Passing Year:</strong></td>
+                            <td><input type="text" v-model="education.passing_year" class="form-control" autocomplete="off"/></td>
+                          </tr>
+                          <tr>
+                            <td><strong>Grad</strong></td>
+                            <td><input type="text" v-model="education.grade" class="form-control" autocomplete="off"/></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <button class="btn btn-sm btn-danger float-right ml-1" style="width:30px; line-height: 28px; position:absolute; top:16px; right:10px;" @click="removeEducationHistory (index)">X</button>
                 </div>
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Upazila</strong></td>
-                        <td>Mohadevpur</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Passing Year:</strong></td>
-                        <td>2013</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Grad</strong></td>
-                        <td>GPA 5.00</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                </draggable>
               </div>
-
-              <h5 class="mt-4">HSC Status</h5> <hr>
-              <div class="row">
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Institute Name</strong></td>
-                        <td>Jahangirpur Model High School</td>
-                      </tr>
-                      <tr>
-                        <td><strong>District:</strong></td>
-                        <td>Naogaon</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Subject</strong></td>
-                        <td>Science</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Upazila</strong></td>
-                        <td>Mohadevpur</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Passing Year:</strong></td>
-                        <td>2013</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Grad</strong></td>
-                        <td>GPA 5.00</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              <h5 class="mt-4">BSC Status</h5> <hr>
-              <div class="row">
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Institute Name</strong></td>
-                        <td>Jahangirpur Model High School</td>
-                      </tr>
-                      <tr>
-                        <td><strong>District:</strong></td>
-                        <td>Naogaon</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Subject</strong></td>
-                        <td>Science</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Upazila</strong></td>
-                        <td>Mohadevpur</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Passing Year:</strong></td>
-                        <td>2013</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Grad</strong></td>
-                        <td>GPA 5.00</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              </div>
+              <button type="button" class="btn btn-outline-success float-right mt-2 mr-2" @click="saveProfile('education_history')" >Save</button>
+              
             </div>
 
             <div class="tab-pane fade show p-2" id="familly-info" role="tabpanel" aria-labelledby="pills-familly-info">
@@ -423,7 +356,7 @@
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-success" @click="saveProfile('emergency_contact')" >Save Profile</button>
+        <button type="button" class="btn btn-outline-success" @click="saveProfile('basicInfo')" >Save Profile</button>
         <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -548,7 +481,7 @@
                     <td><strong>Department Name:</strong></td>
                     <td>
                     <select v-model="jobs.department_id" class="form-control">
-                      <option :value="department.id" v-for="department in departments" :key="department.id">{{ department.name }}</option>
+                      <option :value="department.id" v-for="department in departments" :key="department.id">{{ department.dept_name }}</option>
                     </select>
                     </td>
                   </tr>
@@ -556,7 +489,7 @@
                     <td><strong>Designation:</strong></td>
                     <td>
                     <select v-model="jobs.designation_id" class="form-control">
-                      <option :value="designation.id" v-for="designation in designations" :key="designation.id">{{ designation.name }}</option>
+                      <option :value="designation.id" v-for="designation in designations" :key="designation.id">{{ designation.designation_name }}</option>
                     </select>
                   </td>
                   </tr>
@@ -684,7 +617,7 @@
                     <td><input type="text" v-model="emergency_contact.emergency_relation" class="form-control"></td>
                   </tr>
                   <tr>
-                    <td><strong>Email Address :</strong></td>
+                    <td><strong>Email:</strong></td>
                     <td><input type="text" v-model="emergency_contact.emergency_email" class="form-control"></td>
                   </tr>
                   <tr>
@@ -733,11 +666,12 @@
 
 import myUpload from 'vue-image-crop-upload';
 import $ from 'jquery';
-
+import { VueDraggableNext } from 'vue-draggable-next';
 
 export default {
   components: {
-    myUpload
+    myUpload,
+    draggable: VueDraggableNext,
   },
 
   data() {
@@ -780,8 +714,8 @@ export default {
           }
       },
 
-      departments:[{id:1, name:'Admin'}],
-      designations:[{id:1, name:'officer'}],
+      departments:[],
+      designations:[],
 
 
       basicInfo:{
@@ -817,6 +751,9 @@ export default {
         joining_date:'',
         job_location:'',
       },
+
+      educationArr:[],
+
       familly_info:{
         father_name:'',
         mother_name:'',
@@ -843,6 +780,34 @@ export default {
       .then((res) => {
           console.log(res);
       })
+    },
+    onDrag(){
+      console.log(this.educationArr);
+    },
+
+    getDepartmentList(){
+      this.axios
+      .get(this.backend_url+'getDepartment')
+      .then((res) => {
+        this.departments = res.data.data;
+        console.log(this.departments);
+      })
+    },
+    getDesignationList(){
+      this.axios
+      .get(this.backend_url+'getDesignationMgt')
+      .then((res) => {
+        this.designations = res.data.data;
+        console.log(this.designations);
+      })
+    },
+
+    addNewEducationHistory: function () {
+      this.educationArr.push({ exam_name: '', institute_name: '', district:'', upazila:'', subject:'', passing_year:'', grade:'' });
+    },
+
+    removeEducationHistory: function (index) {
+      this.educationArr.splice(index,1);
     },
 
     getProfileInfo(){
@@ -878,6 +843,8 @@ export default {
           this.jobs.designation    =  profileData.designation;
           this.jobs.job_location   =  profileData.job_location;
           this.jobs.joining_date   =  profileData.joining_date;
+
+          this.educationArr = JSON.parse(profileData.education_history);
 
           this.familly_info.father_name = profileData.father_name;
           this.familly_info.mother_name = profileData.mother_name;
@@ -926,6 +893,10 @@ export default {
         formData.append('job_location', this.jobs.job_location);
       }
 
+      if(type == 'education_history'){
+        formData.append('education_history', JSON.stringify(this.educationArr));
+      }
+
       if(type == 'familly_info'){
         formData.append('father_name', this.familly_info.father_name);
         formData.append('mother_name', this.familly_info.mother_name);
@@ -949,6 +920,9 @@ export default {
           console.log(res.data);
           this.getProfileInfo();
           $(".closeModal").trigger( "click" );
+          this.$toast.success("Profile saved successfully.", {
+            position: "top-right",
+          });
           
       })
     },
@@ -999,6 +973,8 @@ export default {
 
   created() {
     this.getProfileInfo();
+    this.getDepartmentList();
+    this.getDesignationList();
   },
 
   watch: {
@@ -1076,7 +1052,7 @@ export default {
     background-color: #1a202c;
   }
 
-  .table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > td,
 .table-borderless > tbody > tr > th,
 .table-borderless > tfoot > tr > td,
 .table-borderless > tfoot > tr > th,
@@ -1093,4 +1069,10 @@ export default {
 .nav-pills .nav-link{
 font-size: 20px !important;
 }
+.border-left-cz{
+    border-left:5px solid #7dacdb;
+    cursor:grab;
+    cursor:move;
+    position: relative;
+  }
   </style>

@@ -8,7 +8,7 @@
 			</div>
 			<div class="custom-bg">
 				<div class="user_card mt-5 text-center">
-					<img width="150" style="margin:0 auto" src="@/assets/img/processing.png">
+					<!-- <img width="150" style="margin:0 auto" src="@/assets/img/processing.png"> -->
 					<h4 class="mt-3">Request under Processing</h4>
 					<p>Your submitted application is under processing.<br>
 					We w'll know you very shortly.</p>

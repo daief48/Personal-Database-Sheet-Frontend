@@ -24,7 +24,12 @@
                 <ErrorMessage name="userrole" class="error-feedback" />
               </div>
               <div class="form-group">
-                <label for="email">Email*</label>
+                <label for="phone">Phone*</label>
+                <Field name="phone" type="text" class="form-control" v-model="phone" autocomplete="off"/>
+                <ErrorMessage name="phone" class="error-feedback" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
                 <Field name="email" type="email" class="form-control" v-model="email" autocomplete="off"/>
                 <ErrorMessage name="email" class="error-feedback" />
               </div>
@@ -99,29 +104,33 @@
               <div class="" v-if="!isLoading" style="border:1px solid #eeeeee">
               <div class="col-md-12">
                 <div class="row border-bottom border-top p-2 bg-light">
-                  <div class="col-1">Sl</div>
-                  <div class="col-4">User Name</div>
-                  <div class="col-3">User Email</div>
-                  <div class="col-1">Role</div>
-                  <div class="col-1">Status</div>
+                  <div class="col-1 text-center">Sl</div>
+                  <div class="col-3">User Name</div>
+                  <div class="col-2">Phone</div>
+                  <div class="col-2">User Email</div>
+                  <div class="col-1 text-center">Role</div>
+                  <div class="col-1 text-center">Status</div>
                   <div class="col-2">Actions</div>
                 </div>
               </div>
-                <div class="pt-1 pl-2 pb-1 pl-2 customize-border" v-for="(item, index) in usersPaginatedData.data" :key="item.id">
-                  <div class="row border-1 pb-1">
-                    <div class="col-1 text-left">
+                <div class="col-md-12 customize-border" v-for="(item, index) in usersPaginatedData.data" :key="item.id">
+                  <div class="row border-bottom border-top p-2">
+                    <div class="col-1 text-center">
                       {{ index + 1 }}
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                       {{ item.name }}
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
+                      <strong class="text-info">{{ item.phone }} </strong>
+                    </div>
+                    <div class="col-2">
                       <strong class="text-info">{{ item.email }} </strong>
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 text-center">
                       <span class="badge" :class="item.role_id == 1 ? 'badge-success' : 'badge-info'">{{ item.role_id == 1 ? 'Admin' : 'Editor'}}</span>
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 text-center">
                       <span class="badge" :class="item.status == 1 ? 'badge-success' : 'badge-info'">{{ item.status == 1 ? 'Active' : 'Inactive'}}</span>
                     </div>
                     <div class="col-2">
@@ -217,17 +226,25 @@ export default {
 
   data() {
     const store = useStore();
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
     const validationCreate = yup.object().shape({
           username: yup
             .string()
             .required("Username is required!")
             .min(3, "Must be at least 3 characters!")
             .max(20, "Must be maximum 20 characters!"),
-          email: yup
+          // email: yup
+          //   .string()
+          //   .required("Email is required!")
+          //   .email("Email is invalid!")
+          //   .max(50, "Must be maximum 50 characters!"),
+
+          phone: yup
             .string()
-            .required("Email is required!")
-            .email("Email is invalid!")
-            .max(50, "Must be maximum 50 characters!"),
+            .required("Phone Number is required!")
+            .matches(phoneRegExp, 'Phone number is not valid')
+            .min(11, "too short")
+            .max(11, "too long"),
 
           password: yup
             .string()
@@ -251,11 +268,19 @@ export default {
             .required("Username is required!")
             .min(3, "Must be at least 3 characters!")
             .max(20, "Must be maximum 20 characters!"),
-          email: yup
+
+          phone: yup
             .string()
-            .required("Email is required!")
-            .email("Email is invalid!")
-            .max(50, "Must be maximum 50 characters!"),
+            .required("Phone Number is required!")
+            .matches(phoneRegExp, 'Phone number is not valid')
+            .min(11, "too short")
+            .max(11, "too long"),
+
+          // email: yup
+          //   .string()
+          //   .required("Email is required!")
+          //   .email("Email is invalid!")
+          //   .max(50, "Must be maximum 50 characters!"),
 
           userrole: yup
             .number()
@@ -346,6 +371,7 @@ export default {
           name: user.username,
           role_id: user.userrole,
           email: user.email,
+          phone: user.phone,
           password: user.password,
           status: user.userstatus,
         });                 
@@ -355,6 +381,7 @@ export default {
           name: user.username,
           role_id: user.userrole,
           email: user.email,
+          phone: user.phone,
           password: user.password,
           status: user.userstatus,
         });
@@ -365,6 +392,7 @@ export default {
       this.id = user.id;
       this.username = user.name;
       this.email = user.email;
+      this.phone = user.phone,
       this.userrole = user.role_id;
       this.userstatus = user.status;
       this.$store.commit('fromActionStatus', 'edit');
