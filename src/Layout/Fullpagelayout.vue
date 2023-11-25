@@ -8,8 +8,7 @@
         <!-- <ContentHeader/> -->
         <section class="content">
           <div class="container-fluid">
-            <br>
-            <br>
+         <br>
             <router-view></router-view>
           </div>
         </section>

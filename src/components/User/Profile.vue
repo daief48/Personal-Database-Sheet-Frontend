@@ -1,34 +1,41 @@
 <template>
   <div>
-  <h3 class=""><strong> Profile</strong></h3>
-  <div class="card card-default">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-md-12">
-          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="pills-basic-info" data-toggle="pill" href="#basic-info" role="tab" aria-controls="pills-basic-info" aria-selected="true">Basic Info</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="pills-address-deatils" data-toggle="pill" href="#address-details" role="tab" aria-controls="pills-address-details" aria-selected="false">Address Details</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="pills-jobs" data-toggle="pill" href="#jobs" role="tab" aria-controls="pills-jobs" aria-selected="false">Jobs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="pills-education-history" data-toggle="pill" href="#education-history" role="tab" aria-controls="pills-education-history" aria-selected="false">Education History</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="pills-fimilly-info" data-toggle="pill" href="#familly-info" role="tab" aria-controls="pills-familly-info" aria-selected="false">Familly Info</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="pills-emergency-contact" data-toggle="pill" href="#emergency-contact" role="tab" aria-controls="pills-emergency-contact" aria-selected="false">Emergrncy Contact</a>
-            </li>
-          </ul>
-          <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active p-2" id="basic-info" role="tabpanel" aria-labelledby="pills-basic-info">
+    <h3 class=""><strong> Profile</strong></h3>
+    <div class="card card-default">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="pills-basic-info" data-toggle="pill" href="#basic-info" role="tab"
+                  aria-controls="pills-basic-info" aria-selected="true">Basic Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-address-deatils" data-toggle="pill" href="#address-details" role="tab"
+                  aria-controls="pills-address-details" aria-selected="false">Address Details</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-jobs" data-toggle="pill" href="#jobs" role="tab" aria-controls="pills-jobs"
+                  aria-selected="false">Jobs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-education-history" data-toggle="pill" href="#education-history" role="tab"
+                  aria-controls="pills-education-history" aria-selected="false">Education History</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-fimilly-info" data-toggle="pill" href="#familly-info" role="tab"
+                  aria-controls="pills-familly-info" aria-selected="false">Familly Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-emergency-contact" data-toggle="pill" href="#emergency-contact" role="tab"
+                  aria-controls="pills-emergency-contact" aria-selected="false">Emergrncy Contact</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade show active p-2" id="basic-info" role="tabpanel"
+                aria-labelledby="pills-basic-info">
                 <div class="d-flex p-2">
-                  <img class="bg-light p-2" width="300" :src="imgDataUrl" alt=""/>
+                  <img class="bg-light p-2" width="300" :src="imgDataUrl" alt="" />
                   <div class="ml-3">
                     <table class="table table-borderless">
                       <tbody>
@@ -42,624 +49,694 @@
                         </tr>
                         <tr>
                           <td><strong>Email:</strong></td>
-                          <td>{{basicInfo.email}}</td>
+                          <td>{{ basicInfo.email }}</td>
                         </tr>
                         <tr>
                           <td><strong>Designation:</strong></td>
                           <td>{{ basicInfo.designation }}</td>
                         </tr>
+                        <tr>
+                          <td><strong>Gender:</strong></td>
+                          <td>{{ basicInfo.gender }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Date of Birth:</strong></td>
+                          <td>{{ basicInfo.date_of_birth }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Blood Group:</strong></td>
+                          <td>{{ basicInfo.blood_group }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>NID Number:</strong></td>
+                          <td>{{ basicInfo.nid_number }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Passport Number:</strong></td>
+                          <td>{{ basicInfo.passport_number }}</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#basicInfoModal">Edit Info</button>
-            </div>
-
-            <div class="tab-pane fade show p-2" id="address-details" role="tabpanel" aria-labelledby="pills-address-details">
-              <h5>Present Address</h5><hr>
-              <div class="row">
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>House No:</strong></td>
-                        <td>{{addressDetails.present_addr_houseno}}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Area/Word:</strong></td>
-                        <td>{{ addressDetails.present_addr_area }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>District</strong></td>
-                        <td>{{ addressDetails.present_addr_district }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Road No:</strong></td>
-                        <td>{{ addressDetails.present_addr_roadno }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Upozila:</strong></td>
-                        <td>{{ addressDetails.present_addr_upazila }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Post Code</strong></td>
-                        <td>{{ addressDetails.present_addr_postcode }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal"
+                  data-target="#basicInfoModal">Edit Info</button>
               </div>
 
-              <h5 class="mt-4">Parmanent Address</h5> <hr>
-              <div class="row">
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>House No:</strong></td>
-                        <td>{{ addressDetails.permanent_addr_houseno }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Area/Word:</strong></td>
-                        <td>{{ addressDetails.permanent_addr_area }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>District</strong></td>
-                        <td>{{ addressDetails.permanent_addr_district }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Road No:</strong></td>
-                        <td>{{ addressDetails.permanent_addr_roadno }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Upozila:</strong></td>
-                        <td>{{ addressDetails.permanent_addr_upazila }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Post Code</strong></td>
-                        <td>{{ addressDetails.permanent_addr_postcode }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#addressModal">Edit Info</button>
-            </div>
-
-            <div class="tab-pane fade show p-2" id="jobs" role="tabpanel" aria-labelledby="pills-jobs">
-              <div class="row">
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Department Name:</strong></td>
-                        <td>{{ jobs.department }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Designation:</strong></td>
-                        <td>{{ jobs.designation }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Joining Date:</strong></td>
-                        <td>{{ jobs.joining_date }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Job Location:</strong></td>
-                        <td>{{ jobs.job_location }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#jobsModal">Edit Info</button>
-            </div>
-
-            <div class="tab-pane fade show p-2" id="education-history" role="tabpanel" aria-labelledby="pills-education-history">
-              <button type="button" class="btn btn-outline-primary float-right mt-2 mb-2" @click="addNewEducationHistory">Add Education</button>
-              <div class="" style="max-height: 700px; overflow-y: auto; overflow-x: hidden; max-width: 100%; clear:both">
-                <draggable class="dragArea list-group w-full" :list="educationArr" @change="onDrag">
-                <div class="bg-light mb-3 border-left-cz" v-for="(education,index) in educationArr" :key="index">
-                  <div class="input-group m-0 p-3" style="width:calc( 100% - 30px )">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Exam Name</span>
-                    </div>
-                    <input type="text" v-model="education.exam_name" class="form-control" autocomplete="off"/>
+              <div class="tab-pane fade show p-2" id="address-details" role="tabpanel"
+                aria-labelledby="pills-address-details">
+                <h5>Present Address</h5>
+                <hr>
+                <div class="row">
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <tbody>
+                        <tr>
+                          <td><strong>House No:</strong></td>
+                          <td>{{ addressDetails.present_addr_houseno }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Area/Word:</strong></td>
+                          <td>{{ addressDetails.present_addr_area }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>District</strong></td>
+                          <td>{{ addressDetails.present_addr_district }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <table class="table table-borderless d-flex">
-                        <tbody>
-                          <tr>
-                            <td><strong>Institute Name</strong></td>
-                            <td><input type="text" v-model="education.institute_name" class="form-control" autocomplete="off"/></td>
-                          </tr>
-                          <tr>
-                            <td><strong>District:</strong></td>
-                            <td><input type="text" v-model="education.district" class="form-control" autocomplete="off"/></td>
-                          </tr>
-                          <tr>
-                            <td><strong>Subject</strong></td>
-                            <td><input type="text" v-model="education.subject" class="form-control" autocomplete="off"/></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="col-md-6">
-                      <table class="table table-borderless d-flex">
-                        <tbody>
-                          <tr>
-                            <td><strong>Upazila</strong></td>
-                            <td><input type="text" v-model="education.upazila" class="form-control" autocomplete="off"/></td>
-                          </tr>
-                          <tr>
-                            <td><strong>Passing Year:</strong></td>
-                            <td><input type="text" v-model="education.passing_year" class="form-control" autocomplete="off"/></td>
-                          </tr>
-                          <tr>
-                            <td><strong>Grad</strong></td>
-                            <td><input type="text" v-model="education.grade" class="form-control" autocomplete="off"/></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <tbody>
+                        <tr>
+                          <td><strong>Road No:</strong></td>
+                          <td>{{ addressDetails.present_addr_roadno }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Upozila:</strong></td>
+                          <td>{{ addressDetails.present_addr_upazila }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Post Code</strong></td>
+                          <td>{{ addressDetails.present_addr_postcode }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <button class="btn btn-sm btn-danger float-right ml-1" style="width:30px; line-height: 28px; position:absolute; top:16px; right:10px;" @click="removeEducationHistory (index)">X</button>
                 </div>
-                </draggable>
-              </div>
-              <button type="button" class="btn btn-outline-success float-right mt-2 mr-2" @click="saveProfile('education_history')" >Save</button>
-              
-            </div>
 
-            <div class="tab-pane fade show p-2" id="familly-info" role="tabpanel" aria-labelledby="pills-familly-info">
-              <div class="row">
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Father Name : </strong></td>
-                        <td>{{familly_info.father_name}}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Spouse Name:</strong></td>
-                        <td>{{ familly_info.spouse_name }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <h5 class="mt-4">Parmanent Address</h5>
+                <hr>
+                <div class="row">
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <tbody>
+                        <tr>
+                          <td><strong>House No:</strong></td>
+                          <td>{{ addressDetails.permanent_addr_houseno }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Area/Word:</strong></td>
+                          <td>{{ addressDetails.permanent_addr_area }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>District</strong></td>
+                          <td>{{ addressDetails.permanent_addr_district }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <tbody>
+                        <tr>
+                          <td><strong>Road No:</strong></td>
+                          <td>{{ addressDetails.permanent_addr_roadno }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Upozila:</strong></td>
+                          <td>{{ addressDetails.permanent_addr_upazila }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Post Code</strong></td>
+                          <td>{{ addressDetails.permanent_addr_postcode }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Mother Name : </strong></td>
-                        <td>{{ familly_info.mother_name }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Number Of Child:</strong></td>
-                        <td>{{ familly_info.number_of_child }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal"
+                  data-target="#addressModal">Edit Info</button>
               </div>
-              <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#famillyInfoModal">Edit Info</button>
-            </div>
-            <div class="tab-pane fade show" id="emergency-contact" role="tabpanel" aria-labelledby="pills-emergency-contact">
-              <div class="row">
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Name : </strong></td>
-                        <td>{{ emergency_contact.emergency_name }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Mobile No:</strong></td>
-                        <td>{{ emergency_contact.emergency_phn_number }}</td>
-                      </tr> 
-                      <tr>
-                        <td><strong>Address:</strong></td>
-                        <td>{{ emergency_contact.emergency_addr }}</td>
-                      </tr> 
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Relation : </strong></td>
-                        <td>{{ emergency_contact.emergency_relation }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>Email Address:</strong></td>
-                        <td>{{ emergency_contact.emergency_email }}</td>
-                      </tr>
-                      <tr>
-                        <td><strong>District:</strong></td>
-                        <td>{{ emergency_contact.emergency_district }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#emergencyContactModal">Edit Info</button>
-            </div>
 
+              <div class="tab-pane fade show p-2" id="jobs" role="tabpanel" aria-labelledby="pills-jobs">
+                <div class="row">
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <tbody>
+                        <tr>
+                          <td><strong>Department Name:</strong></td>
+                          <td>{{ jobs.department }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Designation:</strong></td>
+                          <td>{{ jobs.designation }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <tbody>
+                        <tr>
+                          <td><strong>Joining Date:</strong></td>
+                          <td>{{ jobs.joining_date }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Job Location:</strong></td>
+                          <td>{{ jobs.job_location }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal"
+                  data-target="#jobsModal">Edit Info</button>
+              </div>
+
+              <div class="tab-pane fade show p-2" id="education-history" role="tabpanel"
+                aria-labelledby="pills-education-history">
+                <button type="button" class="btn btn-outline-primary float-right mt-2 mb-2"
+                  @click="addNewEducationHistory">Add Education</button>
+                <div class=""
+                  style="max-height: 700px; overflow-y: auto; overflow-x: hidden; max-width: 100%; clear:both">
+                  <draggable class="dragArea list-group w-full" :list="educationArr" @change="onDrag">
+                    <div class="bg-light mb-3 border-left-cz" v-for="(education, index) in educationArr" :key="index">
+                      <div class="input-group m-0 p-3" style="width:calc( 100% - 30px )">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="">Exam Name</span>
+                        </div>
+                        <input type="text" v-model="education.exam_name" class="form-control" autocomplete="off" />
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <table class="table table-borderless d-flex">
+                            <tbody>
+                              <tr>
+                                <td><strong>Institute Name</strong></td>
+                                <td><input type="text" v-model="education.institute_name" class="form-control"
+                                    autocomplete="off" /></td>
+                              </tr>
+                              <tr>
+                                <td><strong>District:</strong></td>
+                                <td><input type="text" v-model="education.district" class="form-control"
+                                    autocomplete="off" /></td>
+                              </tr>
+                              <tr>
+                                <td><strong>Subject</strong></td>
+                                <td><input type="text" v-model="education.subject" class="form-control"
+                                    autocomplete="off" /></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-md-6">
+                          <table class="table table-borderless d-flex">
+                            <tbody>
+                              <tr>
+                                <td><strong>Upazila</strong></td>
+                                <td><input type="text" v-model="education.upazila" class="form-control"
+                                    autocomplete="off" /></td>
+                              </tr>
+                              <tr>
+                                <td><strong>Passing Year:</strong></td>
+                                <td><input type="text" v-model="education.passing_year" class="form-control"
+                                    autocomplete="off" /></td>
+                              </tr>
+                              <tr>
+                                <td><strong>Grad</strong></td>
+                                <td><input type="text" v-model="education.grade" class="form-control"
+                                    autocomplete="off" /></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <button class="btn btn-sm btn-danger float-right ml-1"
+                        style="width:30px; line-height: 28px; position:absolute; top:16px; right:10px;"
+                        @click="removeEducationHistory(index)">X</button>
+                    </div>
+                  </draggable>
+                </div>
+                <button type="button" class="btn btn-outline-success float-right mt-2 mr-2"
+                  @click="saveProfile('education_history')">Save</button>
+
+              </div>
+
+              <div class="tab-pane fade show p-2" id="familly-info" role="tabpanel" aria-labelledby="pills-familly-info">
+                <div class="row">
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <tbody>
+                        <tr>
+                          <td><strong>Father Name : </strong></td>
+                          <td>{{ familly_info.father_name }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Spouse Name:</strong></td>
+                          <td>{{ familly_info.spouse_name }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <tbody>
+                        <tr>
+                          <td><strong>Mother Name : </strong></td>
+                          <td>{{ familly_info.mother_name }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Number Of Child:</strong></td>
+                          <td>{{ familly_info.number_of_child }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal"
+                  data-target="#famillyInfoModal">Edit Info</button>
+              </div>
+              <div class="tab-pane fade show" id="emergency-contact" role="tabpanel"
+                aria-labelledby="pills-emergency-contact">
+                <div class="row">
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <tbody>
+                        <tr>
+                          <td><strong>Name : </strong></td>
+                          <td>{{ emergency_contact.emergency_name }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Mobile No:</strong></td>
+                          <td>{{ emergency_contact.emergency_phn_number }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Address:</strong></td>
+                          <td>{{ emergency_contact.emergency_addr }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <tbody>
+                        <tr>
+                          <td><strong>Relation : </strong></td>
+                          <td>{{ emergency_contact.emergency_relation }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Email Address:</strong></td>
+                          <td>{{ emergency_contact.emergency_email }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>District:</strong></td>
+                          <td>{{ emergency_contact.emergency_district }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal"
+                  data-target="#emergencyContactModal">Edit Info</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Modal Start -->
+    <div class="modal" id="basicInfoModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header p-0">
+            <h4 class="modal-title">Basic Info</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="d-flex p-2">
+              <div class="bg-light p-2 ">
+                <img :src="imgDataUrl" class="d-block" width="300">
+                <a class="btn d-block btn-info text-white mt-1" @click="toggleShow">Profile Image</a>
+              </div>
+              <div class="ml-3">
+                <table class="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <td><strong>Name:</strong></td>
+                      <td><input type="text" class="form-control" v-model="basicInfo.name"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Mobile Number:</strong></td>
+                      <td><input type="text" class="form-control" v-model="basicInfo.mobileNumber"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Email:</strong></td>
+                      <td><input type="text" class="form-control" v-model="basicInfo.email"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Designation:</strong></td>
+                      <td>
+                        <select v-model="basicInfo.designation_id" class="form-control">
+                          <option :value="designation.id" v-for="designation in designations" :key="designation.id">{{
+                            designation.designation_name }}</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Gender:</strong></td>
+                      <td>
+                        <input type="text" class="form-control" v-model="basicInfo.gender">
+
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Date of Birth:</strong></td>
+                      <td>
+                        <input type="date" class="form-control" v-model="basicInfo.date_of_birth">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Blood Group:</strong></td>
+                      <td>
+                        <input type="text" class="form-control" v-model="basicInfo.blood_group">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Nid Number:</strong></td>
+                      <td>
+                        <input type="text" class="form-control" v-model="basicInfo.nid_number">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Passport Number:</strong></td>
+                      <td>
+                        <input type="text" class="form-control" v-model="basicInfo.passport_number">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-success" @click="saveProfile('basicInfo')">Save Profile</button>
+            <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
 
-  </div>
- 
-<!-- Modal Start -->
-  <div class="modal" id="basicInfoModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header p-0">
-        <h4 class="modal-title">Basic Info</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <!-- Modal body -->
-      <div class="modal-body">
-        <div class="d-flex p-2">
-          <div class="bg-light p-2 ">
-            <img :src="imgDataUrl" class="d-block" width="300">
-            <a class="btn d-block btn-info text-white mt-1" @click="toggleShow">Profile Image</a>
+
+
+    <div class="modal" id="addressModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header p-0">
+            <h4 class="modal-title">Address Details</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-          <div class="ml-3">
-            <table class="table table-borderless">
-              <tbody>
-                <tr>
-                  <td><strong>Name:</strong></td>
-                  <td><input type="text" class="form-control" v-model="basicInfo.name"></td>
-                </tr>
-                <tr>
-                  <td><strong>Mobile Number:</strong></td>
-                  <td><input type="text" class="form-control" v-model="basicInfo.mobileNumber"></td>
-                </tr>
-                <tr>
-                  <td><strong>Email:</strong></td>
-                  <td><input type="text" class="form-control" v-model="basicInfo.email"></td>
-                </tr>
-                <tr>
-                  <td><strong>Designation:</strong></td>
-                  <td>
-                    <select v-model="basicInfo.designation_id" class="form-control">
-                      <option value="1">Officer</option>
-                    </select>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-success" @click="saveProfile('basicInfo')" >Save Profile</button>
-        <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="modal" id="addressModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header p-0">
-        <h4 class="modal-title">Address Details</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <!-- Modal body -->
-      <div class="modal-body">
-        <h6>Present Address</h6><hr>
-        <div class="row">
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>House No:</strong></td>
-                        <td><input type="text" v-model="addressDetails.present_addr_houseno" class="form-control"></td>
-                      </tr>
-                      <tr>
-                        <td><strong>Area/Word:</strong></td>
-                        <td><input type="text" v-model="addressDetails.present_addr_area" class="form-control"></td>
-                      </tr>
-                      <tr>
-                        <td><strong>District</strong></td>
-                        <td><input type="text" v-model="addressDetails.present_addr_district" class="form-control"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Road No:</strong></td>
-                        <td><input type="text" v-model="addressDetails.present_addr_roadno" class="form-control"></td>
-                      </tr>
-                      <tr>
-                        <td><strong>Upozila:</strong></td>
-                        <td><input type="text" v-model="addressDetails.present_addr_upazila" class="form-control"></td>
-                      </tr>
-                      <tr>
-                        <td><strong>Post Code</strong></td>
-                        <td><input type="text" v-model="addressDetails.present_addr_postcode" class="form-control"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <h6>Present Address</h6>
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <table class="table table-borderless d-flex">
+                  <tbody>
+                    <tr>
+                      <td><strong>House No:</strong></td>
+                      <td><input type="text" v-model="addressDetails.present_addr_houseno" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Area/Word:</strong></td>
+                      <td><input type="text" v-model="addressDetails.present_addr_area" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>District</strong></td>
+                      <td><input type="text" v-model="addressDetails.present_addr_district" class="form-control"></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-
-              <h6 class="mt-4">Parmanent Address</h6> <hr>
-              <div class="row">
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>House No:</strong></td>
-                        <td><input type="text" v-model="addressDetails.permanent_addr_houseno" class="form-control"></td>
-                      </tr>
-                      <tr>
-                        <td><strong>Area/Word:</strong></td>
-                        <td><input type="text" v-model="addressDetails.permanent_addr_area" class="form-control"></td>
-                      </tr>
-                      <tr>
-                        <td><strong>District</strong></td>
-                        <td><input type="text" v-model="addressDetails.permanent_addr_district" class="form-control"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="col-md-6">
-                  <table class="table table-borderless d-flex">
-                    <tbody>
-                      <tr>
-                        <td><strong>Road No:</strong></td>
-                        <td><input type="text" v-model="addressDetails.permanent_addr_roadno" class="form-control"></td>
-                      </tr>
-                      <tr>
-                        <td><strong>Upozila:</strong></td>
-                        <td><input type="text" v-model="addressDetails.permanent_addr_upazila" class="form-control"></td>
-                      </tr>
-                      <tr>
-                        <td><strong>Post Code</strong></td>
-                        <td><input type="text" v-model="addressDetails.permanent_addr_postcode" class="form-control"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <div class="col-md-6">
+                <table class="table table-borderless d-flex">
+                  <tbody>
+                    <tr>
+                      <td><strong>Road No:</strong></td>
+                      <td><input type="text" v-model="addressDetails.present_addr_roadno" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Upozila:</strong></td>
+                      <td><input type="text" v-model="addressDetails.present_addr_upazila" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Post Code</strong></td>
+                      <td><input type="text" v-model="addressDetails.present_addr_postcode" class="form-control"></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-      </div>
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-success" @click="saveProfile('addressDetail')" >Save Profile</button>
-        <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal End -->
-
-<div class="modal" id="jobsModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header p-0">
-        <h4 class="modal-title">Jobs</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <!-- Modal body -->
-      <div class="modal-body">
-        <div class="row">
-            <div class="col-md-6">
-              <table class="table table-borderless d-flex">
-                <tbody>
-                  <tr>
-                    <td><strong>Department Name:</strong></td>
-                    <td>
-                    <select v-model="jobs.department_id" class="form-control">
-                      <option :value="department.id" v-for="department in departments" :key="department.id">{{ department.dept_name }}</option>
-                    </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>Designation:</strong></td>
-                    <td>
-                    <select v-model="jobs.designation_id" class="form-control">
-                      <option :value="designation.id" v-for="designation in designations" :key="designation.id">{{ designation.designation_name }}</option>
-                    </select>
-                  </td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
-            <div class="col-md-6">
-              <table class="table table-borderless d-flex">
-                <tbody>
-                  <tr>
-                    <td><strong>Joining Date:</strong></td>
-                    <td><input type="date" v-model="jobs.joining_date" class="form-control"></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Job Location:</strong></td>
-                    <td><input type="text" v-model="jobs.job_location" class="form-control"></td>
-                  </tr>
-                </tbody>
-              </table>
+
+            <h6 class="mt-4">Parmanent Address</h6>
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <table class="table table-borderless d-flex">
+                  <tbody>
+                    <tr>
+                      <td><strong>House No:</strong></td>
+                      <td><input type="text" v-model="addressDetails.permanent_addr_houseno" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Area/Word:</strong></td>
+                      <td><input type="text" v-model="addressDetails.permanent_addr_area" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>District</strong></td>
+                      <td><input type="text" v-model="addressDetails.permanent_addr_district" class="form-control"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-6">
+                <table class="table table-borderless d-flex">
+                  <tbody>
+                    <tr>
+                      <td><strong>Road No:</strong></td>
+                      <td><input type="text" v-model="addressDetails.permanent_addr_roadno" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Upozila:</strong></td>
+                      <td><input type="text" v-model="addressDetails.permanent_addr_upazila" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Post Code</strong></td>
+                      <td><input type="text" v-model="addressDetails.permanent_addr_postcode" class="form-control"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-success" @click="saveProfile('jobs')" >Save Profile</button>
-        <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="modal" id="famillyInfoModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header p-0">
-        <h4 class="modal-title">Jobs</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <!-- Modal body -->
-      <div class="modal-body">
-        <div class="row">
-            <div class="col-md-6">
-              <table class="table table-borderless d-flex">
-                <tbody>
-                  <tr>
-                    <td><strong>Father Name:</strong></td>
-                    <td>
-                      <input type="text" v-model="familly_info.father_name" class="form-control">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>Spouse Name:</strong></td>
-                    <td>
-                      <input type="text" v-model="familly_info.spouse_name" class="form-control">
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-md-6">
-              <table class="table table-borderless d-flex">
-                <tbody>
-                  <tr>
-                    <td><strong>Mother Name</strong></td>
-                    <td><input type="text" v-model="familly_info.mother_name" class="form-control"></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Number Of Child:</strong></td>
-                    <td><input type="text" v-model="familly_info.number_of_child" class="form-control"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-success" @click="saveProfile('addressDetail')">Save
+              Profile</button>
+            <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
           </div>
         </div>
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-success" @click="saveProfile('familly_info')" >Save Profile</button>
-        <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-</div>
+    <!-- Modal End -->
 
-<div class="modal" id="emergencyContactModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header p-0">
-        <h4 class="modal-title">Jobs</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <!-- Modal body -->
-      <div class="modal-body">
-        <div class="row">
-            <div class="col-md-6">
-              <table class="table table-borderless d-flex">
-                <tbody>
-                  <tr>
-                    <td><strong>Name:</strong></td>
-                    <td>
-                      <input type="text" v-model="emergency_contact.emergency_name" class="form-control">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>Mobile No:</strong></td>
-                    <td>
-                      <input type="text" v-model="emergency_contact.emergency_phn_number" class="form-control">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>Address:</strong></td>
-                    <td>
-                      <input type="text" v-model="emergency_contact.emergency_addr" class="form-control">
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-md-6">
-              <table class="table table-borderless d-flex">
-                <tbody>
-                  <tr>
-                    <td><strong>Relation :</strong></td>
-                    <td><input type="text" v-model="emergency_contact.emergency_relation" class="form-control"></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Email:</strong></td>
-                    <td><input type="text" v-model="emergency_contact.emergency_email" class="form-control"></td>
-                  </tr>
-                  <tr>
-                    <td><strong>District :</strong></td>
-                    <td><input type="text" v-model="emergency_contact.emergency_district" class="form-control"></td>
-                  </tr>
-                </tbody>
-              </table>
+    <div class="modal" id="jobsModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header p-0">
+            <h4 class="modal-title">Jobs</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <table class="table table-borderless d-flex">
+                  <tbody>
+                    <tr>
+                      <td><strong>Department Name:</strong></td>
+                      <td>
+                        <select v-model="jobs.department_id" class="form-control">
+                          <option :value="department.id" v-for="department in departments" :key="department.id">{{
+                            department.dept_name }}</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Designation:</strong></td>
+                      <td>
+                        <select v-model="jobs.designation_id" class="form-control">
+                          <option :value="designation.id" v-for="designation in designations" :key="designation.id">{{
+                            designation.designation_name }}</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-6">
+                <table class="table table-borderless d-flex">
+                  <tbody>
+                    <tr>
+                      <td><strong>Joining Date:</strong></td>
+                      <td><input type="date" v-model="jobs.joining_date" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Job Location:</strong></td>
+                      <td><input type="text" v-model="jobs.job_location" class="form-control"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-success" @click="saveProfile('jobs')">Save Profile</button>
+            <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
+          </div>
         </div>
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-success" @click="saveProfile('emergency_contact')" >Save Profile</button>
-        <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
       </div>
     </div>
+
+
+    <div class="modal" id="famillyInfoModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header p-0">
+            <h4 class="modal-title">Jobs</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <table class="table table-borderless d-flex">
+                  <tbody>
+                    <tr>
+                      <td><strong>Father Name:</strong></td>
+                      <td>
+                        <input type="text" v-model="familly_info.father_name" class="form-control">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Spouse Name:</strong></td>
+                      <td>
+                        <input type="text" v-model="familly_info.spouse_name" class="form-control">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-6">
+                <table class="table table-borderless d-flex">
+                  <tbody>
+                    <tr>
+                      <td><strong>Mother Name</strong></td>
+                      <td><input type="text" v-model="familly_info.mother_name" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Number Of Child:</strong></td>
+                      <td><input type="text" v-model="familly_info.number_of_child" class="form-control"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-success" @click="saveProfile('familly_info')">Save
+              Profile</button>
+            <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="emergencyContactModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header p-0">
+            <h4 class="modal-title">Jobs</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <table class="table table-borderless d-flex">
+                  <tbody>
+                    <tr>
+                      <td><strong>Name:</strong></td>
+                      <td>
+                        <input type="text" v-model="emergency_contact.emergency_name" class="form-control">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Mobile No:</strong></td>
+                      <td>
+                        <input type="text" v-model="emergency_contact.emergency_phn_number" class="form-control">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Address:</strong></td>
+                      <td>
+                        <input type="text" v-model="emergency_contact.emergency_addr" class="form-control">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-6">
+                <table class="table table-borderless d-flex">
+                  <tbody>
+                    <tr>
+                      <td><strong>Relation :</strong></td>
+                      <td><input type="text" v-model="emergency_contact.emergency_relation" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Email:</strong></td>
+                      <td><input type="text" v-model="emergency_contact.emergency_email" class="form-control"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>District :</strong></td>
+                      <td><input type="text" v-model="emergency_contact.emergency_district" class="form-control"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-success" @click="saveProfile('emergency_contact')">Save
+              Profile</button>
+            <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Modal End -->
+
+
+
+    <my-upload field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess"
+      @crop-upload-fail="cropUploadFail" v-model="show" :width="300" :height="200" :noCircle=true :params="params"
+      :headers="headers" :langExt="langExt" langType="en" img-format="png">
+    </my-upload>
+
+
   </div>
-</div>
-
-
-<!-- Modal End -->
-
-
-
-<my-upload field="img"
-  @crop-success="cropSuccess"
-  @crop-upload-success="cropUploadSuccess"
-  @crop-upload-fail="cropUploadFail"
-  v-model="show"
-  :width="300"
-  :height="200"
-  :noCircle=true
-  :params="params"
-  :headers="headers"
-  :langExt="langExt"
-  langType="en"
-  img-format="png">
-</my-upload>
-
-              
-</div>
 </template>
 
 <script>
@@ -677,143 +754,148 @@ export default {
   data() {
     const storageData = JSON.parse(localStorage.getItem('user'));
     return {
-      backend_url: process.env.VUE_APP_API_URL, 
+      backend_url: process.env.VUE_APP_API_URL,
       storageData,
       url: this.backendUrl + "/api/users",
       users: {},
-      testUrl:'http://localhost/pds-backend/api/users/search?search=&page=1',
+      testUrl: 'http://localhost/pds-backend/api/users/search?search=&page=1',
 
       //image cropper
       show: false,
-			params: {
-				token: '123456798',
-				name: 'avatar'
-			},
-			headers: {
-				smail: '*_~'
-			},
-			imgDataUrl: '',
+      params: {
+        token: '123456798',
+        name: 'avatar'
+      },
+      headers: {
+        smail: '*_~'
+      },
+      imgDataUrl: '',
 
       langExt: {
-          hint: 'Click or drag the file here to upload',
-          loading: 'Uploading…',
-          noSupported: 'Browser is not supported, please use IE10+ or other browsers',
-          success: 'Upload success',
-          fail: 'Upload failed',
-          preview: 'Preview',
-          btn: {
-            off: 'Cancel',
-            close: 'Close',
-            back: 'Back',
-            save: 'Crop'
-          },
-          error: {
-            onlyImg: 'Image only',
-            outOfSize: 'Image exceeds size limit: ',
-            lowestPx: 'Image\'s size is too low. Expected at least: '
-          }
+        hint: 'Click or drag the file here to upload',
+        loading: 'Uploading…',
+        noSupported: 'Browser is not supported, please use IE10+ or other browsers',
+        success: 'Upload success',
+        fail: 'Upload failed',
+        preview: 'Preview',
+        btn: {
+          off: 'Cancel',
+          close: 'Close',
+          back: 'Back',
+          save: 'Crop'
+        },
+        error: {
+          onlyImg: 'Image only',
+          outOfSize: 'Image exceeds size limit: ',
+          lowestPx: 'Image\'s size is too low. Expected at least: '
+        }
       },
 
-      departments:[],
-      designations:[],
+      departments: [],
+      designations: [],
 
 
-      basicInfo:{
-        name:'',
-        mobileNumber:'',
-        email:'',
-        designation:'',
-        designation_id:'',
-        image:'',
+      basicInfo: {
+        name: '',
+        mobileNumber: '',
+        gender: '',
+        date_of_birth: '',
+        email: '',
+        designation: '',
+        designation_id: '',
+        image: '',
+        blood_group: "",
+        nid_number: "",
+        passport_number: ""
       },
 
-      addressDetails:{
-        present_addr_houseno:'',
-        present_addr_roadno:'',
-        present_addr_area:'',
-        present_addr_upazila:'',
-        present_addr_district:'',
-        present_addr_postcode:'',
+      addressDetails: {
+        present_addr_houseno: '',
+        present_addr_roadno: '',
+        present_addr_area: '',
+        present_addr_upazila: '',
+        present_addr_district: '',
+        present_addr_postcode: '',
 
-        permanent_addr_houseno:'',
-        permanent_addr_roadno:'',
-        permanent_addr_area:'',
-        permanent_addr_upazila:'',
-        permanent_addr_district:'',
-        permanent_addr_postcode:'',
+        permanent_addr_houseno: '',
+        permanent_addr_roadno: '',
+        permanent_addr_area: '',
+        permanent_addr_upazila: '',
+        permanent_addr_district: '',
+        permanent_addr_postcode: '',
 
       },
-      jobs:{
-        department:'',
-        department_id:'',
-        designation:'',
-        designation_id:'',
-        joining_date:'',
-        job_location:'',
+      jobs: {
+        department: '',
+        department_id: '',
+        designation: '',
+        designation_id: '',
+        joining_date: '',
+        job_location: '',
       },
 
-      educationArr:[],
+      educationArr: [],
 
-      familly_info:{
-        father_name:'',
-        mother_name:'',
-        spouse_name:'',
-        number_of_child:'',
+      familly_info: {
+        father_name: '',
+        mother_name: '',
+        spouse_name: '',
+        number_of_child: '',
       },
-      emergency_contact:{
-        emergency_name:'',
-        emergency_relation:'',
-        emergency_phn_number:'',
-        emergency_email:'',
-        emergency_addr:'',
-        emergency_district:'',
+      emergency_contact: {
+        emergency_name: '',
+        emergency_relation: '',
+        emergency_phn_number: '',
+        emergency_email: '',
+        emergency_addr: '',
+        emergency_district: '',
       }
     };
   },
-  
-  computed: { },
+
+  computed: {},
 
   methods: {
-    check(){
+    check() {
       this.axios
-      .get(this.testUrl)
-      .then((res) => {
+        .get(this.testUrl)
+        .then((res) => {
           console.log(res);
-      })
+        })
     },
-    onDrag(){
+    onDrag() {
       console.log(this.educationArr);
     },
 
-    getDepartmentList(){
+    getDepartmentList() {
       this.axios
-      .get(this.backend_url+'getDepartment')
-      .then((res) => {
-        this.departments = res.data.data;
-        console.log(this.departments);
-      })
+        .get(this.backend_url + 'getDepartment')
+        .then((res) => {
+          this.departments = res.data.data;
+          console.log(this.departments);
+        })
     },
-    getDesignationList(){
+    getDesignationList() {
       this.axios
-      .get(this.backend_url+'getDesignationMgt')
-      .then((res) => {
-        this.designations = res.data.data;
-        console.log(this.designations);
-      })
+        .get(this.backend_url + 'getDesignationMgt')
+        .then((res) => {
+          this.designations = res.data.data;
+          console.log(this.designations);
+        })
     },
 
     addNewEducationHistory: function () {
-      this.educationArr.push({ exam_name: '', institute_name: '', district:'', upazila:'', subject:'', passing_year:'', grade:'' });
+      this.educationArr.push({ exam_name: '', institute_name: '', district: '', upazila: '', subject: '', passing_year: '', grade: '' });
     },
 
     removeEducationHistory: function (index) {
-      this.educationArr.splice(index,1);
+      this.educationArr.splice(index, 1);
     },
 
-    getProfileInfo(){
+    getProfileInfo() {
       this.axios
-      .get(this.backend_url+'user/getprofile/'+this.storageData.id)
-      .then((res) => {
+        .get(this.backend_url + 'user/getprofile/' + this.storageData.id)
+        .then((res) => {
           var profileData = res.data.data;
           console.log(profileData);
 
@@ -821,8 +903,13 @@ export default {
           this.basicInfo.mobileNumber = profileData.mobile_number;
           this.basicInfo.email = profileData.email;
           this.basicInfo.designation = profileData.designation;
+          this.basicInfo.gender = profileData.gender;
+          this.basicInfo.date_of_birth = profileData.date_of_birth;
+          this.basicInfo.blood_group = profileData.blood_group;
+          this.basicInfo.nid_number = profileData.nid_number;
+          this.basicInfo.passport_number = profileData.passport_number;
           this.basicInfo.designation_id = profileData.designation_id;
-          this.imgDataUrl= this.base_url_for_resource+'images/'+profileData.image;
+          this.imgDataUrl = this.base_url_for_resource + 'images/' + profileData.image;
 
           this.addressDetails.present_addr_houseno = profileData.present_addr_houseno;
           this.addressDetails.present_addr_roadno = profileData.present_addr_roadno;
@@ -837,12 +924,12 @@ export default {
           this.addressDetails.permanent_addr_district = profileData.permanent_addr_district;
           this.addressDetails.permanent_addr_postcode = profileData.permanent_addr_postcode;
 
-          this.jobs.department_id  =  profileData.department_id;
-          this.jobs.department     =  profileData.department;
-          this.jobs.designation_id =  profileData.designation_id;
-          this.jobs.designation    =  profileData.designation;
-          this.jobs.job_location   =  profileData.job_location;
-          this.jobs.joining_date   =  profileData.joining_date;
+          this.jobs.department_id = profileData.department_id;
+          this.jobs.department = profileData.department;
+          this.jobs.designation_id = profileData.designation_id;
+          this.jobs.designation = profileData.designation;
+          this.jobs.job_location = profileData.job_location;
+          this.jobs.joining_date = profileData.joining_date;
 
           this.educationArr = JSON.parse(profileData.education_history);
 
@@ -851,26 +938,31 @@ export default {
           this.familly_info.spouse_name = profileData.spouse_name;
           this.familly_info.number_of_child = profileData.number_of_child;
 
-          this.emergency_contact.emergency_name       = profileData.emergency_name;
-          this.emergency_contact.emergency_relation   = profileData.emergency_relation;
+          this.emergency_contact.emergency_name = profileData.emergency_name;
+          this.emergency_contact.emergency_relation = profileData.emergency_relation;
           this.emergency_contact.emergency_phn_number = profileData.emergency_phn_number;
-          this.emergency_contact.emergency_email      = profileData.emergency_email;
-          this.emergency_contact.emergency_addr       = profileData.emergency_addr;
-          this.emergency_contact.emergency_district   = profileData.emergency_district;
-      })
+          this.emergency_contact.emergency_email = profileData.emergency_email;
+          this.emergency_contact.emergency_addr = profileData.emergency_addr;
+          this.emergency_contact.emergency_district = profileData.emergency_district;
+        })
     },
 
-    saveProfile(type){
+    saveProfile(type) {
       let formData = new FormData;
       formData.append('user_id', this.storageData.id);
-      if(type == 'basicInfo'){
+      if (type == 'basicInfo') {
         formData.append('name', this.basicInfo.name);
         formData.append('mobile_number', this.basicInfo.mobileNumber);
         formData.append('email', this.basicInfo.email);
         formData.append('designation', this.basicInfo.designation_id);
+        formData.append('gender', this.basicInfo.gender);
+        formData.append('date_of_birth', this.basicInfo.date_of_birth);
+        formData.append('blood_group', this.basicInfo.blood_group);
+        formData.append('nid_number', this.basicInfo.nid_number);
+        formData.append('passport_number', this.basicInfo.passport_number);
         formData.append('image', this.basicInfo.image);
       }
-      if(type == 'addressDetail'){
+      if (type == 'addressDetail') {
         formData.append('present_addr_houseno', this.addressDetails.present_addr_houseno);
         formData.append('present_addr_roadno', this.addressDetails.present_addr_roadno);
         formData.append('present_addr_area', this.addressDetails.present_addr_area);
@@ -886,25 +978,25 @@ export default {
         formData.append('permanent_addr_postcode', this.addressDetails.permanent_addr_postcode);
       }
 
-      if(type == 'jobs'){
+      if (type == 'jobs') {
         formData.append('department', this.jobs.department_id);
         formData.append('designation', this.jobs.designation_id);
         formData.append('joining_date', this.jobs.joining_date);
         formData.append('job_location', this.jobs.job_location);
       }
 
-      if(type == 'education_history'){
+      if (type == 'education_history') {
         formData.append('education_history', JSON.stringify(this.educationArr));
       }
 
-      if(type == 'familly_info'){
+      if (type == 'familly_info') {
         formData.append('father_name', this.familly_info.father_name);
         formData.append('mother_name', this.familly_info.mother_name);
         formData.append('spouse_name', this.familly_info.spouse_name);
         formData.append('number_of_child', this.familly_info.number_of_child);
       }
 
-      if(type == 'emergency_contact'){
+      if (type == 'emergency_contact') {
         formData.append('emergency_name', this.emergency_contact.emergency_name);
         formData.append('emergency_relation', this.emergency_contact.emergency_relation);
         formData.append('emergency_phn_number', this.emergency_contact.emergency_phn_number);
@@ -912,62 +1004,62 @@ export default {
         formData.append('emergency_addr', this.emergency_contact.emergency_addr);
         formData.append('emergency_district', this.emergency_contact.emergency_district);
       }
-      
+
 
       this.axios
-      .post(this.backend_url+'user/updateProfile',formData)
-      .then((res) => {
+        .post(this.backend_url + 'user/updateProfile', formData)
+        .then((res) => {
           console.log(res.data);
           this.getProfileInfo();
-          $(".closeModal").trigger( "click" );
+          $(".closeModal").trigger("click");
           this.$toast.success("Profile saved successfully.", {
             position: "top-right",
           });
-          
-      })
+
+        })
     },
 
 
     toggleShow() {
-				this.show = !this.show;
-			},
-            /**
-			 * crop success
-			 *
-			 * [param] imgDataUrl
-			 * [param] field
-			 */
-			cropSuccess(imgDataUrl, field){
-				console.log('-------- crop success --------');
-				this.imgDataUrl = imgDataUrl;
-        this.basicInfo.image = imgDataUrl;
-        console.log('field: ' + field);
-        console.log('dataUrl: ' + imgDataUrl);
-        this.show = !this.show;
-			},
-			/**
-			 * upload success
-			 *
-			 * [param] jsonData  server api return data, already json encode
-			 * [param] field
-			 */
-			cropUploadSuccess(jsonData, field){
-				console.log('-------- upload success --------');
-				console.log(jsonData);
-				console.log('field: ' + field);
-        
-			},
-			/**
-			 * upload fail
-			 *
-			 * [param] status    server api return error status, like 500
-			 * [param] field
-			 */
-			cropUploadFail(status, field){
-				console.log('-------- upload fail --------');
-				console.log(status);
-				console.log('field: ' + field);
-			}
+      this.show = !this.show;
+    },
+    /**
+* crop success
+*
+* [param] imgDataUrl
+* [param] field
+*/
+    cropSuccess(imgDataUrl, field) {
+      console.log('-------- crop success --------');
+      this.imgDataUrl = imgDataUrl;
+      this.basicInfo.image = imgDataUrl;
+      console.log('field: ' + field);
+      console.log('dataUrl: ' + imgDataUrl);
+      this.show = !this.show;
+    },
+    /**
+     * upload success
+     *
+     * [param] jsonData  server api return data, already json encode
+     * [param] field
+     */
+    cropUploadSuccess(jsonData, field) {
+      console.log('-------- upload success --------');
+      console.log(jsonData);
+      console.log('field: ' + field);
+
+    },
+    /**
+     * upload fail
+     *
+     * [param] status    server api return error status, like 500
+     * [param] field
+     */
+    cropUploadFail(status, field) {
+      console.log('-------- upload fail --------');
+      console.log(status);
+      console.log('field: ' + field);
+    }
 
   },
 
@@ -978,8 +1070,8 @@ export default {
   },
 
   watch: {
-    
-    },
+
+  },
 
 }
 
@@ -987,16 +1079,15 @@ export default {
 </script>
 
 <style>
-
 .ui.inverted.dimmer {
   color: #009688 !important;
 
 }
 
 .cropper {
-	height: 400px;
-	width: 400px;
-	background: #DDD;
+  height: 400px;
+  width: 400px;
+  background: #DDD;
 }
 
 
@@ -1005,74 +1096,78 @@ export default {
   display: block;
   cursor: pointer;
 }
-.file-btn input {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    cursor: pointer;
-}    
-    
 
+.file-btn input {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
 </style>
 
 <style scoped>
-  ::v-deep .modal-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  ::v-deep .modal-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin: 0 1rem;
-    padding: 1rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.25rem;
-    background: #fff;
-  }
-  .modal__title {
-    margin: 0 2rem 0 0;
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-  .modal__close {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-  }
-  </style>
+::v-deep .modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::v-deep .modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0 1rem;
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  background: #fff;
+}
+
+.modal__title {
+  margin: 0 2rem 0 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+</style>
   
-  <style scoped>
-  .dark-mode div::v-deep .modal-content {
-    border-color: #2d3748;
-    background-color: #1a202c;
-  }
-
-.table-borderless > tbody > tr > td,
-.table-borderless > tbody > tr > th,
-.table-borderless > tfoot > tr > td,
-.table-borderless > tfoot > tr > th,
-.table-borderless > thead > tr > td,
-.table-borderless > thead > tr > th {
-    border: none;
+<style scoped>
+.dark-mode div::v-deep .modal-content {
+  border-color: #2d3748;
+  background-color: #1a202c;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: #333333;
-    background:none !important;
-    font-weight: bold;
+.table-borderless>tbody>tr>td,
+.table-borderless>tbody>tr>th,
+.table-borderless>tfoot>tr>td,
+.table-borderless>tfoot>tr>th,
+.table-borderless>thead>tr>td,
+.table-borderless>thead>tr>th {
+  border: none;
 }
-.nav-pills .nav-link{
-font-size: 20px !important;
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: #333333;
+  background: none !important;
+  font-weight: bold;
 }
-.border-left-cz{
-    border-left:5px solid #7dacdb;
-    cursor:grab;
-    cursor:move;
-    position: relative;
-  }
-  </style>
+
+.nav-pills .nav-link {
+  font-size: 20px !important;
+}
+
+.border-left-cz {
+  border-left: 5px solid #7dacdb;
+  cursor: grab;
+  cursor: move;
+  position: relative;
+}</style>

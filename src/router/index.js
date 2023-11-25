@@ -91,7 +91,223 @@ const routes = [
         }
       ]
     },
-
+    
+    {
+      path: "/admin-transfer",
+      name: "Admin-Transfer",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-transfer',
+          name: 'Admin-Transfer',
+          component: () => import('../components/Transfer/Admin_Transfer.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-transfer-type",
+      name: "Admin-Transfer-Type",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-transfer-type',
+          name: 'Admin-Transfer-Type',
+          component: () => import('../components/Transfer/admin-transfer-type.vue'),
+        }
+      ]
+    },
+    {
+      path: "/promotion",
+      name: "Promotion",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/promotion',
+          name: 'Promotion',
+          component: () => import('../components/Promotion/Promotion.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-promotion",
+      name: "Admin-Promotion",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-promotion',
+          name: 'Admin-Promotion',
+          component: () => import('../components/Promotion/Admin_Promotion.vue'),
+        }
+      ]
+    },
+    {
+      path: "/leave",
+      name: "Leave",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/leave',
+          name: 'Leave',
+          component: () => import('../components/Leave/Leave.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-leave",
+      name: "Admin-Leave",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-leave',
+          name: 'Admin-Leave',
+          component: () => import('../components/Leave/Adimin_Leave.vue'),
+        }
+      ]
+    },
+    {
+      path: "/training",
+      name: "Training",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/training',
+          name: 'Training',
+          component: () => import('../components/Training/Training.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-training",
+      name: "Admin-Training",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-training',
+          name: 'Admin-Training',
+          component: () => import('../components/Training/Admin-Training.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-department",
+      name: "Admin-Department",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-department',
+          name: 'Admin-Department',
+          component: () => import('../components/Department/Admin-Department.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-designation",
+      name: "Admin-Designation",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-designation',
+          name: 'Admin-Designation',
+          component: () => import('../components/Designation/Admin-Designation.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-office",
+      name: "Admin-Office",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-office',
+          name: 'Admin-Office',
+          component: () => import('../components/Office/Admin-Office.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-leave-type",
+      name: "Admin-Leave-Type",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-leave-type',
+          name: 'Admin-Leave-Type',
+          component: () => import('../components/Leave/Admin-LeaveType.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-training-type",
+      name: "Admin-Training-Type",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-training-type',
+          name: 'Admin-Training-Type',
+          component: () => import('../components/Training/Admin-TrainingType.vue'),
+        }
+      ]
+    },
+    {
+      path: "/report",
+      name: "Report",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/report',
+          name: 'Report',
+          component: () => import('../components/Report/Report.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-acr",
+      name: "ACR",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-acr',
+          name: 'ACR',
+          component: () => import('../components/ACR/admin-acr.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-senior-employee",
+      name: "Senior Employee",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-senior-employee',
+          name: 'Senior Employee',
+          component: () => import('../components/Senior Employee/admin_senior_employee.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-freedom-fighter",
+      name: "Freedom Fighter",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-freedom-fighter',
+          name: 'Freedom Fighter',
+          component: () => import('../components/Freedom Fighter/admin-freedom-fighter.vue'),
+        }
+      ]
+    },
+    {
+      path: "/admin-blood-group",
+      name: "Blood Group",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-blood-group',
+          name: 'Blood Group',
+          component: () => import('../components/Blood Group/admin-blood-group.vue'),
+        }
+      ]
+    },
     {
       path: '/contact-messages',
       name: 'Contact Message',
