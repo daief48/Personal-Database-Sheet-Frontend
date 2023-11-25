@@ -512,6 +512,7 @@ export default {
                     this.edittraining.training_strt_date = this.trainingRecordById.training_strt_date;
                     this.edittraining.training_end_date = this.trainingRecordById.training_end_date;
                     this.edittraining.description = this.trainingRecordById.description;
+                    this.edittraining.status = this.trainingRecordById.status;
 
                 })
                 .catch((e) => {

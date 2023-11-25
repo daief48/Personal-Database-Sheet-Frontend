@@ -5,8 +5,7 @@
             <div class="card-body">
                 <div style="display: flex;justify-content: space-between;">
                     <h3>My Leave List</h3>
-                    <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
-                        >+ Add
+                    <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal">+ Add
                         Leave</a>
 
                     <!-- hidden model  -->
@@ -24,7 +23,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <Form @submit.prevent="saveLeave" :validation-schema="schema"
-                                    v-slot="{ errors, resetForm }" ref="form">
+                                        v-slot="{ errors, resetForm }" ref="form">
                                         <div>
                                             <div class="row">
                                                 <!-- {{ leave }} -->
@@ -74,8 +73,8 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal" @click="resetForm">Cancel</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                @click="resetForm">Cancel</button>
                                             <button type="submit" class="btn btn-primary" @click="saveLeave()">Add</button>
                                         </div>
                                     </Form>
@@ -95,8 +94,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <Form @submit.prevent="EditTranfer" :validation-schema="schema"
-                                        v-slot="{ errors }">
+                                    <Form @submit.prevent="EditTranfer" :validation-schema="schema" v-slot="{ errors }">
                                         <div>
                                             <div class="row">
                                                 <!-- {{ leave }} -->
@@ -148,8 +146,8 @@
                                         <div class="modal-footer d-flex justify-content-center">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-primary" @click="EditTranfer()"
-                                                >Edit</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                @click="EditTranfer()">Edit</button>
                                         </div>
                                     </Form>
                                 </div>
@@ -211,7 +209,7 @@
                                                 style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
                                                 data-toggle="modal" data-target="#exampleModal1"
                                                 @click="editbutton(item)"></i> <!-- Corrected edit icon class -->
-                                                <i class="fa-solid fa-trash ml-1"
+                                            <i class="fa-solid fa-trash ml-1"
                                                 style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
                                                 @click="deleterecord(item.id)"></i>
 
@@ -232,7 +230,7 @@
                                                 style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
                                                 data-toggle="modal" data-target="#exampleModal1"
                                                 @click="editbutton(item)"></i> <!-- Corrected edit icon class -->
-                                                <i class="fa-solid fa-trash ml-1"
+                                            <i class="fa-solid fa-trash ml-1"
                                                 style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
                                                 @click="deleterecord(item.id)"></i>
 
@@ -253,7 +251,7 @@
                                                 style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
                                                 data-toggle="modal" data-target="#exampleModal1"
                                                 @click="editbutton(item)"></i> <!-- Corrected edit icon class -->
-                                                <i class="fa-solid fa-trash ml-1"
+                                            <i class="fa-solid fa-trash ml-1"
                                                 style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
                                                 @click="deleterecord(item.id)"></i>
 
@@ -346,8 +344,7 @@ export default {
     computed: {},
 
     methods: {
-        deleterecord(id)
-        {
+        deleterecord(id) {
             this.axios
                 .delete(this.backend_url + 'deleteLeaveType/' + id)
                 .then((res) => {
@@ -357,10 +354,10 @@ export default {
                     $('#datatable').DataTable().destroy();
                     this.$toast.error("Delete Successfully");
 
-                })    .catch((error) => {
-                        console.error("An error occurred while updating the transfer record:", error);
-                        this.$toast.error("Record cannot be deleted. Associated data exists.");
-                    });
+                }).catch((error) => {
+                    console.error("An error occurred while updating the transfer record:", error);
+                    this.$toast.error("Record cannot be deleted. Associated data exists.");
+                });
         },
         EditTranfer() {
             try {
@@ -396,7 +393,7 @@ export default {
 
 
         },
-  
+
         getLeaveList() {
             this.axios
                 .get(this.backend_url + 'getLeaveType?user_id=' + this.storageData.id)
