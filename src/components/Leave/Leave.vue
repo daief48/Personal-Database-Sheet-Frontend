@@ -522,19 +522,7 @@ export default {
             this.axios
                 .get(this.backend_url + 'specificUserLeave/' + id)
                 .then((response) => {
-                    //                 "employee_id": 1,
-                    //   "employee_name": "Shakiur",
-                    //   "id": 2,
-                    //   "leave_type": 11,
-                    //   "from_date": "2023-04-29",
-                    //   "to_date": "2023-04-29",
-                    //   "day": "2",
-                    //   "description": "good",
-                    //   "status": 1,
-                    //   "created_at": "2023-10-21T09:15:01.000000Z",
-                    //   "updated_at": "2023-10-21T09:15:01.000000Z"
-
-
+                
                     this.LeaveRecordById = response.data.data;
                     console.log(this.LeaveRecordById);
                     this.editleave.id = id;
@@ -544,6 +532,7 @@ export default {
                     this.editleave.from_date = this.LeaveRecordById.from_date;
                     this.editleave.to_date = this.LeaveRecordById.to_date;
                     this.editleave.day = this.LeaveRecordById.day;
+                    this.editleave.status = this.LeaveRecordById.status;
                     this.editleave.description = this.LeaveRecordById.description;
 
 

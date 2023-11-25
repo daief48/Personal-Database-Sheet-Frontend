@@ -165,6 +165,18 @@ const routes = [
       ]
     },
     {
+      path: "/sms-send",
+      name: "SMS-Send",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/sms-send',
+          name: 'SMS-Send',
+          component: () => import('../components/SMS Send/SMS-Send.vue'),
+        }
+      ]
+    },
+    {
       path: "/training",
       name: "Training",
       component: () => import('../Layout/Fullpagelayout.vue'),

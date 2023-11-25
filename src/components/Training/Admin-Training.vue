@@ -5,7 +5,8 @@
             <div class="card-body">
                 <div style="display: flex;justify-content: space-between;">
                     <h3>My Training History</h3>
-                    <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal" @click="clear()">+ Add
+                    <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
+                        @click="clear()">+ Add
                         Training</a>
 
                     <!-- hidden model  -->
@@ -76,7 +77,7 @@
                                             </div>
 
                                             <div class="col-4">
-                                               
+
                                                 <div class="d-flex">
                                                     <div class="form-group w-50 mr-2">
                                                         <label for="exampleInputEmail1">Training Start Date</label>
@@ -116,7 +117,7 @@
 
                                                 </div>
 
-                                               
+
 
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Training Feedback</label>
@@ -164,7 +165,157 @@
                     </div>
                     <!--End Add and Edit Modal -->
 
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width: 82vw;left: -457px;top: 164px;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Training</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
 
+
+                                    <Form @submit.prevent="EditTraining" :validation-schema="schema"
+                                        v-slot="{ errors }" >
+                                        <!-- {{ training }} -->
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label class="typo__label">Select with search</label>
+                                                    <multiselect v-model="value" :options="employeeList"
+                                                        :custom-label="nameWithLang" :close-on-select="true"
+                                                        placeholder="Select one" label="name" track-by="id"></multiselect>
+
+                                                </div>
+                                                <!-- <div class="form-group">
+                                                    <label for="exampleInputEmail1">Employee ID</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Enter Employee ID"
+                                                        v-model="training.employee_id" name="employee_id"
+                                                        :class="{ 'is-invalid': errors.employee_id }" />
+
+                                                    <div class="invalid-feedback">{{ errors.employee_id }}</div>
+
+                                                </div> -->
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Training Center Name</label>
+                                                    <Field type="text" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Training Center Name"
+                                                        v-model="edittraining.training_center_name"
+                                                        :class="{ 'is-invalid': errors.training_center_name }"
+                                                        name="training_center_name" />
+                                                    <div class="invalid-feedback">{{ errors.training_center_name }}</div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Train Name</label>
+                                                    <Field type="text" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Train Name"
+                                                        v-model="edittraining.training_name"
+                                                        :class="{ 'is-invalid': errors.training_name }"
+                                                        name="training_name" />
+                                                    <div class="invalid-feedback">{{ errors.training_name }}</div>
+
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+
+                                            <div class="col-4">
+
+                                                <div class="d-flex">
+                                                    <div class="form-group w-50 mr-2">
+                                                        <label for="exampleInputEmail1">Training Start Date</label>
+                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" placeholder="Training Start Date"
+                                                            v-model="edittraining.training_strt_date"
+                                                            :class="{ 'is-invalid': errors.training_strt_date }"
+                                                            name="training_strt_date" />
+                                                        <div class="invalid-feedback">{{ errors.training_strt_date }}</div>
+
+
+                                                    </div>
+
+                                                    <div class="form-group w-50">
+                                                        <label for="exampleInputEmail1">Training Eng Date</label>
+                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" placeholder="Training Eng Date"
+                                                            v-model="edittraining.training_end_date"
+                                                            :class="{ 'is-invalid': errors.training_end_date }"
+                                                            name="training_end_date" />
+                                                        <div class="invalid-feedback">{{ errors.training_end_date }}</div>
+
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Training Score</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Training Score"
+                                                        v-model="edittraining.training_score"
+                                                        :class="{ 'is-invalid': errors.training_score }"
+                                                        name="training_score" />
+                                                    <div class="invalid-feedback">{{ errors.training_score }}</div>
+
+
+                                                </div>
+
+
+
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Training Feedback</label>
+                                                    <Field type="text" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Training Feedback"
+                                                        v-model="edittraining.training_feedback"
+                                                        :class="{ 'is-invalid': errors.training_feedback }"
+                                                        name="training_feedback" />
+                                                    <div class="invalid-feedback">{{ errors.training_feedback }}</div>
+
+
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <div class="col-4">
+
+
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlTextarea1">Description</label>
+                                                    <Field as="textarea" class="form-control"
+                                                        id="exampleFormControlTextarea1" rows="5" placeholder="Description"
+                                                        v-model="edittraining.description"
+                                                        :class="{ 'is-invalid': errors.description }" name="description">
+                                                    </Field>
+                                                    <div class="invalid-feedback">{{ errors.description }}</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                              >Cancel</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                @click="EditTraining()">Edit</button>
+                                        </div>
+                                    </Form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Training Details Modal -->
 
                     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
@@ -262,6 +413,14 @@
                                                 <i class="fa fa-check"
                                                     style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                             </a>
+                                            <i class="fas fa-edit"
+                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                data-toggle="modal" data-target="#exampleModal1"
+                                                @click="editbutton(item.id,item)"></i> <!-- Corrected edit icon class -->
+                                            <i class="fa-solid fa-trash ml-1"
+                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                @click="deleterecord(item.id)"></i>
+
                                         </div>
 
                                         <div v-else-if="item.status === 1">
@@ -275,6 +434,14 @@
                                                 <i class="fa fa-times"
                                                     style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                             </a>
+                                            <i class="fas fa-edit"
+                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                data-toggle="modal" data-target="#exampleModal1"
+                                                @click="editbutton(item.id,item)"></i> <!-- Corrected edit icon class -->
+                                            <i class="fa-solid fa-trash ml-1"
+                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                @click="deleterecord(item.id)"></i>
+
                                         </div>
 
                                         <div v-else-if="item.status === 2">
@@ -288,6 +455,14 @@
                                                 <i class="fa fa-check"
                                                     style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                             </a>
+                                            <i class="fas fa-edit"
+                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                data-toggle="modal" data-target="#exampleModal1"
+                                                @click="editbutton(item.id,item)"></i> <!-- Corrected edit icon class -->
+                                            <i class="fa-solid fa-trash ml-1"
+                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                @click="deleterecord(item.id)"></i>
+
                                         </div>
 
                                     </td>
@@ -386,15 +561,82 @@ export default {
 
             },
 
-
+            edittraining: {
+                employee_id: "",
+                training_center_name: "",
+                training_name: "",
+                description: "",
+                training_score: "",
+                training_feedback: "",
+                training_strt_date: "",
+                training_end_date: "",
+            }
 
         }
     },
 
 
     methods: {
+        EditTraining() {
+            try {
+                this.axios
+                    .post(this.backend_url + `updateTrainingRecord/${this.edittraining.id}`, this.edittraining)
+                    .then((res) => {
+                        console.log(res);
+                        $("#exampleModal1").modal('hide');
+                        this.getTrainingList();
+                        $('#datatable').DataTable().destroy();
+                        this.$toast.success(`Update Successfully!`);
+                    })
+                    .catch((error) => {
+                        console.error("An error occurred while updating the training record:", error);
+                        this.$toast.error(`Failed to update training record.`);
+                    });
+            } catch (error) {
+                console.error("An error occurred:", error);
+                this.$toast.error(`Failed to update training record.`);
+            }
+        },
+        editbutton(id,item) {
+            console.log(id);
+            this.value.id = item.id;
+            this.value.emp = item.employee_name;
 
-        clear(){
+
+            this.axios
+                .get(this.backend_url + 'specificUserTraining/' + id)
+                .then((response) => {
+                    this.trainingRecordById = response.data.data;
+                    console.log(this.trainingRecordById);
+                    this.edittraining.id = id;
+                    this.edittraining.employee_id = this.trainingRecordById.employee_id;
+                    this.edittraining.training_center_name = this.trainingRecordById.training_center_name;
+                    this.edittraining.training_name = this.trainingRecordById.training_name;
+                    this.edittraining.training_score = this.trainingRecordById.training_score;
+                    this.edittraining.training_feedback = this.trainingRecordById.training_feedback;
+                    this.edittraining.training_strt_date = this.trainingRecordById.training_strt_date;
+                    this.edittraining.training_end_date = this.trainingRecordById.training_end_date;
+                    this.edittraining.description = this.trainingRecordById.description;
+                    this.edittraining.status = this.trainingRecordById.status;
+
+                })
+                .catch((e) => {
+                    console.log(e)
+                })
+        },
+        deleterecord(id) {
+            this.axios
+                .delete(this.backend_url + 'deleteTrainingRecord/' + id)
+                .then((res) => {
+                    console.log('Delete Successfully', res);
+                    this.getTrainingList();
+                    $('#datatable').DataTable().destroy();
+                    this.$toast.error('Delete Successfully');
+
+                })
+        },
+        clear() {
+            console.log("hi");
             this.$refs.form.resetForm();
 
         },
@@ -417,7 +659,7 @@ export default {
                 })
         },
 
-        getpromotionList() {
+        getTrainingList() {
             this.axios
                 .get(this.backend_url + 'getTrainingList?user_id=' + this.storageData.id)
                 .then((res) => {
@@ -438,7 +680,7 @@ export default {
                 .delete(this.backend_url + 'deleteTransferRecord/' + id)
                 .then((res) => {
                     console.log('Delete Successfully', res);
-                    this.getpromotionList();
+                    this.getTrainingList();
                     $('#datatable').DataTable().destroy();
                     this.$toast.error(`Delete Successfully!!`);
 
@@ -520,7 +762,7 @@ export default {
                 .patch(this.backend_url + `activeTrainingRecord/${id}`)
                 .then((response) => {
                     console.log(response);
-                    this.getpromotionList();
+                    this.getTrainingList();
                     $('#datatable').DataTable().destroy();
                     this.$toast.success(`Active status Successfully!!`);
                 })
@@ -533,7 +775,7 @@ export default {
                 .patch(this.backend_url + `inactiveTrainingRecord/${id}`)
                 .then((response) => {
                     console.log(response);
-                    this.getpromotionList();
+                    this.getTrainingList();
                     $('#datatable').DataTable().destroy();
                     this.$toast.error(`Status Cancel!!`);
                 })
@@ -550,7 +792,7 @@ export default {
                     console.log(res);
 
                     $("#exampleModal").modal('hide');
-                    this.getpromotionList();
+                    this.getTrainingList();
                     $('#datatable').DataTable().destroy();
                     this.$toast.success(`Data Added Successfully!!`);
                     this.$refs.form.resetForm();
@@ -566,7 +808,7 @@ export default {
 
     created() {
         this.getEmployeeList();
-        this.getpromotionList();
+        this.getTrainingList();
         this.getDepartmentList();
         this.getDesignationList();
         this.getTransfertype();

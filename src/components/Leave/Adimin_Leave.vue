@@ -4,11 +4,11 @@
         <div class="card card-default">
             <div class="card-body">
                 <div style="display: flex;justify-content: space-between;">
-                    <h3>My Leave History</h3>
+                    <h3>All Leave History</h3>
                     <div>
 
-                        <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
-                            >+ Add
+                        <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal" @click="clear()">+
+                            Add
                             Leave</a>
                     </div>
 
@@ -18,7 +18,7 @@
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content" style="width: 82vw;left: -457px;top: 164px;">
+                            <div class="modal-content" style="width: 60vw;left: -332px;top: 164px;">
                                 <div class="modal-header">
                                     <h5 class="modal-title text-center" id="exampleModalLabel">Add Leave</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -27,11 +27,11 @@
                                 </div>
                                 <div class="modal-body">
                                     <Form @submit.prevent="saveLeave" :validation-schema="schema"
-                                    v-slot="{ errors, resetForm }" ref="form"> <!-- <p></p> -->
+                                        v-slot="{ errors, resetForm }" ref="form"> <!-- <p></p> -->
                                         <!-- {{ leave }} -->
                                         <!-- {{ storageData }} -->
                                         <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-6">
                                                 <div class="form-group">
                                                     <label class="typo__label">Select with search</label>
                                                     <multiselect v-model="value" :options="employeeList"
@@ -58,43 +58,39 @@
                                                 </div>
 
 
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">To Date</label>
-                                                    <Field type="date" class="form-control" id="exampleInputEmail1"
-                                                        aria-describedby="emailHelp" placeholder="Enter email"
-                                                        v-model="leave.to_date" @change="getDays"
-                                                        :class="{ 'is-invalid': errors.to_date }" name="to_date" />
-                                                    <div class="invalid-feedback">{{ errors.to_date }}</div>
 
-                                                </div>
                                             </div>
 
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">From Date</label>
-                                                    <Field type="date" class="form-control" id="exampleInputEmail1"
-                                                        aria-describedby="emailHelp" placeholder="Enter email"
-                                                        v-model="leave.from_date" @change="getDays"
-                                                        :class="{ 'is-invalid': errors.from_date }" name="from_date" />
-                                                    <div class="invalid-feedback">{{ errors.from_date }}</div>
+                                            <div class="col-6">
+                                                <div class="d-flex">
+                                                    <div class="form-group w-25 mr-2">
+                                                        <label for="exampleInputEmail1">From Date</label>
+                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" placeholder="Enter email"
+                                                            v-model="leave.from_date" @change="getDays"
+                                                            :class="{ 'is-invalid': errors.from_date }" name="from_date" />
+                                                        <div class="invalid-feedback">{{ errors.from_date }}</div>
 
+                                                    </div>
+                                                    <div class="form-group w-25 mr-2">
+                                                        <label for="exampleInputEmail1">To Date</label>
+                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" placeholder="Enter email"
+                                                            v-model="leave.to_date" @change="getDays"
+                                                            :class="{ 'is-invalid': errors.to_date }" name="to_date" />
+                                                        <div class="invalid-feedback">{{ errors.to_date }}</div>
+
+                                                    </div>
+
+                                                    <div class="form-group w-50">
+                                                        <label for="exampleInputEmail1">Total Leave Days</label>
+                                                        <Field type="text" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" v-model="leave.day"
+                                                            :class="{ 'is-invalid': errors.day }" name="day" readonly />
+                                                        <div class="invalid-feedback">{{ errors.day }}</div>
+
+                                                    </div>
                                                 </div>
-
-
-
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Total Leave Days</label>
-                                                    <Field type="text" class="form-control" id="exampleInputEmail1"
-                                                        aria-describedby="emailHelp" v-model="leave.day"
-                                                        :class="{ 'is-invalid': errors.day }" name="day" readonly />
-                                                    <div class="invalid-feedback">{{ errors.day }}</div>
-
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="col-4">
 
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Description</label>
@@ -108,13 +104,14 @@
                                                 </div>
 
                                             </div>
+
+
                                         </div>
 
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal" @click="resetForm()">Cancel</button>
-                                            <button type="submit" class="btn btn-primary" @click="saveLeave()"
-                                               >Add</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                @click="resetForm()">Cancel</button>
+                                            <button type="submit" class="btn btn-primary" @click="saveLeave()">Add</button>
 
                                         </div>
                                     </Form>
@@ -123,7 +120,110 @@
                         </div>
                     </div>
                     <!--End Add and Edit Modal -->
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width: 60vw;left: -332px;top: 164px;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-center" id="exampleModalLabel">Edit Leave</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <Form @submit.prevent="saveLeave" :validation-schema="schema"
+                                        v-slot="{ errors }" > <!-- <p></p> -->
+                                        <!-- {{ leave }} -->
+                                        <!-- {{ storageData }} -->
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label class="typo__label">Select with search</label>
+                                                    <multiselect v-model="value" :options="employeeList"
+                                                        :custom-label="nameWithLang" :close-on-select="true"
+                                                        placeholder="Select one" label="name" track-by="id"></multiselect>
 
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <input type="text" v-model="leave.employee_id" style="display:none;">
+                                                    <label for="exampleFormControlSelect1">Leave Type </label>
+
+                                                    <Field as="select" class="form-control" id="exampleFormControlSelect1"
+                                                        v-model="editleave.leave_type" name="leave_type"
+                                                        :class="{ 'is-invalid': errors.leave_type }">
+
+                                                        <option v-for="leave in LeaveType" :key="leave.id"
+                                                            v-bind:value="leave.id">
+                                                            {{ leave.leave_type }}</option>
+
+                                                    </Field>
+                                                    <div class="invalid-feedback">{{ errors.leave_type }}</div>
+
+                                                </div>
+
+
+
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="d-flex">
+                                                    <div class="form-group w-25 mr-2">
+                                                        <label for="exampleInputEmail1">From Date</label>
+                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" placeholder="Enter email"
+                                                            v-model="editleave.from_date" @change="getDays"
+                                                            :class="{ 'is-invalid': errors.from_date }" name="from_date" />
+                                                        <div class="invalid-feedback">{{ errors.from_date }}</div>
+
+                                                    </div>
+                                                    <div class="form-group w-25 mr-2">
+                                                        <label for="exampleInputEmail1">To Date</label>
+                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" placeholder="Enter email"
+                                                            v-model="editleave.to_date" @change="getDays"
+                                                            :class="{ 'is-invalid': errors.to_date }" name="to_date" />
+                                                        <div class="invalid-feedback">{{ errors.to_date }}</div>
+
+                                                    </div>
+
+                                                    <div class="form-group w-50">
+                                                        <label for="exampleInputEmail1">Total Leave Days</label>
+                                                        <Field type="text" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" v-model="editleave.day"
+                                                            :class="{ 'is-invalid': errors.day }" name="day" readonly />
+                                                        <div class="invalid-feedback">{{ errors.day }}</div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Description</label>
+                                                    <Field as="textarea" class="form-control "
+                                                        id="exampleFormControlTextarea1" rows="5" placeholder="Description"
+                                                        v-model="editleave.description"
+                                                        :class="{ 'is-invalid': errors.description }" name="description">
+                                                    </Field>
+                                                    <div class="invalid-feedback">{{ errors.description }}</div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                               >Cancel</button>
+                                            <button type="submit" class="btn btn-primary" @click="EditTranfer()">Edit</button>
+
+                                        </div>
+                                    </Form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Transter Details Modal -->
 
@@ -223,6 +323,13 @@
                                                 <i class="fa fa-check"
                                                     style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                             </a>
+                                            <i class="fas fa-edit"
+                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                data-toggle="modal" data-target="#exampleModal1"
+                                                @click="editbutton(item.id,item)"></i> <!-- Corrected edit icon class -->
+                                            <i class="fa-solid fa-trash ml-1"
+                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                @click="deleterecord(item.id)"></i>
                                         </div>
 
                                         <div v-else-if="item.status === 1">
@@ -236,6 +343,13 @@
                                                 <i class="fa fa-times"
                                                     style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                             </a>
+                                            <i class="fas fa-edit"
+                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                data-toggle="modal" data-target="#exampleModal1"
+                                                @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
+                                            <i class="fa-solid fa-trash ml-1"
+                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                @click="deleterecord(item.id)"></i>
                                         </div>
 
                                         <div v-else-if="item.status === 2">
@@ -249,6 +363,13 @@
                                                 <i class="fa fa-check"
                                                     style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                             </a>
+                                            <i class="fas fa-edit"
+                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                data-toggle="modal" data-target="#exampleModal1"
+                                                @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
+                                            <i class="fa-solid fa-trash ml-1"
+                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                @click="deleterecord(item.id)"></i>
                                         </div>
 
                                     </td>
@@ -295,12 +416,12 @@ export default {
 
 
         const schema = Yup.object().shape({
-            employee_id: Yup.string().required("Employee ID is required"),
+            // employee_id: Yup.string().required("Employee ID is required"),
             leave_type: Yup.string().required("Leave Type is required"),
             from_date: Yup.date().required("From Date is required").typeError("Invalid date format"),
             to_date: Yup.date().required("To Date is required").typeError("Invalid date format"),
-            day: Yup.number().required("Number of Days is required").typeError("Invalid number format"),
-            description: Yup.string().required("Description is required"),
+            // day: Yup.number().required("Number of Days is required").typeError("Invalid number format"),
+            // description: Yup.string().required("Description is required"),
         });
 
 
@@ -334,6 +455,13 @@ export default {
                 to_date: "",
                 day: "",
                 description: "",
+            },editleave: {
+                employee_id: "",
+                leave_type: "",
+                from_date: "",
+                to_date: "",
+                day: "",
+                description: "",
             }
 
         };
@@ -342,7 +470,72 @@ export default {
     computed: {},
 
     methods: {
-   
+        clear() {
+            console.log("hi");
+            this.$refs.form.resetForm();
+
+        },
+        EditTranfer() {
+            try {
+                this.axios
+                    .post(this.backend_url + `updateLeaveMgt/${this.editleave.id}`, this.editleave)
+                    .then((res) => {
+                        console.log(res);
+                        this.getTransferList();
+                        $("#exampleModal1").modal('hide');
+                        $('#datatable').DataTable().destroy();
+                        this.$toast.success(`Update Data Successfully!`);
+                    })
+                    .catch((error) => {
+                        console.error("An error occurred while updating the Leave record:", error);
+                        this.$toast.error(`Failed to update Leave record.`);
+                    });
+            } catch (error) {
+                console.error("An error occurred:", error);
+                this.$toast.error(`Failed to update Leave record.`);
+            }
+        },
+        editbutton(id,item) {
+            console.log(id);
+            this.value.id = item.id;
+            this.value.emp = item.employee_name;
+            this.axios
+                .get(this.backend_url + 'specificUserLeave/' + id)
+                .then((response) => {
+                
+                    this.LeaveRecordById = response.data.data;
+                    console.log(this.LeaveRecordById);
+                    this.editleave.id = id;
+                    this.editleave.employee_name = this.LeaveRecordById.employee_name;
+                    this.editleave.employee_id = this.LeaveRecordById.employee_id;
+                    this.editleave.leave_type = this.LeaveRecordById.leave_type;
+                    this.editleave.from_date = this.LeaveRecordById.from_date;
+                    this.editleave.to_date = this.LeaveRecordById.to_date;
+                    this.editleave.day = this.LeaveRecordById.day;
+                    this.editleave.status = this.LeaveRecordById.status;
+                    this.editleave.description = this.LeaveRecordById.description;
+
+
+                })
+                .catch((e) => {
+                    console.log(e)
+                })
+        },
+        deleterecord(id) {
+            this.axios
+                .delete(this.backend_url + 'deleteLeaveMgt/' + id)
+                .then((res) => {
+                    console.log('Delete Successfully', res.message);
+
+                    this.getTransferList();
+                    $('#datatable').DataTable().destroy();
+                    this.$toast.error("Delete Successfully");
+
+                }).catch((error) => {
+                    console.error("An error occurred while updating the transfer record:", error);
+                    this.$toast.error("An error occurred while updating the transfer record:", error);
+                });
+        },
         getTransferList() {
             this.axios
                 .get(this.backend_url + 'getLeaveMgt?user_id=' + this.storageData.id)
@@ -554,6 +747,10 @@ export default {
 .ui.inverted.dimmer {
     color: #009688 !important;
 
+}
+
+.w-25 {
+    width: 30% !important;
 }
 
 .cropper {
