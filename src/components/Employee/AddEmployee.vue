@@ -145,11 +145,21 @@
                         <div class="input-group-append">
                           <span class="input-group-text">Blood Group:</span>
                         </div>
-                        <Field name="blood_group" type="text" v-model="basicInfo.blood_group" class="form-control"
+                        <select v-model="basicInfo.blood_group" class="form-control"
                           :class="{ 'is-invalid': errors.blood_group }">
-                        </Field>
+                          <option value="" disabled>Select Blood Group</option>
+                          <option value="A+">A+</option>
+                          <option value="A-">A-</option>
+                          <option value="B+">B+</option>
+                          <option value="B-">B-</option>
+                          <option value="AB+">AB+</option>
+                          <option value="AB-">AB-</option>
+                          <option value="O+">O+</option>
+                          <option value="O-">O-</option>
+                        </select>
                         <div class="invalid-feedback">{{ errors.blood_group }}</div>
                       </div>
+
 
                       <div class="input-group mb-4">
                         <div class="input-group-append">
@@ -694,12 +704,22 @@
                       <div class="input-group-append">
                         <span class="input-group-text">Relation</span>
                       </div>
-                      <Field type="text" v-model="emergency_contact.emergency_relation" class="form-control"
-                        name="emergency_relation" :class="{ 'is-invalid': errors.emergency_relation }" />
+                      <select v-model="emergency_contact.emergency_relation" class="form-control"
+                        name="emergency_relation" :class="{ 'is-invalid': errors.emergency_relation }">
+                        <option value="" disabled>Select Relationship</option>
+                        <option value="Father">Father</option>
+                        <option value="Mother">Mother</option>
+                        <option value="Brother">Brother</option>
+                        <option value="Sister">Sister</option>
+                        <option value="Son">Son</option>
+                        <option value="Daughter">Daughter</option>
+                        <option value="Wife">Wife</option>
+                        <option value="Other">Other</option>
+                      </select>
                       <div class="invalid-feedback">{{ errors.emergency_relation }}</div>
-
                     </div>
                   </div>
+
                 </div>
                 <div class="row">
                   <div class="col-md-6">
@@ -1084,7 +1104,7 @@ export default {
         token: "123456798",
         name: "avatar",
       },
-    
+
       headers: {
         smail: "*_~",
       },
@@ -1199,11 +1219,11 @@ export default {
 
   methods: {
     deleteField(index) {
-        this.fields.splice(index, 1);
-      },
-      addField() {
-        this.fields.push({ firstName: "", lastName: "" });
-      },
+      this.fields.splice(index, 1);
+    },
+    addField() {
+      this.fields.push({ firstName: "", lastName: "" });
+    },
     handleFileChange(event) {
       // Access the selected file using event.target.files[0]
       const selectedFile = event.target.files[0];

@@ -289,6 +289,8 @@
             // } -->
                                         <!-- {{  training }} -->
                                         <hr>
+                                        <h1 class="card-title "> Name: {{ this.training.employee_name }} </h1>
+
                                         <h1 class="card-title ">Training Center Name: {{ training.training_center_name }}
                                         </h1>
                                         <h5 class="card-title">Training Name: {{ training.training_name }}</h5>
@@ -350,7 +352,7 @@
                                         <p v-else class="text-success font-weight-bold">Pending</p>
                                     </td>
                                     <td style="width: 185px;">
-                                        <button v-if="item.status === 1" @click="viewDetails(item.id)"
+                                        <button v-if="item.status === 1" @click="viewDetails(item.id,item)"
                                             class="btn btn-outline-primary mr-2"
                                             style="border: 3px solid;font-weight: bolder; width: 124px;" data-toggle="modal"
                                             data-target="#exampleModal2">
@@ -530,7 +532,7 @@ export default {
 
                 })
         },
-        viewDetails(id) {
+        viewDetails(id,item) {
             console.log(id);
             // <!-- training: {
             //     employee_id: "",
@@ -548,6 +550,7 @@ export default {
                     console.log(this.trainingRecordById);
                     this.training.id = id;
                     this.training.employee_id = this.trainingRecordById.employee_id;
+                    this.training.employee_name = item.employee_name;
                     this.training.training_center_name = this.trainingRecordById.training_center_name;
                     this.training.training_name = this.trainingRecordById.training_name;
                     this.training.training_score = this.trainingRecordById.training_score;

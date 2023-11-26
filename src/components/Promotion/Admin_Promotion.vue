@@ -232,6 +232,7 @@
                                             Promtotion Details
                                         </h5>
                                         <hr>
+                                        <h1 class="card-title ">Name: {{ promotion.employee_name }} </h1>
                                         <h1 class="card-title ">Promotion Ref Number: {{ promotion.promotion_ref_number }}
                                         </h1>
                                         <h5 class="card-title">Promoted Designation: {{ promotion.promoted_designation }}
@@ -291,7 +292,7 @@
                                     </td>
                                     <td style="width: 185px;">
                                         <div v-if="item.status === 0">
-                                            <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -316,7 +317,7 @@
                                         </div>
 
                                         <div v-else-if="item.status === 1">
-                                            <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -336,7 +337,7 @@
                                         </div>
 
                                         <div v-else-if="item.status === 2">
-                                            <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -551,7 +552,7 @@ export default {
                 })
         },
 
-        viewDetails(id) {
+        viewDetails(id,item) {
             console.log(id);
             this.axios
                 .get(this.backend_url + 'specificUserPromotion/' + id)
@@ -564,6 +565,7 @@ export default {
 
                     this.promotionRecordById.designation_name = response.data.data.designation_name;
                     this.promotion.id = id;
+                    this.promotion.employee_name = item.employee_name;
                     this.promotion.employee_id = this.promotionRecordById.employee_id;
                     this.promotion.promotion_ref_number = this.promotionRecordById.promotion_ref_number;
                     this.promotion.promoted_designation = this.promotionRecordById.designation_name;

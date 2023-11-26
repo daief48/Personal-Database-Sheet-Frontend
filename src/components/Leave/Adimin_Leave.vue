@@ -247,6 +247,7 @@
                                             Leave Details
                                         </h5>
                                         <hr>
+                                        <h1 class="card-title ">Name: {{ leave.employee_name }}</h1>
                                         <h1 class="card-title ">Leave Type: {{ leave.leave_type }}</h1>
                                         <h5 class="card-title">From Date: {{ leave.from_date }}</h5>
                                         <h5 class="card-title">To Date: {{ leave.to_date }}</h5>
@@ -308,7 +309,7 @@
                                     </td>
                                     <td style="width: 185px;">
                                         <div v-if="item.status === 0">
-                                            <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -333,7 +334,7 @@
                                         </div>
 
                                         <div v-else-if="item.status === 1">
-                                            <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -353,7 +354,7 @@
                                         </div>
 
                                         <div v-else-if="item.status === 2">
-                                            <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -579,7 +580,7 @@ export default {
 
                 })
         },
-        viewDetails(id) {
+        viewDetails(id,item) {
             console.log(id);
             this.axios
                 .get(this.backend_url + 'specificUserLeave/' + id)
@@ -588,7 +589,7 @@ export default {
                     this.LeaveRecordById = response.data.data;
                     console.log(this.LeaveRecordById.Leave_type);
                     this.leave.id = id;
-                    this.leave.employee_name = this.LeaveRecordById.employee_name;
+                    this.leave.employee_name = item.employee_name;
                     this.leave.employee_id = this.LeaveRecordById.employee_id;
                     this.leave.leave_type = this.LeaveRecordById.leave_type;
                     this.leave.from_date = this.LeaveRecordById.from_date;

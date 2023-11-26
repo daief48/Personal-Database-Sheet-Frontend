@@ -239,6 +239,7 @@
                                             Promtotion Details
                                         </h5>
                                         <hr>
+                                        <h1 class="card-title ">Name: {{ promotion.employee_name }} </h1>
                                         <h1 class="card-title ">Promotion Ref Number: {{ promotion.promotion_ref_number }}
                                         </h1>
                                         <h5 class="card-title">Promoted Designation: {{ promotion.promoted_designation }}
@@ -300,7 +301,7 @@
                                         <p v-else class="text-success font-weight-bold">Pending</p>
                                     </td>
                                     <td style="width: 185px;">
-                                        <button v-if="item.status === 1" @click="viewDetails(item.id)"
+                                        <button v-if="item.status === 1" @click="viewDetails(item.id,item)"
                                             class="btn btn-outline-primary mr-2"
                                             style="border: 3px solid;font-weight: bolder; width: 124px;" data-toggle="modal"
                                             data-target="#exampleModal2">
@@ -464,7 +465,7 @@ export default {
 
                 })
         },
-        viewDetails(id) {
+        viewDetails(id,item) {
             console.log(id);
             this.axios
                 .get(this.backend_url + 'specificUserPromotion/' + id)
@@ -477,6 +478,7 @@ export default {
 
                     this.promotionRecordById.designation_name = response.data.data.designation_name;
                     this.promotion.id = id;
+                    this.promotion.employee_name = item.employee_name;
                     this.promotion.employee_id = this.promotionRecordById.employee_id;
                     this.promotion.promotion_ref_number = this.promotionRecordById.promotion_ref_number;
                     this.promotion.promoted_designation = this.promotionRecordById.designation_name;

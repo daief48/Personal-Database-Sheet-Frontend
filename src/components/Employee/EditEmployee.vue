@@ -133,11 +133,21 @@
                             <tr>
                               <td><strong>Blood Group:</strong></td>
                               <td>
-                                <Field name="blood_group" type="text" v-model="basicInfo.blood_group" class="form-control"
+                                <select v-model="basicInfo.blood_group" class="form-control"
                                   :class="{ 'is-invalid': errors.blood_group }">
-                                </Field>
+                                  <option value="" disabled>Select Blood Group</option>
+                                  <option value="A+">A+</option>
+                                  <option value="A-">A-</option>
+                                  <option value="B+">B+</option>
+                                  <option value="B-">B-</option>
+                                  <option value="AB+">AB+</option>
+                                  <option value="AB-">AB-</option>
+                                  <option value="O+">O+</option>
+                                  <option value="O-">O-</option>
+                                </select>
                               </td>
                             </tr>
+
 
                             <tr>
                               <td><strong>NID Number:</strong></td>
@@ -193,7 +203,8 @@
                             <td><strong>House No:</strong></td>
                             <td>
                               <Field type="text" v-model="addressDetails.present_addr_houseno" class="form-control"
-                                name="present_addr_houseno" :class="{ 'is-invalid': errors.present_addr_houseno }" style="width: 428px;"/>
+                                name="present_addr_houseno" :class="{ 'is-invalid': errors.present_addr_houseno }"
+                                style="width: 428px;" />
                               <div class="invalid-feedback">{{ errors.present_addr_houseno }}</div>
                             </td>
                           </tr>
@@ -208,9 +219,10 @@
                           <tr>
                             <td><strong>District</strong></td>
                             <td>
-                              <Field type="text" v-model="addressDetails.present_addr_district" class="form-control"
-                                name="present_addr_district" :class="{ 'is-invalid': errors.present_addr_district }" />
-                              <div class="invalid-feedback">{{ errors.present_addr_district }}</div>
+                              <multiselect v-model="present_district" :options="district"
+                                :custom-label="nameWithPresentDistrict" class="form-control p-0" :close-on-select="true"
+                                placeholder="Select one" label="name" track-by="id">
+                              </multiselect>
 
                             </td>
                           </tr>
@@ -224,16 +236,18 @@
                             <td><strong>Road No:</strong></td>
                             <td>
                               <Field type="number" v-model="addressDetails.present_addr_roadno" class="form-control"
-                                name="present_addr_roadno" :class="{ 'is-invalid': errors.present_addr_roadno }" style="width: 428px;"/>
+                                name="present_addr_roadno" :class="{ 'is-invalid': errors.present_addr_roadno }"
+                                style="width: 428px;" />
                               <div class="invalid-feedback">{{ errors.present_addr_roadno }}</div>
                             </td>
                           </tr>
                           <tr>
-                            <td><strong>Upozila:</strong></td>
+                            <td><strong>upazila:</strong></td>
                             <td>
-                              <Field type="text" v-model="addressDetails.present_addr_upazila" class="form-control"
-                                name="present_addr_upazila" :class="{ 'is-invalid': errors.present_addr_upazila }" />
-                              <div class="invalid-feedback">{{ errors.present_addr_upazila }}</div>
+                              <multiselect v-model="present_addr_upazila" :options="upazila"
+                                :custom-label="nameWithPresentUpazila" class="form-control p-0" :close-on-select="true"
+                                placeholder="Select one" label="name" track-by="id">
+                              </multiselect>
                             </td>
                           </tr>
                           <tr>
@@ -259,7 +273,8 @@
                             <td><strong>House No:</strong></td>
                             <td>
                               <Field type="text" v-model="addressDetails.permanent_addr_houseno" class="form-control"
-                                name="permanent_addr_houseno" :class="{ 'is-invalid': errors.permanent_addr_houseno }" style="width: 428px;"/>
+                                name="permanent_addr_houseno" :class="{ 'is-invalid': errors.permanent_addr_houseno }"
+                                style="width: 428px;" />
                               <div class="invalid-feedback">{{ errors.permanent_addr_houseno }}</div>
                             </td>
                           </tr>
@@ -274,10 +289,10 @@
                           <tr>
                             <td><strong>District</strong></td>
                             <td>
-                              <Field type="text" v-model="addressDetails.permanent_addr_district" class="form-control"
-                                name="permanent_addr_district"
-                                :class="{ 'is-invalid': errors.permanent_addr_district }" />
-                              <div class="invalid-feedback">{{ errors.permanent_addr_district }}</div>
+                              <multiselect v-model="permanent_addr_district" :options="district"
+                                :custom-label="nameWithPresentDistrict" class="form-control p-0" :close-on-select="true"
+                                placeholder="Select one" label="name" track-by="id">
+                              </multiselect>
                             </td>
                           </tr>
                         </tbody>
@@ -290,16 +305,18 @@
                             <td><strong>Road No:</strong></td>
                             <td>
                               <Field type="number" v-model="addressDetails.permanent_addr_roadno" class="form-control"
-                                name="permanent_addr_roadno" :class="{ 'is-invalid': errors.permanent_addr_roadno }" style="width: 428px;"/>
+                                name="permanent_addr_roadno" :class="{ 'is-invalid': errors.permanent_addr_roadno }"
+                                style="width: 428px;" />
                               <div class="invalid-feedback">{{ errors.permanent_addr_roadno }}</div>
                             </td>
                           </tr>
                           <tr>
-                            <td><strong>Upozila:</strong></td>
+                            <td><strong>upazila:</strong></td>
                             <td>
-                              <Field type="text" v-model="addressDetails.permanent_addr_upazila" class="form-control"
-                                name="permanent_addr_upazila" :class="{ 'is-invalid': errors.permanent_addr_upazila }" />
-                              <div class="invalid-feedback">{{ errors.permanent_addr_upazila }}</div>
+                              <multiselect v-model="permanent_addr_upazila" :options="upazila"
+                                :custom-label="nameWithPresentUpazila" class="form-control p-0" :close-on-select="true"
+                                placeholder="Select one" label="name" track-by="id">
+                              </multiselect>
                             </td>
                           </tr>
                           <tr>
@@ -332,7 +349,7 @@
                             <td><strong>Department Name:</strong></td>
                             <td>
                               <select v-model="jobs.department" class="form-control" style="width: 428px;">
-                                <option :value="department.id" v-for="department in departments" :key="department.id" >
+                                <option :value="department.id" v-for="department in departments" :key="department.id">
                                   {{ department.dept_name }}
                                 </option>
                               </select>
@@ -358,7 +375,7 @@
                             <td><strong>Joining Date:</strong></td>
                             <td>
                               <Field type="date" v-model="jobs.joining_date" class="form-control" name="joining_date"
-                                :class="{ 'is-invalid': errors.joining_date }" style="width: 428px;"/>
+                                :class="{ 'is-invalid': errors.joining_date }" style="width: 428px;" />
                               <div class="invalid-feedback">{{ errors.joining_date }}</div>
                             </td>
                           </tr>
@@ -414,7 +431,7 @@
                                   <td>
                                     <Field type="text" v-model="education.institute_name" class="form-control"
                                       autocomplete="off" name="institute_name"
-                                      :class="{ 'is-invalid': errors.institute_name }" style="width: 428px;"/>
+                                      :class="{ 'is-invalid': errors.institute_name }" style="width: 428px;" />
                                     <div class="invalid-feedback">{{ errors.institute_name }}</div>
                                   </td>
                                 </tr>
@@ -444,7 +461,7 @@
                                   <td><strong>Upazila</strong></td>
                                   <td>
                                     <Field type="text" v-model="education.upazila" class="form-control" autocomplete="off"
-                                      name="upazila" :class="{ 'is-invalid': errors.upazila }" style="width: 428px;"/>
+                                      name="upazila" :class="{ 'is-invalid': errors.upazila }" style="width: 428px;" />
                                     <div class="invalid-feedback">{{ errors.upazila }}</div>
                                   </td>
                                 </tr>
@@ -498,7 +515,8 @@
                             <td><strong>Father Name:</strong></td>
                             <td>
                               <Field type="text" v-model="familly_info.father_name" class="form-control"
-                                autocomplete="off" name="father_name" :class="{ 'is-invalid': errors.father_name }" style="width: 428px;"/>
+                                autocomplete="off" name="father_name" :class="{ 'is-invalid': errors.father_name }"
+                                style="width: 428px;" />
                               <div class="invalid-feedback">{{ errors.father_name }}</div>
                             </td>
                           </tr>
@@ -520,7 +538,7 @@
                             <td><strong>Mother Name</strong></td>
                             <td>
                               <Field type="text" v-model="familly_info.mother_name" class="form-control"
-                                name="mother_name" :class="{ 'is-invalid': errors.mother_name }" style="width: 428px;"/>
+                                name="mother_name" :class="{ 'is-invalid': errors.mother_name }" style="width: 428px;" />
                               <div class="invalid-feedback">{{ errors.mother_name }}</div>
                             </td>
                           </tr>
@@ -553,7 +571,8 @@
                             <td><strong>Name:</strong></td>
                             <td>
                               <Field type="text" v-model="emergency_contact.emergency_name" class="form-control"
-                                name="emergency_name" :class="{ 'is-invalid': errors.emergency_name }" style="width: 428px;"/>
+                                name="emergency_name" :class="{ 'is-invalid': errors.emergency_name }"
+                                style="width: 428px;" />
                               <div class="invalid-feedback">{{ errors.emergency_name }}</div>
                             </td>
                           </tr>
@@ -582,11 +601,23 @@
                           <tr>
                             <td><strong>Relation :</strong></td>
                             <td>
-                              <Field type="text" v-model="emergency_contact.emergency_relation" class="form-control"
-                                name="emergency_relation" :class="{ 'is-invalid': errors.emergency_relation }" style="width: 428px;"/>
+                              <select v-model="emergency_contact.emergency_relation" class="form-control"
+                                name="emergency_relation" :class="{ 'is-invalid': errors.emergency_relation }"
+                                style="width: 428px;">
+                                <option value="" disabled>Select Relationship</option>
+                                <option value="Father">Father</option>
+                                <option value="Mother">Mother</option>
+                                <option value="Brother">Brother</option>
+                                <option value="Sister">Sister</option>
+                                <option value="Son">Son</option>
+                                <option value="Daughter">Daughter</option>
+                                <option value="Wife">Wife</option>
+                                <option value="Other">Other</option>
+                              </select>
                               <div class="invalid-feedback">{{ errors.emergency_relation }}</div>
                             </td>
                           </tr>
+
                           <tr>
                             <td><strong>Email:</strong></td>
                             <td>
@@ -722,10 +753,12 @@ import myUpload from "vue-image-crop-upload";
 import { VueDraggableNext } from "vue-draggable-next";
 import { Form, Field } from 'vee-validate';
 import * as Yup from "yup";
+import Multiselect from 'vue-multiselect';
+const address = require('@bangladeshi/bangladesh-address');
 
 export default {
   components: {
-    Form, Field,
+    Form, Field, Multiselect,
     myUpload,
     draggable: VueDraggableNext,
   },
@@ -933,7 +966,15 @@ export default {
         fighting_divi: "",
         Sector: ""
       },
+      //   this.divisions = address.allDivision();
+      // this.district = address.allDistict();
+      // this.upazila = address.allUpazila();
+      divisions: [], district: [], upazila: [],
       fields: [{ firstName: "", lastName: "" }],
+      present_district: { district: '' },
+      present_addr_upazila: { upazila: '' },
+      permanent_addr_district: { district: '' },
+      permanent_addr_upazila: { upazila: '' }
 
     };
   },
@@ -941,6 +982,28 @@ export default {
   computed: {},
 
   methods: {
+    changePresentDistrict() {
+      console.log(this.addressDetails.present_addr_district)
+      this.present_district.district = this.addressDetails.present_addr_district;
+    },
+    changePresentupazila() {
+      console.log(this.addressDetails.present_addr_district)
+      this.present_addr_upazila.upazila = this.addressDetails.present_addr_upazila;
+    },
+    changePermanentDistrict() {
+      console.log(this.addressDetails.present_addr_district)
+      this.permanent_addr_district.district = this.addressDetails.permanent_addr_district;
+    },
+    changePermanentUpazila() {
+      console.log(this.addressDetails.present_addr_district)
+      this.permanent_addr_upazila.upazila = this.addressDetails.permanent_addr_upazila;
+    },
+    nameWithPresentDistrict({ district }) {
+      return `${district}`
+    },
+    nameWithPresentUpazila({ upazila }) {
+      return `${upazila}`
+    },
     handleFileChange(event) {
       // Access the selected file using event.target.files[0]
       const selectedFile = event.target.files[0];
@@ -975,6 +1038,7 @@ export default {
       this.addressDetails.present_addr_upazila = this.data.present_addr_upazila;
       this.addressDetails.present_addr_district =
         this.data.present_addr_district;
+
       this.addressDetails.present_addr_postcode =
         this.data.present_addr_postcode;
       this.addressDetails.permanent_addr_houseno =
@@ -1062,119 +1126,111 @@ export default {
         });
     },
     saveProfile(type) {
+      console.log(type);
       let formData = new FormData();
       formData.append("user_id", this.empData.user_id);
-      if (type == "basicInfo") {
-        formData.append("name", this.basicInfo.name);
-        formData.append("mobile_number", this.basicInfo.mobileNumber);
-        formData.append("department", this.basicInfo.department);
-        formData.append("gender", this.basicInfo.gender);
-        formData.append("date_of_birth", this.basicInfo.date_of_birth);
-        formData.append("email", this.basicInfo.email);
-        formData.append("designation", this.basicInfo.designation);
-        formData.append("blood_group", this.basicInfo.blood_group);
-        formData.append("nid_number", this.basicInfo.nid_number);
-        formData.append("passport_number", this.basicInfo.passport_number);
-        formData.append("image", this.basicInfo.image);
-        formData.append("status", this.basicInfo.status);
+      formData.append("name", this.basicInfo.name);
+      formData.append("mobile_number", this.basicInfo.mobileNumber);
+      formData.append("department", this.basicInfo.department);
+      formData.append("gender", this.basicInfo.gender);
+      formData.append("date_of_birth", this.basicInfo.date_of_birth);
+      formData.append("email", this.basicInfo.email);
+      formData.append("designation", this.basicInfo.designation);
+      formData.append("blood_group", this.basicInfo.blood_group);
+      formData.append("nid_number", this.basicInfo.nid_number);
+      formData.append("passport_number", this.basicInfo.passport_number);
+      formData.append("image", this.basicInfo.image);
+      formData.append("status", this.basicInfo.status);
 
-      }
-      if (type == "addressDetail") {
-        formData.append(
-          "present_addr_houseno",
-          this.addressDetails.present_addr_houseno
-        );
-        formData.append(
-          "present_addr_roadno",
-          this.addressDetails.present_addr_roadno
-        );
-        formData.append(
-          "present_addr_area",
-          this.addressDetails.present_addr_area
-        );
-        formData.append(
-          "present_addr_upazila",
-          this.addressDetails.present_addr_upazila
-        );
-        formData.append(
-          "present_addr_district",
-          this.addressDetails.present_addr_district
-        );
-        formData.append(
-          "present_addr_postcode",
-          this.addressDetails.present_addr_postcode
-        );
+      formData.append(
+        "present_addr_houseno",
+        this.addressDetails.present_addr_houseno
+      );
+      formData.append(
+        "present_addr_roadno",
+        this.addressDetails.present_addr_roadno
+      );
+      formData.append(
+        "present_addr_area",
+        this.addressDetails.present_addr_area
+      );
+      formData.append(
+        "present_addr_upazila",
+        this.present_addr_upazila.upazila
+      );
+      formData.append(
+        "present_addr_district",
+        this.present_district.district
+      );
+      formData.append(
+        "present_addr_postcode",
+        this.addressDetails.present_addr_postcode
+      );
 
-        formData.append(
-          "permanent_addr_houseno",
-          this.addressDetails.permanent_addr_houseno
-        );
-        formData.append(
-          "permanent_addr_roadno",
-          this.addressDetails.permanent_addr_roadno
-        );
-        formData.append(
-          "permanent_addr_area",
-          this.addressDetails.permanent_addr_area
-        );
-        formData.append(
-          "permanent_addr_upazila",
-          this.addressDetails.permanent_addr_upazila
-        );
-        formData.append(
-          "permanent_addr_district",
-          this.addressDetails.permanent_addr_district
-        );
-        formData.append(
-          "permanent_addr_postcode",
-          this.addressDetails.permanent_addr_postcode
-        );
-      }
+      formData.append(
+        "permanent_addr_houseno",
+        this.addressDetails.permanent_addr_houseno
+      );
+      formData.append(
+        "permanent_addr_roadno",
+        this.addressDetails.permanent_addr_roadno
+      );
+      formData.append(
+        "permanent_addr_area",
+        this.addressDetails.permanent_addr_area
+      );
+      formData.append(
+        "permanent_addr_upazila",
+        this.permanent_addr_upazila.upazila
+      );
+      formData.append(
+        "permanent_addr_district",
+        this.permanent_addr_district.district
+      );
+      formData.append(
+        "permanent_addr_postcode",
+        this.addressDetails.permanent_addr_postcode
+      );
 
-      if (type == "jobs") {
-        formData.append("department", this.jobs.department);
-        formData.append("designation", this.jobs.designation);
-        formData.append("joining_date", this.jobs.joining_date);
-        formData.append("job_location", this.jobs.job_location);
-      }
+      const permanentAddrPostcode = formData.get("permanent_addr_postcode");
+      console.log(permanentAddrPostcode);
 
-      if (type == "education_history") {
-        formData.append("education_history", JSON.stringify(this.educationArr));
-      }
+      formData.append("department", this.jobs.department);
+      formData.append("designation", this.jobs.designation);
+      formData.append("joining_date", this.jobs.joining_date);
+      formData.append("job_location", this.jobs.job_location);
 
-      if (type == "familly_info") {
-        formData.append("father_name", this.familly_info.father_name);
-        formData.append("mother_name", this.familly_info.mother_name);
-        formData.append("spouse_name", this.familly_info.spouse_name);
-        formData.append("number_of_child", this.familly_info.number_of_child);
-      }
+      formData.append("education_history", JSON.stringify(this.educationArr));
 
-      if (type == "emergency_contact") {
-        formData.append(
-          "emergency_name",
-          this.emergency_contact.emergency_name
-        );
-        formData.append(
-          "emergency_relation",
-          this.emergency_contact.emergency_relation
-        );
-        formData.append(
-          "emergency_phn_number",
-          this.emergency_contact.emergency_phn_number
-        );
-        formData.append(
-          "emergency_email",
-          this.emergency_contact.emergency_email
-        );
-        formData.append(
-          "emergency_addr",
-          this.emergency_contact.emergency_addr
-        );
-        formData.append(
-          "emergency_district",
-          this.emergency_contact.emergency_district
-        );
-      }
+      formData.append("father_name", this.familly_info.father_name);
+      formData.append("mother_name", this.familly_info.mother_name);
+      formData.append("spouse_name", this.familly_info.spouse_name);
+      formData.append("number_of_child", this.familly_info.number_of_child);
+
+      formData.append(
+        "emergency_name",
+        this.emergency_contact.emergency_name
+      );
+      formData.append(
+        "emergency_relation",
+        this.emergency_contact.emergency_relation
+      );
+      formData.append(
+        "emergency_phn_number",
+        this.emergency_contact.emergency_phn_number
+      );
+      formData.append(
+        "emergency_email",
+        this.emergency_contact.emergency_email
+      );
+      formData.append(
+        "emergency_addr",
+        this.emergency_contact.emergency_addr
+      );
+      formData.append(
+        "emergency_district",
+        this.emergency_contact.emergency_district
+      );
 
       this.axios
         .post(this.backend_url + "user/updateProfile", formData)
@@ -1184,11 +1240,13 @@ export default {
             position: "top-right",
           });
         })
-        .error((res) => {
-          this.$toast.error(res.message, {
+        .catch((error) => {
+          // Use error instead of res in the catch block
+          this.$toast.error(error.message, {
             position: "top-right",
           });
         });
+
 
 
     },
@@ -1232,12 +1290,38 @@ export default {
       console.log(status);
       console.log("field: " + field);
     },
+    areas() {
+      this.divisions = address.allDivision();
+      this.district = address.allDistict();
+      this.upazila = address.allUpazila();
+      console.log(this.divisions);
+      this.district = this.district.map(item => {
+        return {
+          district: item
+        };
+      });
+
+      this.upazila = this.upazila.map(item => {
+        return {
+          upazila: item
+        }
+      })
+      console.log(this.district);
+
+      console.log(this.upazila);
+    }
   },
 
   created() {
     this.getDepartmentList();
     this.getDesignationList();
     this.setData();
+    this.areas();
+    this.changePresentDistrict();
+    this.changePresentupazila();
+    this.changePermanentDistrict();
+    this.changePermanentUpazila();
+
   },
 
   watch: {
@@ -1256,6 +1340,7 @@ export default {
       this.addressDetails.present_addr_upazila = newValue.present_addr_upazila;
       this.addressDetails.present_addr_district =
         newValue.present_addr_district;
+      // 
       this.addressDetails.present_addr_postcode =
         newValue.present_addr_postcode;
       this.addressDetails.permanent_addr_houseno =
@@ -1289,6 +1374,10 @@ export default {
       this.emergency_contact.emergency_email = newValue.emergency_email;
       this.emergency_contact.emergency_addr = newValue.emergency_addr;
       this.emergency_contact.emergency_district = newValue.emergency_district;
+    },
+    mounted() {
+      // Use the package methods
+
     },
   },
 };

@@ -413,6 +413,7 @@
                     <h5 class="modal-title text-center" id="exampleModalLabel" style="font-size: 25px;">Transfer Details
                     </h5>
                     <hr>
+                    <h1 class="card-title ">Name: {{ tansfer.employee_name }}</h1>
                     <h1 class="card-title ">Transfer Type: {{ tansfer.transfer_type }}</h1>
                     <h5 class="card-title">Transfer Order: {{ tansfer.transfer_order }}</h5>
                     <h5 class="card-title">Transfer Order Number: {{ tansfer.transfer_order_number }}</h5>
@@ -674,7 +675,7 @@ export default {
       console.log(item);
       this.tansfer.employee_name = item.employee_name;
       this.tansfer.employee_id = item.employee_id;
-      this.tansfer.transfer_type = item.transfer_type;
+      this.tansfer.transfer_type = item.t_type;
       this.tansfer.transfer_order = item.transfer_order;
       this.tansfer.transfer_order_number = item.transfer_order_number;
       this.tansfer.to_office = item.to_office;

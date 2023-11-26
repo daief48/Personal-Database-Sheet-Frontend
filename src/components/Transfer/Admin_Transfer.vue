@@ -6,8 +6,8 @@
                 <div style="display: flex;justify-content: space-between;">
                     <h3>All Transfer History</h3>
                     <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
-            @click="clear()">+ Add
-            Transfer</a>
+                        @click="clear()">+ Add
+                        Transfer</a>
 
                     <!-- hidden model  -->
                     <!-- Add and Edit Modal -->
@@ -23,7 +23,8 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <Form @submit.prevent="saveTranfer" :validation-schema="schema" v-slot="{ errors, resetForm }" ref="form">
+                                    <Form @submit.prevent="saveTranfer" :validation-schema="schema"
+                                        v-slot="{ errors, resetForm }" ref="form">
                                         <div>
                                             <div class="row">
                                                 <!-- {{ tansfer }} -->
@@ -249,8 +250,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <Form @submit.prevent="EditTranfer" :validation-schema="schema"
-                                        v-slot="{ errors  }">
+                                    <Form @submit.prevent="EditTranfer" :validation-schema="schema" v-slot="{ errors }">
                                         <div style="height: 418px;">
                                             <div class="row">
                                                 <!-- {{ tansfer }} -->
@@ -455,8 +455,8 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                          >Cancel</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
                                             <button type="submit" class="btn btn-primary"
                                                 @click="EditTranfer()">Edit</button>
                                         </div>
@@ -483,6 +483,7 @@
                                             Transfer Details
                                         </h5>
                                         <hr>
+                                        <h1 class="card-title ">Name: {{ tansfer.employee_name }}</h1>
                                         <h1 class="card-title ">Transfer Type: {{ tansfer.transfer_type }}</h1>
                                         <h5 class="card-title">Transfer Order: {{ tansfer.transfer_order }}</h5>
                                         <h5 class="card-title">Transfer Order Number: {{ tansfer.transfer_order_number }}
@@ -556,7 +557,7 @@
                                     </td>
                                     <td style="width: 185px;">
                                         <div v-if="item.status === 0">
-                                            <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -581,7 +582,7 @@
                                         </div>
 
                                         <div v-else-if="item.status === 1">
-                                            <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -601,7 +602,7 @@
                                         </div>
 
                                         <div v-else-if="item.status === 2">
-                                            <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -822,8 +823,8 @@ export default {
             this.tansfer.to_department = "";
             this.tansfer.from_department = "";
 
-         
-            
+
+
             this.$refs.form.resetForm();
         },
         deleterecord(id) {
@@ -889,8 +890,8 @@ export default {
 
                 })
         },
-        viewDetails(id) {
-            console.log(id);
+        viewDetails(id, item) {
+            console.log(item.employee_name);
             this.axios
                 .get(this.backend_url + 'specificUserTransferRecord/' + id)
                 .then((response) => {
@@ -898,7 +899,7 @@ export default {
                     this.transferRecordById = response.data.data;
                     console.log(this.transferRecordById.transfer_type);
                     this.tansfer.id = id;
-                    this.tansfer.employee_name = this.transferRecordById.employee_name;
+                    this.tansfer.employee_name = item.employee_name;
                     this.tansfer.employee_id = this.transferRecordById.employee_id;
                     this.tansfer.transfer_type = this.transferRecordById.transfer_type;
                     this.tansfer.transfer_order = this.transferRecordById.transfer_order;

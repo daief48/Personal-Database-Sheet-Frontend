@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <Form @submit.prevent="saveTranfer" :validation-schema="schema"
-                                        v-slot="{ errors, resetForm }" ref="form">
+                                        v-slot="{ errors }" >
                                         <div>
                                             <div class="row">
                                                 <!-- {{ freedomList }} -->
@@ -195,7 +195,7 @@
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                                @click="resetForm()">Cancel</button>
+                                              >Cancel</button>
                                             <button type="submit" class="btn btn-primary"
                                                 @click="EditFreedom()">Edit</button>
                                         </div>
