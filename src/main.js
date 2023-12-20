@@ -125,9 +125,8 @@ app
   .component("v-otp-input", VOtpInput);
 //app.config.globalProperties.backendUrl = 'http://203.76.123.197/pds-backend';
 //app.config.globalProperties.base_url_for_resource = 'http://203.76.123.197/pds-backend/public/';
-app.config.globalProperties.backendUrl = "http://localhost/pds-backend";
-app.config.globalProperties.base_url_for_resource =
-  "http://localhost/pds-backend/public/";
+app.config.globalProperties.backendUrl = "http://10.0.6.47/pds-backend";
+app.config.globalProperties.base_url_for_resource = "http://localhost/pds-backend/public/";
 app.config.globalProperties.$filters = {
   myDateFormate(date) {
     return moment(date).format("DD MMM YYYY");

@@ -261,6 +261,18 @@ const routes = [
       ]
     },
     {
+      path: "/admin-grade-type",
+      name: "Admin-Grade-Type",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/admin-grade-type',
+          name: 'Admin-Grade-Type',
+          component: () => import('../components/Grade/Admin-Grade.vue'),
+        }
+      ]
+    },
+    {
       path: "/report",
       name: "Report",
       component: () => import('../Layout/Fullpagelayout.vue'),
@@ -281,6 +293,18 @@ const routes = [
           path: '/admin-acr',
           name: 'ACR',
           component: () => import('../components/ACR/admin-acr.vue'),
+        }
+      ]
+    },
+    {
+      path: "/blood-group",
+      name: "Blood Group User",
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/blood-group',
+          name: 'Blood Group User',
+          component: () => import('../components/Blood Group/blood-group.vue'),
         }
       ]
     },

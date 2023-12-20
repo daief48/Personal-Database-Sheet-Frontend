@@ -57,8 +57,10 @@
                         <a class="btn d-block btn-info text-white mt-1" @click="toggleShow">Profile Image</a>
                       </div>
                       <div class="ml-3">
+                        <!-- {{  freedomFighter}} -->
                         <table class="table table-borderless">
                           <tbody>
+                            {{  basicInfo.designation}}
                             <tr class="basic_info">
                               <td><strong>Name:</strong></td>
                               <td>
@@ -82,7 +84,7 @@
                             <tr>
                               <td><strong>Department:</strong></td>
                               <td>
-                                <select v-model="jobs.department" class="form-control">
+                                <select v-model="basicInfo.department" class="form-control">
                                   <option :value="department.id" v-for="department in departments" :key="department.id">
                                     {{ department.dept_name }}
                                   </option>
@@ -346,6 +348,16 @@
                       <table class="table table-borderless d-flex">
                         <tbody>
                           <tr>
+                            <td><strong>Office:</strong></td>
+                            <td>
+                              <select v-model="jobs.office" class="form-control" style="width: 428px;">
+                                <option :value="office.id" v-for="office in office" :key="office.id">
+                                  {{ office.office_name }}
+                                </option>
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
                             <td><strong>Department Name:</strong></td>
                             <td>
                               <select v-model="jobs.department" class="form-control" style="width: 428px;">
@@ -371,6 +383,16 @@
                     <div class="col-md-6">
                       <table class="table table-borderless d-flex">
                         <tbody>
+                          <tr>
+                            <td><strong>Grade:</strong></td>
+                            <td>
+                              <select v-model="jobs.job_grade" class="form-control">
+                                <option :value="job_grade.id" v-for="job_grade in job_grade" :key="job_grade.id">
+                                  {{ job_grade.job_grade }}
+                                </option>
+                              </select>
+                            </td>
+                          </tr>
                           <tr>
                             <td><strong>Joining Date:</strong></td>
                             <td>
@@ -647,7 +669,7 @@
 
               <div class="tab-pane fade show" id="freedom-fighter" role="tabpanel"
                 aria-labelledby="pills-freedom-fighter">
-                <Form class="form" action="#" @submit="saveFreedom()" :validation-schema="schema_emergency_contact"
+                <Form class="form" action="#" @submit="saveProfile()" :validation-schema="schema_emergency_contact"
                   v-slot="{ errors }">
                   <div class="row">
                     <div class="col-md-12">
@@ -693,19 +715,19 @@
               <div class="tab-pane fade show" id="emergency-other" role="tabpanel"
                 aria-labelledby="pills-emergency-other">
 
-                <Form class="form" action="#" @submit="dsf()" :validation-schema="schema_emergency_contact">
+                <Form class="form" action="#" @submit="saveProfile()" :validation-schema="schema_emergency_contact">
                   <div class="col-12 mt-3 d-flex justify-content-end">
                     <button class="btn btn-primary" @click="addField">
                       Add Documents
                     </button>
                   </div>
                   <div class="container m-0 mb-2 ">
-
-                    <div v-for="(field, index) in fields" :key="index">
+                    <!-- {{ document }} -->
+                    <div v-for="(document, index) in document" :key="index">
                       <div class="d-flex flex-row p-3 card">
                         <div class="w-50">
                           <div class="mt-3 p-3 border">
-                            <input class="form-control" v-model="field.field1" placeholder="Document Name">
+                            <input class="form-control" v-model="document.document_name" placeholder="Document Name">
                           </div>
                         </div>
                         <div class="w-25">
@@ -939,10 +961,12 @@ export default {
         permanent_addr_postcode: "",
       },
       jobs: {
+        office: "",
         department: "",
         designation: "",
         joining_date: "",
         job_location: "",
+        job_grade: ""
       },
 
       educationArr: [],
@@ -966,6 +990,13 @@ export default {
         fighting_divi: "",
         Sector: ""
       },
+      document:
+        [{
+          document_name: "",
+          document_file: ""
+
+        }]
+      ,
       //   this.divisions = address.allDivision();
       // this.district = address.allDistict();
       // this.upazila = address.allUpazila();
@@ -974,7 +1005,10 @@ export default {
       present_district: { district: '' },
       present_addr_upazila: { upazila: '' },
       permanent_addr_district: { district: '' },
-      permanent_addr_upazila: { upazila: '' }
+      permanent_addr_upazila: { upazila: '' },
+      office: [],
+      job_grade: []
+
 
     };
   },
@@ -1008,9 +1042,16 @@ export default {
       // Access the selected file using event.target.files[0]
       const selectedFile = event.target.files[0];
 
-      // Do something with the selected file, such as updating your data
-      this.field.field2 = selectedFile;
+      // Extract and update the document_name property with only the file name
+      if (selectedFile) {
+        const fileName = selectedFile.name;
+        this.document[0].document_file = fileName;
+      } else {
+        // Handle the case where no file is selected, you may want to clear the existing file name
+        this.document[0].document_file = "";
+      }
     },
+
     addField() {
       this.fields.push({ firstName: "", lastName: "" });
     },
@@ -1057,8 +1098,11 @@ export default {
       this.jobs.designation = this.data.designation;
       this.jobs.job_location = this.data.job_location;
       this.jobs.joining_date = this.data.joining_date;
+      this.jobs.office = this.data.office;
+      this.jobs.job_grade = this.data.job_grade;
 
       this.educationArr = JSON.parse(this.data.education_history);
+      this.document = JSON.parse(this.data.document);
 
       this.familly_info.father_name = this.data.father_name;
       this.familly_info.mother_name = this.data.mother_name;
@@ -1072,6 +1116,13 @@ export default {
       this.emergency_contact.emergency_email = this.data.emergency_email;
       this.emergency_contact.emergency_addr = this.data.emergency_addr;
       this.emergency_contact.emergency_district = this.data.emergency_district;
+
+      this.freedomFighter.freedom_fighter_num = this.data.freedom_fighter_num;
+      this.freedomFighter.fighting_divi = this.data.fighting_divi;
+      this.freedomFighter.Sector = this.data.Sector;
+
+      console.log("..................")
+      console.log(this.data);
     },
 
     onDrag() {
@@ -1195,9 +1246,11 @@ export default {
       const permanentAddrPostcode = formData.get("permanent_addr_postcode");
       console.log(permanentAddrPostcode);
 
+      formData.append("office", this.jobs.office);
       formData.append("department", this.jobs.department);
       formData.append("designation", this.jobs.designation);
       formData.append("joining_date", this.jobs.joining_date);
+      formData.append("job_grade", this.jobs.job_grade);
       formData.append("job_location", this.jobs.job_location);
 
       formData.append("education_history", JSON.stringify(this.educationArr));
@@ -1230,6 +1283,18 @@ export default {
       formData.append(
         "emergency_district",
         this.emergency_contact.emergency_district
+      );
+      formData.append(
+        "freedom_fighter_num",
+        this.freedomFighter.freedom_fighter_num
+      );
+      formData.append(
+        "fighting_divi",
+        this.freedomFighter.fighting_divi
+      );
+      formData.append(
+        "Sector",
+        this.freedomFighter.Sector
       );
 
       this.axios
@@ -1309,7 +1374,23 @@ export default {
       console.log(this.district);
 
       console.log(this.upazila);
-    }
+    },
+    getOffice() {
+      this.axios
+        .get(this.backend_url + `getOfficeMgt`)
+        .then((response) => {
+          this.office = response.data.list;
+          // console.log(this.office);
+        })
+    },
+    getGrade() {
+      this.axios
+        .get(this.backend_url + `getGradeMgt`)
+        .then((response) => {
+          this.job_grade = response.data.list;
+          console.log(this.job_grade);
+        })
+    },
   },
 
   created() {
@@ -1321,6 +1402,8 @@ export default {
     this.changePresentupazila();
     this.changePermanentDistrict();
     this.changePermanentUpazila();
+    this.getOffice();
+    this.getGrade();
 
   },
 
@@ -1355,9 +1438,11 @@ export default {
       this.addressDetails.permanent_addr_postcode =
         newValue.permanent_addr_postcode;
 
+      this.jobs.office = newValue.office;
       this.jobs.department = newValue.department;
       this.jobs.designation = newValue.designation;
       this.jobs.job_location = newValue.job_location;
+      this.jobs.job_grade = newValue.job_grade;
       this.jobs.joining_date = newValue.joining_date;
 
       this.educationArr = JSON.parse(newValue.education_history);
@@ -1374,6 +1459,10 @@ export default {
       this.emergency_contact.emergency_email = newValue.emergency_email;
       this.emergency_contact.emergency_addr = newValue.emergency_addr;
       this.emergency_contact.emergency_district = newValue.emergency_district;
+
+      this.freedomFighter.freedom_fighter_num = newValue.freedom_fighter_num;
+      this.freedomFighter.fighting_divi = newValue.fighting_divi;
+      this.freedomFighter.Sector = newValue.Sector;
     },
     mounted() {
       // Use the package methods

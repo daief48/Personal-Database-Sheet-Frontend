@@ -37,20 +37,77 @@
                                                 </div>
 
 
-                                                <div class="form-group mr-2 ">
-                                                    <label for="exampleFormControlSelect1"> Designation</label>
-                                                    <Field as="select" class="form-control" id="exampleFormControlSelect1"
-                                                        v-model="promotion.promoted_designation"
-                                                        :class="{ 'is-invalid': errors.promoted_designation }"
-                                                        name="promoted_designation">
+                                                <div class="d-flex">
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">To Designation</label>
+                                                        <Field as="select" class="form-control"
+                                                            id="exampleFormControlSelect1"
+                                                            v-model="promotion.to_designation"
+                                                            :class="{ 'is-invalid': errors.to_designation }"
+                                                            name="to_designation">
 
-                                                        <option v-for="designation in designations" :key="designation.id"
-                                                            v-bind:value="designation.id">
-                                                            {{ designation.designation_name }}</option>
+                                                            <option v-for="designation in designations"
+                                                                :key="designation.id" v-bind:value="designation.id">
+                                                                {{ designation.designation_name }}</option>
 
-                                                    </Field>
-                                                    <div class="invalid-feedback">{{ errors.promoted_designation }}</div>
+                                                        </Field>
+                                                        <div class="invalid-feedback">{{ errors.to_designation }}
+                                                        </div>
 
+                                                    </div>
+
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">Form Designation</label>
+                                                        <Field as="select" class="form-control"
+                                                            id="exampleFormControlSelect1"
+                                                            v-model="promotion.from_designation"
+                                                            :class="{ 'is-invalid': errors.from_designation }"
+                                                            name="from_designation">
+
+                                                            <option v-for="designation in designations"
+                                                                :key="designation.id" v-bind:value="designation.id">
+                                                                {{ designation.designation_name }}</option>
+
+                                                        </Field>
+                                                        <div class="invalid-feedback">{{ errors.from_designation }}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex">
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">To Office</label>
+                                                        <Field as="select" class="form-control"
+                                                            id="exampleFormControlSelect1" v-model="promotion.to_office"
+                                                            :class="{ 'is-invalid': errors.to_office }" name="to_office">
+
+                                                            <option v-for="item in office" :key="item.id"
+                                                                v-bind:value="item.id">
+                                                                {{ item.office_name }}</option>
+
+                                                        </Field>
+                                                        <div class="invalid-feedback">{{ errors.to_office }}
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">Form Office</label>
+                                                        <Field as="select" class="form-control"
+                                                            id="exampleFormControlSelect1" v-model="promotion.from_office"
+                                                            :class="{ 'is-invalid': errors.from_office }"
+                                                            name="from_office">
+
+                                                            <option v-for="item in office" :key="item.id"
+                                                                v-bind:value="item.id">
+                                                                {{ item.office_name }}</option>
+
+                                                        </Field>
+                                                        <div class="invalid-feedback">{{ errors.from_office }}
+                                                        </div>
+
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -78,6 +135,43 @@
                                                     <div class="invalid-feedback">{{ errors.promotion_date }}</div>
 
                                                 </div>
+
+                                                <div class="d-flex">
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">To Department</label>
+                                                        <Field as="select" class="form-control"
+                                                            id="exampleFormControlSelect1" v-model="promotion.to_department"
+                                                            :class="{ 'is-invalid': errors.to_department }"
+                                                            name="to_department">
+
+                                                            <option v-for="item in departments" :key="item.id"
+                                                                v-bind:value="item.id">
+                                                                {{ item.dept_name }}</option>
+
+                                                        </Field>
+                                                        <div class="invalid-feedback">{{ errors.to_department }}
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">Form Department</label>
+                                                        <Field as="select" class="form-control"
+                                                            id="exampleFormControlSelect1"
+                                                            v-model="promotion.from_department"
+                                                            :class="{ 'is-invalid': errors.from_department }"
+                                                            name="from_department">
+
+                                                            <option v-for="item in departments" :key="item.id"
+                                                                v-bind:value="item.id">
+                                                                {{ item.dept_name }}</option>
+
+                                                        </Field>
+                                                        <div class="invalid-feedback">{{ errors.from_department }}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             </div>
 
 
@@ -86,7 +180,7 @@
                                                 <div class="form-group">
                                                     <label for="exampleFormControlTextarea1">Description</label>
                                                     <Field as="textarea" class="form-control"
-                                                        id="exampleFormControlTextarea1" rows="5"
+                                                        id="exampleFormControlTextarea1" rows="9"
                                                         placeholder="Write your comment here"
                                                         v-model="promotion.description" name="description"
                                                         :class="{ 'is-invalid': errors.description }"></Field>
@@ -125,9 +219,8 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <Form @submit.prevent="savePromotion" :validation-schema="schema"
-                                        v-slot="{ errors }" >
-                                        <!-- {{ promotion }} -->
+                                    <Form @submit.prevent="savePromotion" :validation-schema="schema" v-slot="{ errors }">
+                                        <!-- {{ editpromotion }} -->
                                         <div class="row">
                                             <div class="col-4">
                                                 <div class="form-group">
@@ -139,20 +232,78 @@
                                                 </div>
 
 
-                                                <div class="form-group mr-2">
-                                                    <label for="exampleFormControlSelect1"> Designation</label>
-                                                    <Field as="select" class="form-control" id="exampleFormControlSelect1"
-                                                        v-model="editpromotion.promoted_designation"
-                                                        :class="{ 'is-invalid': errors.promoted_designation }"
-                                                        name="promoted_designation">
+                                                <div class="d-flex">
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">To Designation</label>
+                                                        <Field as="select" class="form-control"
+                                                            id="exampleFormControlSelect1"
+                                                            v-model="editpromotion.to_designation"
+                                                            :class="{ 'is-invalid': errors.to_designation }"
+                                                            name="to_designation">
 
-                                                        <option v-for="designation in designations" :key="designation.id"
-                                                            v-bind:value="designation.id">
-                                                            {{ designation.designation_name }}</option>
+                                                            <option v-for="designation in designations"
+                                                                :key="designation.id" v-bind:value="designation.id">
+                                                                {{ designation.designation_name }}</option>
 
-                                                    </Field>
-                                                    <div class="invalid-feedback">{{ errors.promoted_designation }}</div>
+                                                        </Field>
+                                                        <div class="invalid-feedback">{{ errors.to_designation }}
+                                                        </div>
 
+                                                    </div>
+
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">Form Designation</label>
+                                                        <Field as="select" class="form-control"
+                                                            id="exampleFormControlSelect1"
+                                                            v-model="editpromotion.from_designation"
+                                                            :class="{ 'is-invalid': errors.from_designation }"
+                                                            name="from_designation">
+
+                                                            <option v-for="designation in designations"
+                                                                :key="designation.id" v-bind:value="designation.id">
+                                                                {{ designation.designation_name }}</option>
+
+                                                        </Field>
+                                                        <div class="invalid-feedback">{{ errors.from_designation }}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex">
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">To Office</label>
+                                                        <Field as="select" class="form-control"
+                                                            id="exampleFormControlSelect1" v-model="editpromotion.to_office"
+                                                            :class="{ 'is-invalid': errors.to_office }" name="to_office">
+
+                                                            <option v-for="item in office" :key="item.id"
+                                                                v-bind:value="item.id">
+                                                                {{ item.office_name }}</option>
+
+                                                        </Field>
+                                                        <div class="invalid-feedback">{{ errors.to_office }}
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">Form Office</label>
+                                                        <Field as="select" class="form-control"
+                                                            id="exampleFormControlSelect1"
+                                                            v-model="editpromotion.from_office"
+                                                            :class="{ 'is-invalid': errors.from_office }"
+                                                            name="from_office">
+
+                                                            <option v-for="item in office" :key="item.id"
+                                                                v-bind:value="item.id">
+                                                                {{ item.office_name }}</option>
+
+                                                        </Field>
+                                                        <div class="invalid-feedback">{{ errors.from_office }}
+                                                        </div>
+
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -180,6 +331,43 @@
                                                     <div class="invalid-feedback">{{ errors.promotion_date }}</div>
 
                                                 </div>
+
+                                                <div class="d-flex">
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">To Department</label>
+                                                        <Field as="select" class="form-control"
+                                                            id="exampleFormControlSelect1"
+                                                            v-model="editpromotion.to_department"
+                                                            :class="{ 'is-invalid': errors.to_department }"
+                                                            name="to_department">
+
+                                                            <option v-for="item in departments" :key="item.id"
+                                                                v-bind:value="item.id">
+                                                                {{ item.dept_name }}</option>
+
+                                                        </Field>
+                                                        <div class="invalid-feedback">{{ errors.to_department }}
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group mr-2 w-50">
+                                                        <label for="exampleFormControlSelect1">From Department</label>
+                                                        <select class="form-control" id="exampleFormControlSelect1"
+                                                            v-model="editpromotion.from_department"
+                                                            :class="{ 'is-invalid': errors.from_department }"
+                                                            name="from_department">
+
+                                                            <option v-for="item in departments" :key="item.id"
+                                                                :value="item.id">
+                                                                {{ item.dept_name }}
+                                                            </option>
+
+                                                        </select>
+                                                        <div class="invalid-feedback">{{ errors.from_department }}</div>
+                                                    </div>
+
+                                                </div>
                                             </div>
 
 
@@ -188,7 +376,7 @@
                                                 <div class="form-group">
                                                     <label for="exampleFormControlTextarea1">Description</label>
                                                     <Field as="textarea" class="form-control"
-                                                        id="exampleFormControlTextarea1" rows="5"
+                                                        id="exampleFormControlTextarea1" rows="9"
                                                         placeholder="Write your comment here"
                                                         v-model="editpromotion.description" name="description"
                                                         :class="{ 'is-invalid': errors.description }"></Field>
@@ -199,8 +387,8 @@
                                         </div>
 
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                              >Cancel</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
                                             <button type="submit" class="btn btn-primary"
                                                 @click="EditPromotion()">Edit</button>
                                         </div>
@@ -253,37 +441,38 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table text-center" id="datatable">
+                        <div class="table-responsive">
+                            <table class="table text-center" id="datatable">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Employee</th>
                                     <th>Promotion Ref Number</th>
-                                    <th>Promoted Designation</th>
                                     <th>Promotion Date</th>
+                                    <th>From Department</th>
+                                    <th>To Department</th>
+                                    <th>From Designation</th>
+                                    <th>To Designation</th>
+                                    <th>From Office</th>
+                                    <th>To Office</th>
                                     <th>Description</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- "employee_id": 1,
-      "employee_name": "Shakiur",
-      "id": 3,
-      "name": "",
-      "promotion_ref_number": "sdf",
-      "promoted_designation": 22,
-      "promotion_date": "2023-03-28",
-      "description": "sfd",
-      "status": 1,
-      "created_at": "2023-10-30T08:19:36.000000Z",
-      "updated_at": "2023-10-30T08:23:44.000000Z" -->
+
                                 <tr v-for="(item, index) in PromotionList" :key="index">
                                     <td>{{ item.id }}</td>
                                     <td>{{ item.employee_name }}</td>
                                     <td>{{ item.promotion_ref_number }}</td>
-                                    <td>{{ item.designation_name }}</td>
                                     <td>{{ item.promotion_date }}</td>
+                                    <td>{{ item.from_department_title }}</td>
+                                    <td>{{ item.to_department_title }}</td>
+                                    <td>{{ item.from_designation_title }}</td>
+                                    <td>{{ item.to_designation_title }}</td>
+                                    <td>{{ item.from_office_title }}</td>
+                                    <td>{{ item.to_office_title }}</td>
                                     <td>{{ item.description }}</td>
                                     <td>
                                         <p v-if="item.status == 1" class="text-success font-weight-bold"> Verified</p>
@@ -292,7 +481,7 @@
                                     </td>
                                     <td style="width: 185px;">
                                         <div v-if="item.status === 0">
-                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -317,7 +506,7 @@
                                         </div>
 
                                         <div v-else-if="item.status === 1">
-                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -337,7 +526,7 @@
                                         </div>
 
                                         <div v-else-if="item.status === 2">
-                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
+                                            <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
@@ -361,6 +550,7 @@
 
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -439,15 +629,25 @@ export default {
             employeeList: [],
             promotion: {
                 employee_id: "",
+                to_office: "",
+                from_office: "",
+                to_department: "",
+                from_department: "",
                 promotion_ref_number: "",
-                promoted_designation: "",
+                to_designation: "",
+                from_designation: "",
                 promotion_date: "",
                 description: ""
             },
             editpromotion: {
                 employee_id: "",
+                to_office: "",
+                from_office: "",
+                to_department: "",
+                from_department: "",
                 promotion_ref_number: "",
-                promoted_designation: "",
+                to_designation: "",
+                from_designation: "",
                 promotion_date: "",
                 description: ""
             }
@@ -460,10 +660,27 @@ export default {
     methods: {
         clear() {
             console.log("Hi")
+
+            // employee_id: "",
+            //     to_office:"",
+            //     from_office:"",
+            //     to_department:"",
+            //     from_department:"",
+            //     promotion_ref_number: "",
+            //     to_designation: "",
+            //     from_designation:"",
+            //     promotion_date: "",
+            //     description: ""
+
             this.promotion.id = "";
             this.promotion.employee_id = "";
+            this.promotion.to_office = "";
+            this.promotion.from_office = "";
+            this.promotion.to_department = "";
+            this.promotion.from_department = "";
             this.promotion.promotion_ref_number = "";
-            this.promotion.promoted_designation = "";
+            this.promotion.to_designation = "";
+            this.promotion.from_designation = "";
             this.promotion.promotion_date = "";
             this.promotion.description = "";
 
@@ -492,37 +709,27 @@ export default {
         },
         editbutton(id, item) {
             console.log(id);
-            this.axios
-                .get(this.backend_url + 'specificUserPromotion/' + id)
-                .then((response) => {
-                    console.log(item.employee_name)
-                    this.value.emp = item.employee_name
-                    this.value.id = item.id
 
-                    //                 "id": 8,
-                    // "employee_id": 1,
-                    // "name": "",
-                    // "promotion_ref_number": "123",
-                    // "promoted_designation": 1,
-                    // "promotion_date": "2023-10-30",
-                    // "description": "sdffsdfsfsdf",
-                    // "status": 0,
-                    // "created_at": "2023-10-30T09:18:26.000000Z",
-                    // "updated_at": "2023-10-30T09:18:26.000000Z"
+            console.log(item)
+            this.value.emp = item.employee_name
+            this.value.id = item.id
 
-                    this.promotionRecordById = response.data.data;
-                    console.log(this.promotionRecordById);
-                    this.editpromotion.id = id;
-                    this.editpromotion.employee_id = this.promotionRecordById.employee_id;
-                    this.editpromotion.promotion_ref_number = this.promotionRecordById.promotion_ref_number;
-                    this.editpromotion.promoted_designation = this.promotionRecordById.promoted_designation;
-                    this.editpromotion.promotion_date = this.promotionRecordById.promotion_date;
-                    this.editpromotion.description = this.promotionRecordById.description;
 
-                })
-                .catch((e) => {
-                    console.log(e)
-                })
+
+
+            this.editpromotion.id = id;
+            this.editpromotion.employee_id = item.employee_id;
+            this.editpromotion.to_office = item.to_office;
+            this.editpromotion.from_office = item.from_office;
+            this.editpromotion.to_department = item.to_department;
+            this.editpromotion.from_department = item.from_department;
+            this.editpromotion.promotion_ref_number = item.promotion_ref_number;
+            this.editpromotion.to_designation = item.to_designation;
+            this.editpromotion.from_designation = item.from_designation;
+            this.editpromotion.promotion_date = item.promotion_date;
+            this.editpromotion.description = item.description;
+
+
         },
         deleterecord(id) {
             this.axios
@@ -552,31 +759,22 @@ export default {
                 })
         },
 
-        viewDetails(id,item) {
+        viewDetails(id, item) {
             console.log(id);
-            this.axios
-                .get(this.backend_url + 'specificUserPromotion/' + id)
-                .then((response) => {
-                    console.log(response);
-                    this.promotionRecordById = response.data.data;
-                    console.log(this.promotionRecordById);
+        
 
                     // console.log(response.data.data.designation_name);
 
-                    this.promotionRecordById.designation_name = response.data.data.designation_name;
+                    this.promotionRecordById.designation_name = item.designation_name;
                     this.promotion.id = id;
                     this.promotion.employee_name = item.employee_name;
-                    this.promotion.employee_id = this.promotionRecordById.employee_id;
-                    this.promotion.promotion_ref_number = this.promotionRecordById.promotion_ref_number;
-                    this.promotion.promoted_designation = this.promotionRecordById.designation_name;
-                    this.promotion.promotion_date = this.promotionRecordById.promotion_date;
-                    this.promotion.description = this.promotionRecordById.description;
+                    this.promotion.employee_id = item.employee_id;
+                    this.promotion.promotion_ref_number = item.promotion_ref_number;
+                    this.promotion.promoted_designation = item.designation_name;
+                    this.promotion.promotion_date = item.promotion_date;
+                    this.promotion.description = item.description;
 
 
-                })
-                .catch((e) => {
-                    console.log(e)
-                })
         },
         nameWithLang({ emp }) {
             return `${emp}`

@@ -270,8 +270,8 @@
                                     <th>ID</th>
                                     <th>Employee</th>
                                     <th>Promotion Ref Number</th>
-                                    <th>Promoted Designation</th>
                                     <th>Promotion Date</th>
+                                    <th>Promoted Designation</th>
                                     <th>Description</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -293,8 +293,8 @@
                                     <td>{{ item.id }}</td>
                                     <td>{{ item.employee_name }}</td>
                                     <td>{{ item.promotion_ref_number }}</td>
-                                    <td>{{ item.designation_name }}</td>
                                     <td>{{ item.promotion_date }}</td>
+                                    <td>{{ item.designation_name }}</td>
                                     <td>{{ item.description }}</td>
                                     <td>
                                         <p v-if="item.status == 1" class="text-warning font-weight-bold"> Verified</p>

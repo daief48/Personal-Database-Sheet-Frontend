@@ -4,9 +4,9 @@
         <div class="card card-default">
             <div class="card-body">
                 <div style="display: flex;justify-content: space-between;">
-                    <h3>My Freedom Fighter History</h3>
-                    <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal" @click="clear()">+ Add
-                        Freedom Fighter</a>
+                    <h3> Freedom Fighter List</h3>
+                    <!-- <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal" @click="clear()">+ Add
+                        Freedom Fighter</a> -->
 
                     <!-- hidden model  -->
                     <!-- Add and Edit Modal -->

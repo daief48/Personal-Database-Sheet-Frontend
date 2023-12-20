@@ -33,10 +33,10 @@
                         <tr>
                           <th>Sl</th>
                           <th>Name</th>
-                          <th>Email</th>
-                          <th>Mobile</th>
-                          <th>Department</th>
                           <th>Designation</th>
+                          <th>Department</th>
+                          <th>Mobile</th>
+                          <th>Email</th>
                           <th>Status</th>
                           <th>Action</th>
                         </tr>
@@ -45,10 +45,10 @@
                         <tr v-for="(emp, index) in employees" :key="index">
                           <td>{{ index++ }}</td>
                           <td>{{ emp.name }}</td>
-                          <td>{{ emp.email }}</td>
-                          <td>{{ emp.mobile_number }}</td>
-                          <td>{{ emp.department_name }}</td>
                           <td>{{ emp.designation_name }}</td>
+                          <td>{{ emp.department_name }}</td>
+                          <td>{{ emp.mobile_number }}</td>
+                          <td>{{ emp.email }}</td>
                           <td class="text-center">
                             <span
                               class="badge"
@@ -338,6 +338,7 @@ export default {
         .get(url)
         .then((res) => {
           this.employees = res.data.data.data;
+          console.log(this.employees);
           if (res.data.data.total > this.query.per_page) {
             this.query.page = Math.ceil(
               res.data.data.total / this.query.per_page

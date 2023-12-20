@@ -4,7 +4,7 @@
         <div class="card card-default">
             <div class="card-body">
                 <div style="display: flex;justify-content: space-between;">
-                    <h3>My Training History</h3>
+                    <h3>All Training History</h3>
                     <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
                         @click="clear()">+ Add
                         Training</a>
@@ -370,12 +370,12 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Employee</th>
+                                    <th>Training Start Date</th>
+                                    <th>Training End Date</th>
                                     <th>Training Center Name</th>
                                     <th>Training Name</th>
                                     <th>Training Score</th>
                                     <th>Training Feedback</th>
-                                    <th>Training Start Date</th>
-                                    <th>Training End Date</th>
                                     <th>Description</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -386,12 +386,12 @@
                                 <tr v-for="(item, index) in promotionList" :key="index">
                                     <td>{{ item.id }}</td>
                                     <td>{{ item.employee_name }}</td>
+                                    <td>{{ item.training_strt_date }}</td>
+                                    <td>{{ item.training_end_date }}</td>
                                     <td>{{ item.training_center_name }}</td>
                                     <td>{{ item.training_name }}</td>
                                     <td>{{ item.training_score }}</td>
                                     <td>{{ item.training_feedback }}</td>
-                                    <td>{{ item.training_strt_date }}</td>
-                                    <td>{{ item.training_end_date }}</td>
                                     <td>{{ item.description }}</td>
                                     <td>
                                         <p v-if="item.status == 1" class="text-success font-weight-bold"> Verified</p>

@@ -378,8 +378,22 @@
                 <h3 class="text-center text-dark mb-4">
                   <span class="s-title">Job</span>
                 </h3>
+                <!-- {{jobs}} -->
                 <div class="row">
                   <div class="col-md-6">
+                    <div class="input-group mb-4">
+                      <div class="input-group-append">
+                        <span class="input-group-text">Office:</span>
+                      </div>
+                      <Field name="department" as="select" v-model="jobs.office" class="form-control"
+                        :class="{ 'is-invalid': errors.office }">
+                        <option :value="office.id" v-for="office in office" :key="office.id">
+                          {{ office.office_name }}
+                        </option>
+                      </Field>
+                      <div class="invalid-feedback">{{ errors.department }}</div>
+                    </div>
+
                     <div class="input-group mb-4">
                       <div class="input-group-append">
                         <span class="input-group-text">Department Name:</span>
@@ -409,11 +423,15 @@
                   <div class="col-md-6">
                     <div class="input-group mb-4">
                       <div class="input-group-append">
-                        <span class="input-group-text">Joining Date:</span>
+                        <span class="input-group-text"> Grade:</span>
                       </div>
-                      <Field type="date" v-model="jobs.joining_date" class="form-control" name="joining_date"
-                        :class="{ 'is-invalid': errors.joining_date }" />
-                      <div class="invalid-feedback">{{ errors.joining_date }}</div>
+                      <Field name="designation" as="select" v-model="jobs.job_grade" class="form-control"
+                        :class="{ 'is-invalid': errors.designation }">
+                        <option :value="grade.id" v-for="grade in job_grade" :key="grade.id">
+                          {{ grade.job_grade }}
+                        </option>
+                      </Field>
+                      <div class="invalid-feedback">{{ errors.department }}</div>
                     </div>
                     <div class="input-group mb-4">
                       <div class="input-group-append">
@@ -422,6 +440,14 @@
                       <Field type="text" v-model="jobs.job_location" class="form-control" name="job_location"
                         :class="{ 'is-invalid': errors.job_location }" />
                       <div class="invalid-feedback">{{ errors.job_location }}</div>
+                    </div>
+                    <div class="input-group mb-4">
+                      <div class="input-group-append">
+                        <span class="input-group-text">Joining Date:</span>
+                      </div>
+                      <Field type="date" v-model="jobs.joining_date" class="form-control" name="joining_date"
+                        :class="{ 'is-invalid': errors.joining_date }" />
+                      <div class="invalid-feedback">{{ errors.joining_date }}</div>
                     </div>
                   </div>
                 </div>
@@ -499,15 +525,12 @@
                             </div>
                             <div class="input-group mb-4">
                               <div class="input-group-append">
-                                <span class="input-group-text">Designation:</span>
+                                <span class="input-group-text">Board</span>
                               </div>
-                              <Field name="designation" as="select" v-model="jobs.designation" class="form-control"
-                                :class="{ 'is-invalid': errors.designation }">
-                                <option :value="designation.id" v-for="designation in designations" :key="designation.id">
-                                  {{ designation.designation_name }}
-                                </option>
-                              </Field>
-                              <div class="invalid-feedback">{{ errors.department }}</div>
+                              <Field type="text" v-model="education.board" class="form-control" autocomplete="off"
+                                name="subject" :class="{ 'is-invalid': errors.board }" />
+                              <div class="invalid-feedback">{{ errors.board }}</div>
+
                             </div>
                             <div class="input-group mb-4">
                               <div class="input-group-append">
@@ -522,11 +545,11 @@
                           <div class="col-md-6">
                             <div class="input-group mb-4">
                               <div class="input-group-append">
-                                <span class="input-group-text">Upazila</span>
+                                <span class="input-group-text">Group</span>
                               </div>
-                              <Field type="text" v-model="education.upazila" class="form-control" autocomplete="off"
-                                name="upazila" :class="{ 'is-invalid': errors.upazila }" />
-                              <div class="invalid-feedback">{{ errors.upazila }}</div>
+                              <Field type="text" v-model="education.group" class="form-control" autocomplete="off"
+                                name="upazila" :class="{ 'is-invalid': errors.group }" />
+                              <div class="invalid-feedback">{{ errors.group }}</div>
                             </div>
                             <div class="input-group mb-4">
                               <div class="input-group-append">
@@ -803,50 +826,66 @@
 
           <transition name="slide-fade">
             <section v-show="step === 7">
+              {{ check }}
+              <div class="d-flex justify-content-center">
+                <div class="w-25 d-flex justify-content-end" style="margin-left: 139px;">
+                  <span data-v-3d027d9e="" class="s-title" style="color: black;font-size: 24px;font-weight: bold;">Freedom
+                    Fighter</span>
+                </div>
+                <div class="w-25 d-flex justify-content-start align-items-center" style="padding-left: 36px;">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                    style="height: 20px; width: 20px;" v-on:change="check = !check">
+                </div>
+              </div>
+
               <Form class="form" action="#" @submit="next" :validation-schema="schema_emergency_contact"
                 v-slot="{ errors }">
                 <h3 class="text-center text-dark mb-4">
-                  <span class="s-title">Freedom Fighter</span>
+
+
                 </h3>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="input-group mb-4">
-                      <div class="input-group-append">
-                        <span class="input-group-text">Freedom Fighter Number:</span>
-                      </div>
-                      <Field type="number" v-model="freedomFighter.freedom_fighter_num" class="form-control"
-                        name="freedom_fighter_num" :class="{ 'is-invalid': errors.freedom_fighter_num }"
-                        style="width: 370px;" />
-                      <div class="invalid-feedback">{{ errors.freedom_fighter_num }}</div>
+                <div v-show="check">
+                  <div class="row">
+                    <!-- {{ freedomFighter }} -->
+                    <div class="col-md-6">
+                      <div class="input-group mb-4">
+                        <div class="input-group-append">
+                          <span class="input-group-text">Freedom Fighter Number:</span>
+                        </div>
+                        <Field type="number" v-model="freedomFighter.freedom_fighter_num" class="form-control"
+                          name="freedom_fighter_num" :class="{ 'is-invalid': errors.freedom_fighter_num }"
+                          style="width: 370px;" />
+                        <div class="invalid-feedback">{{ errors.freedom_fighter_num }}</div>
 
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="input-group mb-4">
+                        <div class="input-group-append">
+                          <span class="input-group-text">Freedom Fighter Sector:</span>
+                        </div>
+                        <Field type="number" v-model="freedomFighter.Sector" class="form-control" name="Sector"
+                          :class="{ 'is-invalid': errors.Sector }" />
+                        <div class="invalid-feedback">{{ errors.Sector }}</div>
+
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="input-group mb-4">
-                      <div class="input-group-append">
-                        <span class="input-group-text">Freedom Fighter Sector:</span>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="input-group mb-4">
+                        <div class="input-group-append">
+                          <span class="input-group-text">Freedom Fighter Division:</span>
+                        </div>
+                        <Field type="number" v-model="freedomFighter.fighting_divi" class="form-control"
+                          name="fighting_divi" :class="{ 'is-invalid': errors.fighting_divi }" />
+                        <div class="invalid-feedback">{{ errors.fighting_divi }}</div>
+
                       </div>
-                      <Field type="text" v-model="freedomFighter.Sector" class="form-control" name="Sector"
-                        :class="{ 'is-invalid': errors.Sector }" />
-                      <div class="invalid-feedback">{{ errors.Sector }}</div>
+                    </div>
+                    <div class="col-md-6">
 
                     </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="input-group mb-4">
-                      <div class="input-group-append">
-                        <span class="input-group-text">Freedom Fighter Division:</span>
-                      </div>
-                      <Field type="text" v-model="freedomFighter.fighting_divi" class="form-control" name="fighting_divi"
-                        :class="{ 'is-invalid': errors.fighting_divi }" />
-                      <div class="invalid-feedback">{{ errors.fighting_divi }}</div>
-
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-
                   </div>
                 </div>
                 <div class="form-group cta-step">
@@ -885,6 +924,7 @@
 
           <transition name="slide-fade">
             <section v-show="step === 8">
+
               <Form class="form" action="#" @submit="saveProfile(); saveFreedom()"
                 :validation-schema="schema_emergency_contact">
                 <h3 class="text-center text-dark mb-4">
@@ -896,12 +936,12 @@
                   </button>
                 </div>
                 <div class="container m-0 mb-2 ">
-
-                  <div v-for="(field, index) in fields" :key="index">
+                  <!-- {{ document }} -->
+                  <div v-for="(document, index) in document" :key="index">
                     <div class="d-flex flex-row p-3 card">
                       <div class="w-50">
                         <div class="mt-3 p-3 border">
-                          <input class="form-control" v-model="field.field1" placeholder="Document Name">
+                          <input class="form-control" v-model="document.document_name" placeholder="Document Name">
                         </div>
                       </div>
                       <div class="w-25">
@@ -1171,14 +1211,17 @@ export default {
         designation: "",
         joining_date: "",
         job_location: "",
+        office: "",
+        job_grade: ""
+
       },
 
       educationArr: [
         {
           exam_name: "",
           institute_name: "",
-          district: "",
-          upazila: "",
+          board: "",
+          group: "",
           subject: "",
           passing_year: "",
           grade: "",
@@ -1204,14 +1247,23 @@ export default {
         fighting_divi: "",
         Sector: ""
       },
+      document:
+        [{
+          document_name: "",
+          document_file: ""
+
+        }]
+      ,
       fields: [{ firstName: "", lastName: "" }],
       steps: {},
       step: 1,
       present_district: { district: '' },
       present_addr_upazila: { upozila: '' },
       permanent_addr_district: { district: '' },
-      permanent_addr_upazila: { upozila: '' }
-
+      permanent_addr_upazila: { upozila: '' },
+      check: false,
+      office: [],
+      job_grade: []
     };
   },
 
@@ -1219,18 +1271,21 @@ export default {
 
   methods: {
     deleteField(index) {
-      this.fields.splice(index, 1);
+      this.document.splice(index, 1);
     },
     addField() {
-      this.fields.push({ firstName: "", lastName: "" });
+      this.document.push({ document_name: "", document_file: "" });
     },
     handleFileChange(event) {
       // Access the selected file using event.target.files[0]
       const selectedFile = event.target.files[0];
 
-      // Do something with the selected file, such as updating your data
-      this.field.field2 = selectedFile;
+
+      // Extract and update the document_name property with only the file name
+      const fileName = selectedFile.name;
+      this.document[0].document_file = fileName;
     },
+
     nameWithPresentDistrict({ district }) {
       return `${district}`
     },
@@ -1267,8 +1322,8 @@ export default {
       this.educationArr.push({
         exam_name: "",
         institute_name: "",
-        district: "",
-        upazila: "",
+        board: "",
+        group: "",
         subject: "",
         passing_year: "",
         grade: "",
@@ -1281,9 +1336,24 @@ export default {
     cancelAdd() {
       this.$emit("cancel"); // Emit the 'cancel' event
     },
-    saveFreedom() {
-      console.log(this.freedomFighter);
 
+    saveFreedom()
+    {
+    // another request 
+    this.axios
+        .post(this.backend_url + "addFreedomFighter", this.freedomFighter)
+        .then((res) => {
+          console.log(res.data);
+          this.$toast.success("Employee Updated successfully.", {
+            position: "top-right",
+          });
+          
+        })
+        .error((res) => {
+          this.$toast.error(res.message, {
+            position: "top-right",
+          });
+        });
     },
     saveProfile() {
       let formData = new FormData();
@@ -1353,6 +1423,8 @@ export default {
       formData.append("designation", this.jobs.designation);
       formData.append("joining_date", this.jobs.joining_date);
       formData.append("job_location", this.jobs.job_location);
+      formData.append("office", this.jobs.office);
+      formData.append("job_grade", this.jobs.job_grade);
 
       formData.append("education_history", JSON.stringify(this.educationArr));
 
@@ -1379,8 +1451,29 @@ export default {
         "emergency_district",
         this.emergency_contact.emergency_district
       );
+      formData.append(
+        "document",
+        JSON.stringify(this.document)
+      );
 
+      formData.append(
+        "freedom_fighter_num",
+        JSON.stringify(this.freedomFighter.freedom_fighter_num)
+      );
+      formData.append(
+        "Sector",
+        JSON.stringify(this.freedomFighter.Sector)
+      );
+      formData.append(
+        "fighting_divi",
+        JSON.stringify(this.freedomFighter.fighting_divi)
+      );
       console.log(formData);
+
+      console.log(this.freedomFighter);
+  
+      // this.saveFreedom();
+
       this.axios
         .post(this.backend_url + "user/addProfile", formData)
         .then((res) => {
@@ -1391,25 +1484,6 @@ export default {
             position: "top-right",
           });
           window.location.href = '/employees';
-
-          // another request 
-          this.axios
-            .post(this.backend_url + "addFreedomFighter", this.freedomFighter)
-            .then((res) => {
-              console.log(res.data);
-              this.$toast.success("Employee Updated successfully.", {
-                position: "top-right",
-              });
-            })
-            .error((res) => {
-              this.$toast.error(res.message, {
-                position: "top-right",
-              });
-            });
-
-          // end
-
-
 
         })
         .error((res) => {
@@ -1443,11 +1517,29 @@ export default {
       console.log(status);
       console.log("field: " + field);
     },
+    getOffice() {
+      this.axios
+        .get(this.backend_url + `getOfficeMgt`)
+        .then((response) => {
+          this.office = response.data.list;
+          // console.log(this.office);
+        })
+    },
+    getGrade() {
+      this.axios
+        .get(this.backend_url + `getGradeMgt`)
+        .then((response) => {
+          this.job_grade = response.data.list;
+          console.log(this.job_grade);
+        })
+    },
   },
 
   created() {
     this.getDepartmentList();
     this.getDesignationList();
+    this.getOffice();
+    this.getGrade();
   },
   mounted() {
     // Use the package methods

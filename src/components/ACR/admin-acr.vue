@@ -1,12 +1,12 @@
 <template>
     <div>
-        <h5><i class="fa fa-thin fa-arrow-left"></i> Transfer</h5>
+        <h5><i class="fa fa-thin fa-arrow-left"></i> Acr</h5>
         <div class="card card-default">
             <div class="card-body">
                 <div style="display: flex;justify-content: space-between;">
-                    <h3>My Transfer History</h3>
+                    <h3>All Acr History</h3>
                     <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal">+ Add
-                        Transfer</a>
+                        Acr</a>
 
                     <!-- hidden model  -->
                     <!-- Add and Edit Modal -->
@@ -22,162 +22,133 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
+                                    {{ Acr }}
                                     <Form @submit.prevent="saveTranfer" :validation-schema="schema"
                                         v-slot="{ errors, resetForm }" ref="form">
-                                        <div>
-                                            <div class="row">
-                                                <!-- {{ tansfer }} -->
-                                                <div class="col-6">
-                                                    <div class="form-group mr-2">
-                                                        <label for="exampleFormControlSelect1"> Designation:</label>
-                                                        <Field as="select" class="form-control"
-                                                            id="exampleFormControlSelect1" v-model="tansfer.to_designation"
-                                                            name="to_designation"
-                                                            :class="{ 'is-invalid': errors.to_designation }">
+                                        <div class="row">
+                                            <!-- Left Column -->
+                                            <div class="col-6">
+                                                <div class="form-group mr-2">
+                                                    <label for="exampleFormControlSelect1">Search:</label>
+                                                    <multiselect v-model="value" :options="employeeList"
+                                                        :custom-label="nameWithLang" :close-on-select="true"
+                                                        placeholder="Select one" label="name" track-by="id"
+                                                        @select="change1">
+                                                    </multiselect>
+                                                </div>
 
-                                                            <option v-for="designation in designations"
-                                                                :key="designation.id" v-bind:value="designation.id">
-                                                                {{ designation.designation_name }}</option>
+                                                <div class="form-group mr-2">
+                                                    <label for="exampleFormControlSelect1">Designation:</label>
+                                                    <Field as="select" class="form-control" id="exampleFormControlSelect1"
+                                                        v-model="Acr.designation" name="designation"
+                                                        :class="{ 'is-invalid': errors.designation }">
 
-                                                        </Field>
-                                                        <div class="invalid-feedback">{{ errors.to_designation }}</div>
+                                                        <option v-for="designation in designations" :key="designation.id"
+                                                            :value="designation.id">
+                                                            {{ designation.designation_name }}
+                                                        </option>
 
-                                                    </div>
+                                                    </Field>
+                                                    <div class="invalid-feedback">{{ errors.designation }}</div>
+                                                </div>
 
-                                                    <div class="form-group mr-2">
-                                                        <label for="exampleFormControlSelect1">Office Name:</label>
-                                                        <Field as="select" class="form-control"
-                                                            id="exampleFormControlSelect1" v-model="tansfer.to_office"
-                                                            name="to_office" :class="{ 'is-invalid': errors.to_office }">
-
-                                                            <option v-for="office in office" :key="office.id"
-                                                                v-bind:value="office.id">
-                                                                {{ office.office_name }}</option>
-
-                                                        </Field>
-                                                        <div class="invalid-feedback">{{ errors.to_office }}</div>
-
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Total Score:</label>
-                                                        <Field type="number" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="tansfer.transfer_order_number"
-                                                            name="transfer_order_number"
-                                                            :class="{ 'is-invalid': errors.transfer_order_number }" />
-                                                        <div class="invalid-feedback">{{ errors.transfer_order_number }}
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Rack Number:</label>
-                                                        <Field type="number" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="tansfer.transfer_order_number"
-                                                            name="transfer_order_number"
-                                                            :class="{ 'is-invalid': errors.transfer_order_number }" />
-                                                        <div class="invalid-feedback">{{ errors.transfer_order_number }}
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">File Number:</label>
-                                                        <Field type="number" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="tansfer.transfer_order_number"
-                                                            name="transfer_order_number"
-                                                            :class="{ 'is-invalid': errors.transfer_order_number }" />
-                                                        <div class="invalid-feedback">{{ errors.transfer_order_number }}
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Remarks:</label>
-                                                        <Field type="number" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="tansfer.transfer_order_number"
-                                                            name="transfer_order_number"
-                                                            :class="{ 'is-invalid': errors.transfer_order_number }" />
-                                                        <div class="invalid-feedback">{{ errors.transfer_order_number }}
-                                                        </div>
-
-                                                    </div>
-
+                                                <div class="form-group mr-2">
+                                                    <label for="exampleFormControlSelect1">Department:</label>
+                                                    <Field class="form-control" as="select" id="exampleFormControlSelect1"
+                                                        v-model="Acr.department" name="department"
+                                                        :class="{ 'is-invalid': errors.department }">
+                                                        <option v-for="department in departments" :key="department.id"
+                                                            :value="department.id">
+                                                            {{ department.dept_name }}
+                                                        </option>
+                                                    </Field>
+                                                    <div class="invalid-feedback">{{ errors.department }}</div>
                                                 </div>
 
 
+                                                <div class="form-group mr-2">
+                                                    <label for="exampleFormControlSelect1">Office Name:</label>
+                                                    <Field as="select" class="form-control" id="exampleFormControlSelect1"
+                                                        v-model="Acr.office_name" name="office_name"
+                                                        :class="{ 'is-invalid': errors.office_name }">
 
+                                                        <option v-for="office in office" :key="office.id"
+                                                            :value="office.id">
+                                                            {{ office.office_name }}
+                                                        </option>
 
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Employee Name:</label>
-                                                        <Field type="number" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="tansfer.transfer_order_number"
-                                                            name="transfer_order_number"
-                                                            :class="{ 'is-invalid': errors.transfer_order_number }" />
-                                                        <div class="invalid-feedback">{{ errors.transfer_order_number }}
-                                                        </div>
+                                                    </Field>
+                                                    <div class="invalid-feedback">{{ errors.to_office }}</div>
+                                                </div>
 
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Total Score:</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="Acr.score" name="score"
+                                                        :class="{ 'is-invalid': errors.score }" />
+                                                    <div class="invalid-feedback">{{ errors.score }}</div>
+                                                </div>
 
-                                                    <div class="form-group mr-2">
-                                                        <label for="exampleFormControlSelect1">From Department</label>
-                                                        <Field class="form-control" as="select"
-                                                            id="exampleFormControlSelect1" v-model="tansfer.from_department"
-                                                            name="from_department"
-                                                            :class="{ 'is-invalid': errors.from_department }">
-                                                            <option v-for="department in departments" :key="department.id"
-                                                                v-bind:value="department.id">{{
-                                                                    department.dept_name }}</option>
-                                                        </Field>
-                                                        <div class="invalid-feedback">{{ errors.from_department }}</div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Remarks:</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="Acr.remarks" name="remarks"
+                                                        :class="{ 'is-invalid': errors.remarks }" />
+                                                    <div class="invalid-feedback">{{ errors.remarks }}</div>
+                                                </div>
+                                            </div>
 
-                                                    </div>
+                                            <!-- Right Column -->
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">ACR Year:</label>
+                                                    <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Enter email"
+                                                        v-model="Acr.acr_year" name="acr_year"
+                                                        :class="{ 'is-invalid': errors.acr_year }" />
+                                                    <div class="invalid-feedback">{{ errors.acr_year }}</div>
+                                                </div>
 
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">ACR Year</label>
-                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Enter email"
-                                                            v-model="tansfer.join_date" name="join_date"
-                                                            :class="{ 'is-invalid': errors.join_date }" />
-                                                        <div class="invalid-feedback">{{ errors.join_date }}</div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Attached File:</label>
+                                                    <Field type="file" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="Acr.file" name="file"
+                                                        :class="{ 'is-invalid': errors.file }" />
+                                                    <div class="invalid-feedback">{{ errors.file }}</div>
+                                                </div>
 
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Rack Number:</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="Acr.rack_number" name="rack_number"
+                                                        :class="{ 'is-invalid': errors.rack_number }" />
+                                                    <div class="invalid-feedback">{{ errors.rack_number }}</div>
+                                                </div>
 
-                                                  
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Bin Number:</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="Acr.bin_number" name="bin_number"
+                                                        :class="{ 'is-invalid': errors.bin_number }" />
+                                                    <div class="invalid-feedback">{{ errors.bin_number }}</div>
+                                                </div>
 
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Attached File:</label>
-                                                        <Field type="number" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="tansfer.transfer_order_number"
-                                                            name="transfer_order_number"
-                                                            :class="{ 'is-invalid': errors.transfer_order_number }" />
-                                                        <div class="invalid-feedback">{{ errors.transfer_order_number }}
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Bin Number:</label>
-                                                        <Field type="number" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="tansfer.transfer_order_number"
-                                                            name="transfer_order_number"
-                                                            :class="{ 'is-invalid': errors.transfer_order_number }" />
-                                                        <div class="invalid-feedback">{{ errors.transfer_order_number }}
-                                                        </div>
-
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">File Number:</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="Acr.file_number" name="file_number"
+                                                        :class="{ 'is-invalid': errors.file_number }" />
+                                                    <div class="invalid-feedback">{{ errors.file_number }}</div>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="modal-footer d-flex justify-content-center">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                                 @click="resetForm()">Cancel</button>
@@ -185,6 +156,7 @@
                                                 @click="saveTranfer()">Add</button>
                                         </div>
                                     </Form>
+
                                 </div>
                             </div>
                         </div>
@@ -201,203 +173,135 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
+                                    {{ editAcr }}
                                     <Form @submit.prevent="EditTranfer" :validation-schema="schema" v-slot="{ errors }">
-                                        <div>
-                                            <div class="row">
-                                                <!-- {{ tansfer }} -->
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <input type="text" v-model="edittansfer.employee_id"
-                                                            style="display:none;" autocomplete="off">
-                                                        <!-- <div class="invalid-feedback">{{ errors.name }}</div> -->
-
-                                                        <label for="exampleFormControlSelect1">Transfer Type </label>
-
-
-
-                                                        <Field name="transfer_type" as="select"
-                                                            v-model="edittansfer.transfer_type" class="form-control"
-                                                            :class="{ 'is-invalid': errors.transfer_type }"
-                                                            autocomplete="off">
-                                                            <option v-for="transferType in transferType"
-                                                                :key="transferType.id" v-bind:value="transferType.id">
-                                                                {{ transferType.title }}</option>
-                                                        </Field>
-                                                        <div class="invalid-feedback">{{ errors.transfer_type }}</div>
-
-                                                    </div>
-
-                                                    <div class="d-flex">
-                                                        <div class="form-group mr-2 w-50">
-                                                            <label for="exampleFormControlSelect1">To Department</label>
-                                                            <Field class="form-control" as="select"
-                                                                id="exampleFormControlSelect1"
-                                                                v-model="edittansfer.to_department" name="to_department"
-                                                                :class="{ 'is-invalid': errors.to_department }">
-                                                                <option v-for="department in departments"
-                                                                    :key="department.id" v-bind:value="department.id">{{
-                                                                        department.dept_name }}</option>
-                                                            </Field>
-                                                            <div class="invalid-feedback">{{ errors.to_department }}</div>
-
-                                                        </div>
-
-                                                        <div class="form-group mr-2 w-50">
-                                                            <label for="exampleFormControlSelect1">From Department</label>
-                                                            <Field class="form-control" as="select"
-                                                                id="exampleFormControlSelect1"
-                                                                v-model="edittansfer.from_department" name="from_department"
-                                                                :class="{ 'is-invalid': errors.from_department }">
-                                                                <option v-for="department in departments"
-                                                                    :key="department.id" v-bind:value="department.id">{{
-                                                                        department.dept_name }}</option>
-                                                            </Field>
-                                                            <div class="invalid-feedback">{{ errors.from_department }}</div>
-
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Transfer Date</label>
-                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Enter email"
-                                                            v-model="edittansfer.transfer_date" name="transfer_date"
-                                                            :class="{ 'is-invalid': errors.transfer_date }" />
-                                                        <div class="invalid-feedback">{{ errors.transfer_date }}</div>
-
-                                                    </div>
+                                        <div class="row">
+                                            <!-- Left Column -->
+                                            <div class="col-6">
+                                                <div class="form-group mr-2">
+                                                    <label for="exampleFormControlSelect1">Search:</label>
+                                                    <multiselect v-model="value" :options="employeeList"
+                                                        :custom-label="nameWithLang" :close-on-select="true"
+                                                        placeholder="Select one" label="name" track-by="id"
+                                                        @select="change1">
+                                                    </multiselect>
                                                 </div>
 
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Transfer Order Number</label>
-                                                        <Field type="number" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="edittansfer.transfer_order_number"
-                                                            name="transfer_order_number"
-                                                            :class="{ 'is-invalid': errors.transfer_order_number }" />
-                                                        <div class="invalid-feedback">{{ errors.transfer_order_number }}
-                                                        </div>
+                                                <div class="form-group mr-2">
+                                                    <label for="exampleFormControlSelect1">Designation:</label>
+                                                    <Field as="select" class="form-control" id="exampleFormControlSelect1"
+                                                        v-model="editAcr.designation" name="designation"
+                                                        :class="{ 'is-invalid': errors.designation }">
+                                                        <option v-for="designation in designations" :key="designation.id"
+                                                            :value="designation.id">
+                                                            {{ designation.designation_name }}
+                                                        </option>
+                                                    </Field>
+                                                    <div class="invalid-feedback">{{ errors.designation }}</div>
+                                                </div>
 
-                                                    </div>
-
-
-                                                    <div class="d-flex">
-                                                        <div class="form-group mr-2 w-50">
-                                                            <label for="exampleFormControlSelect1">To Designation</label>
-                                                            <Field as="select" class="form-control"
-                                                                id="exampleFormControlSelect1"
-                                                                v-model="edittansfer.to_designation" name="to_designation"
-                                                                :class="{ 'is-invalid': errors.to_designation }">
-
-                                                                <option v-for="designation in designations"
-                                                                    :key="designation.id" v-bind:value="designation.id">
-                                                                    {{ designation.designation_name }}</option>
-
-                                                            </Field>
-                                                            <div class="invalid-feedback">{{ errors.to_designation }}</div>
-
-                                                        </div>
-
-                                                        <div class="form-group mr-2 w-50">
-                                                            <label for="exampleFormControlSelect1">From Designation</label>
-                                                            <Field as="select" class="form-control"
-                                                                id="exampleFormControlSelect1"
-                                                                v-model="edittansfer.from_designation"
-                                                                name="from_designation"
-                                                                :class="{ 'is-invalid': errors.from_designation }">
-
-                                                                <option v-for="designation in designations"
-                                                                    :key="designation.id" v-bind:value="designation.id">
-                                                                    {{ designation.designation_name }}</option>
-
-                                                            </Field>
-                                                            <div class="invalid-feedback">{{ errors.from_designation }}
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Join Date</label>
-                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Enter email"
-                                                            v-model="edittansfer.join_date" name="join_date"
-                                                            :class="{ 'is-invalid': errors.join_date }" />
-                                                        <div class="invalid-feedback">{{ errors.join_date }}</div>
-
-                                                    </div>
+                                                <div class="form-group mr-2">
+                                                    <label for="exampleFormControlSelect1">Department:</label>
+                                                    <Field class="form-control" as="select" id="exampleFormControlSelect1"
+                                                        v-model="editAcr.department" name="department"
+                                                        :class="{ 'is-invalid': errors.department }">
+                                                        <option v-for="department in departments" :key="department.id"
+                                                            :value="department.id">
+                                                            {{ department.dept_name }}
+                                                        </option>
+                                                    </Field>
+                                                    <div class="invalid-feedback">{{ errors.department }}</div>
                                                 </div>
 
 
+                                                <div class="form-group mr-2">
+                                                    <label for="exampleFormControlSelect1">Office Name:</label>
+                                                    <Field as="select" class="form-control" id="exampleFormControlSelect1"
+                                                        v-model="editAcr.office_name" name="office_name"
+                                                        :class="{ 'is-invalid': errors.office_name }">
 
-                                                <div class="col-4">
-                                                    <div class="d-flex">
-                                                        <div class="form-group mr-2 w-50">
-                                                            <label for="exampleFormControlSelect1">To Office</label>
-                                                            <Field as="select" class="form-control"
-                                                                id="exampleFormControlSelect1"
-                                                                v-model="edittansfer.to_office" name="to_office"
-                                                                :class="{ 'is-invalid': errors.to_office }">
+                                                        <option v-for="office in office" :key="office.id"
+                                                            :value="office.id">
+                                                            {{ office.office_name }}
+                                                        </option>
 
-                                                                <option v-for="office in office" :key="office.id"
-                                                                    v-bind:value="office.id">
-                                                                    {{ office.office_name }}</option>
+                                                    </Field>
+                                                    <div class="invalid-feedback">{{ errors.to_office }}</div>
+                                                </div>
 
-                                                            </Field>
-                                                            <div class="invalid-feedback">{{ errors.to_office }}</div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Total Score:</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="editAcr.score" name="score"
+                                                        :class="{ 'is-invalid': errors.score }" />
+                                                    <div class="invalid-feedback">{{ errors.score }}</div>
+                                                </div>
 
-                                                        </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Remarks:</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="editAcr.remarks" name="remarks"
+                                                        :class="{ 'is-invalid': errors.remarks }" />
+                                                    <div class="invalid-feedback">{{ errors.remarks }}</div>
+                                                </div>
+                                            </div>
 
-                                                        <div class="form-group mr-2 w-50">
-                                                            <label for="exampleFormControlSelect1">From Office</label>
-                                                            <Field as="select" class="form-control"
-                                                                id="exampleFormControlSelect1"
-                                                                v-model="edittansfer.from_office" name="from_office"
-                                                                :class="{ 'is-invalid': errors.from_office }">
+                                            <!-- Right Column -->
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">ACR Year:</label>
+                                                    <Field type="text" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Enter email"
+                                                        v-model="editAcr.acr_year" name="acr_year"
+                                                        :class="{ 'is-invalid': errors.acr_year }" />
+                                                    <div class="invalid-feedback">{{ errors.acr_year }}</div>
+                                                </div>
 
-                                                                <option v-for="office in office" :key="office.id"
-                                                                    v-bind:value="office.id">
-                                                                    {{ office.office_name }}</option>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Attached File:</label>
+                                                    <Field type="file" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="editAcr.file" name="file"
+                                                        :class="{ 'is-invalid': errors.file }" />
+                                                    <div class="invalid-feedback">{{ errors.file }}</div>
+                                                </div>
 
-                                                            </Field>
-                                                            <div class="invalid-feedback">{{ errors.from_office }}</div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Rack Number:</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="editAcr.rack_number" name="rack_number"
+                                                        :class="{ 'is-invalid': errors.rack_number }" />
+                                                    <div class="invalid-feedback">{{ errors.rack_number }}</div>
+                                                </div>
 
-                                                        </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Bin Number:</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="editAcr.bin_number" name="bin_number"
+                                                        :class="{ 'is-invalid': errors.bin_number }" />
+                                                    <div class="invalid-feedback">{{ errors.bin_number }}</div>
+                                                </div>
 
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlSelect1">Transfer Order</label>
-                                                        <Field type="text" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order"
-                                                            v-model="edittansfer.transfer_order" name="transfer_order"
-                                                            :class="{ 'is-invalid': errors.transfer_order }" />
-                                                        <div class="invalid-feedback">{{ errors.transfer_order }}</div>
-
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="formFileSm" class="form-label">Transfer Letter</label>
-                                                        <div class="input-group">
-                                                            <input type="file" class="form-control" id="formFileSm"
-                                                                @change="edithandleFileChange"
-                                                                aria-describedby="inputGroupFileAddon03"
-                                                                aria-label="Upload">
-                                                        </div>
-                                                    </div>
-
-
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">File Number:</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        v-model="editAcr.file_number" name="file_number"
+                                                        :class="{ 'is-invalid': errors.file_number }" />
+                                                    <div class="invalid-feedback">{{ errors.file_number }}</div>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="modal-footer d-flex justify-content-center">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
                                             <button type="submit" class="btn btn-primary"
-                                                @click="EditTranfer()">Edit</button>
+                                                @click="EditTranfer()">Add</button>
                                         </div>
                                     </Form>
                                 </div>
@@ -418,23 +322,32 @@
                                 </div>
                                 <div class="modal-body card">
                                     <div class="card-body d-flex flex-column">
+                                        <!-- <td>{{ item.employee_id }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.designation }}</td>
+                                    <td>{{ item.department }}</td>
+                                    <td>{{ item.office_name }}</td>
+                                    <td>{{ item.rack_number }}</td>
+                                    <td>{{ item.bin_number }}</td>
+                                    <td>{{ item.file }}</td>
+                                    <td>{{ item.file_number }}</td>
+                                    <td>{{ item.acr_year }}</td>
+                                    <td>{{ item.score }}</td> -->
                                         <h5 class="modal-title text-center" id="exampleModalLabel" style="font-size: 25px;">
                                             Transfer Details
                                         </h5>
                                         <hr>
-                                        <h1 class="card-title ">Transfer Type: {{ tansfer.transfer_type }}</h1>
-                                        <h5 class="card-title">Transfer Order: {{ tansfer.transfer_order }}</h5>
-                                        <h5 class="card-title">Transfer Order Number: {{ tansfer.transfer_order_number }}
+                                        <h1 class="card-title ">Employee Name: {{ Acr.name }}</h1>
+                                        <h5 class="card-title">Transfer Order: {{ Acr.designation }}</h5>
+                                        <h5 class="card-title">Transfer Order Number: {{ Acr.department }}
                                         </h5>
-                                        <h5 class="card-title">To Office: {{ tansfer.to_office }}</h5>
-                                        <h5 class="card-title">From Office: {{ tansfer.from_office }}</h5>
-                                        <h5 class="card-title">To Designation: {{ tansfer.to_designation }}</h5>
-                                        <h5 class="card-title">From Designation: {{ tansfer.from_designation }}</h5>
-                                        <h5 class="card-title">Transfer Date: {{ tansfer.transfer_date }}</h5>
-                                        <h5 class="card-title">Join Date: {{ tansfer.join_date }}</h5>
-                                        <h5 class="card-title">Transfer Letter: {{ tansfer.transfer_letter }}</h5>
-                                        <h5 class="card-title">To Department: {{ tansfer.to_department }}</h5>
-                                        <h5 class="card-title">From Department: {{ tansfer.from_department }}</h5>
+                                        <h5 class="card-title">To Office: {{ Acr.office_name }}</h5>
+                                        <h5 class="card-title">From Office: {{ Acr.rack_number }}</h5>
+                                        <h5 class="card-title">To Designation: {{ Acr.bin_number }}</h5>
+                                        <h5 class="card-title">From Designation: {{ Acr.file }}</h5>
+                                        <h5 class="card-title">Transfer Date: {{ Acr.file_number }}</h5>
+                                        <h5 class="card-title">Join Date: {{ Acr.acr_year }}</h5>
+                                        <h5 class="card-title">Transfer Letter: {{ Acr.score }}</h5>
                                     </div>
                                 </div>
 
@@ -458,38 +371,40 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Employee</th>
-                                    <th>Office Name</th>
-                                    <th>Rack Number</th>
-                                    <th>Remarks</th>
-                                    <th>Score</th>
                                     <th>Designation</th>
                                     <th>Department</th>
+                                    <th>Office Name</th>
+                                    <th>Rack Number</th>
+                                    <th>Bin Number</th>
                                     <th>File</th>
                                     <th>File Number</th>
-
+                                    <th>Acr Year</th>
+                                    <th>Total Score</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <tr v-for="(item, index) in AcrList" :key="index">
                                     <td>{{ item.employee_id }}</td>
-                                    <td>{{ item.emp_name }}</td>
                                     <td>{{ item.name }}</td>
-                                    <td>{{ item.rack_number }}</td>
-                                    <td>{{ item.remarks }}</td>
-                                    <td>{{ item.score }}</td>
                                     <td>{{ item.designation }}</td>
                                     <td>{{ item.department }}</td>
+                                    <td>{{ item.office_name }}</td>
+                                    <td>{{ item.rack_number }}</td>
+                                    <td>{{ item.bin_number }}</td>
                                     <td>{{ item.file }}</td>
                                     <td>{{ item.file_number }}</td>
+                                    <td>{{ item.acr_year }}</td>
+                                    <td>{{ item.score }}</td>
                                     <td>
                                         <p v-if="item.status == 1" class="text-warning font-weight-bold"> Verified</p>
                                         <p v-else class="text-success font-weight-bold">Pending</p>
                                     </td>
 
                                     <td style="width: 185px;">
-                                        <button v-if="item.status === 1" @click="viewDetails(item.id)"
+                                        <button v-if="item.status === 1" @click="viewDetails(item)"
                                             class="btn btn-outline-primary mr-2"
                                             style="border: 3px solid;font-weight: bolder; width: 124px;" data-toggle="modal"
                                             data-target="#exampleModal2">
@@ -533,6 +448,7 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import { Form, Field } from 'vee-validate';
 import * as Yup from "yup";
+import Multiselect from 'vue-multiselect';
 
 
 
@@ -540,7 +456,7 @@ import * as Yup from "yup";
 export default {
     components: {
         // DataTable,
-        Form, Field
+        Form, Field, Multiselect
 
     },
 
@@ -584,37 +500,37 @@ export default {
                 designation_id: '',
                 image: '',
             },
+            value: { id: '', emp: '' },
+            employeeList: [],
             transferRecordById: [],
             AcrList: [],
-            tansfer: {
+            Acr: {
                 employee_id: "",
-                transfer_type: "",
-                transfer_order: "",
-                transfer_order_number: "",
-                to_office: "",
-                from_office: "",
-                to_department: "",
-                from_department: "",
-                to_designation: "",
-                from_designation: "",
-                transfer_date: "",
-                join_date: "",
-                transfer_letter: ""
+                emp_name: "",
+                remarks: "",
+                designation: "",
+                department: "",
+                office_name: "",
+                rack_number: "",
+                bin_number: "",
+                file: "",
+                file_number: "",
+                acr_year: "",
+                score: "",
             },
-            edittansfer: {
+            editAcr: {
                 employee_id: "",
-                transfer_type: "",
-                transfer_order: "",
-                transfer_order_number: "",
-                to_office: "",
-                from_office: "",
-                to_department: "",
-                from_department: "",
-                to_designation: "",
-                from_designation: "",
-                transfer_date: "",
-                join_date: "",
-                transfer_letter: ""
+                emp_name: "",
+                remarks: "",
+                designation: "",
+                department: "",
+                office_name: "",
+                rack_number: "",
+                bin_number: "",
+                file: "",
+                file_number: "",
+                acr_year: "",
+                score: "",
             }
 
         };
@@ -623,39 +539,53 @@ export default {
     computed: {},
 
     methods: {
+        change1() {
+            this.axios
+                    .post(this.backend_url + 'addTransferRecord', this.Acr)
+                    .then((res) => {
+                        console.log(res);
+                        this.getTransferList();
+                        $("#exampleModal").modal('hide');
+                        $('#datatable').DataTable().destroy();
+                        this.$toast.success(`Add Data Successfully!`);
+                        this.$refs.form.resetForm();
+
+                    })
+                    .catch((error) => {
+                        console.error("An error occurred while saving the transfer record:", error);
+                        this.$toast.error(`Failed to save transfer record.`);
+                    });
+
+        },
         handleFileChange(event) {
             const selectedFile = event.target.files[0];
-            this.tansfer.transfer_letter = selectedFile;
+            this.Acr.transfer_letter = selectedFile;
         },
         edithandleFileChange(event) {
             const selectedFile = event.target.files[0];
-            this.edittansfer.transfer_letter = selectedFile;
+            this.editAcr.transfer_letter = selectedFile;
         },
 
         editbutton(id) {
             console.log(id);
             this.axios
-                .get(this.backend_url + 'specificUserTransferRecord/' + id)
+                .get(this.backend_url + 'specificAcrInfo/' + id)
                 .then((response) => {
-                    this.transferRecordById = response.data.data;
-                    console.log(this.transferRecordById);
-                    this.edittansfer.id = id;
-                    this.edittansfer.employee_name = this.transferRecordById.employee_name;
-                    this.edittansfer.employee_id = this.transferRecordById.employee_id;
-                    this.edittansfer.transfer_type = this.transferRecordById.transfer_type;
-                    this.edittansfer.transfer_order = this.transferRecordById.transfer_order;
-                    this.edittansfer.transfer_order_number = this.transferRecordById.transfer_order_number;
-                    this.edittansfer.to_office = this.transferRecordById.to_office;
-                    this.edittansfer.from_office = this.transferRecordById.from_office;
-                    this.edittansfer.to_designation = this.transferRecordById.to_designation;
-                    this.edittansfer.from_designation = this.transferRecordById.from_designation;
-                    this.edittansfer.transfer_date = this.transferRecordById.transfer_date;
-                    this.edittansfer.join_date = this.transferRecordById.join_date;
-                    this.edittansfer.transfer_letter = this.transferRecordById.transfer_letter;
-                    this.edittansfer.to_department = this.transferRecordById.to_department;
-                    this.edittansfer.from_department = this.transferRecordById.from_department;
+                    this.value.id = response.data.data.employee_id;
+                    this.value.emp = response.data.data.name;
 
-                    this.edit = true;
+                    this.editAcr.employee_id = response.data.data.employee_id,
+                        this.editAcr.emp_name = response.data.data.emp_name,
+                        this.editAcr.remarks = response.data.data.remarks,
+                        this.editAcr.designation = response.data.data.designation,
+                        this.editAcr.department = response.data.data.department,
+                        this.editAcr.office_name = response.data.data.office_name,
+                        this.editAcr.rack_number = response.data.data.rack_number,
+                        this.editAcr.bin_number = response.data.data.bin_number,
+                        this.editAcr.file = response.data.data.file,
+                        this.editAcr.file_number = response.data.data.file_number,
+                        this.editAcr.acr_year = response.data.data.acr_year,
+                        this.editAcr.score = response.data.data.score
 
                 })
                 .catch((e) => {
@@ -664,7 +594,7 @@ export default {
         },
         deletebutton(id) {
             this.axios
-                .delete(this.backend_url + 'deleteTransferRecord/' + id)
+                .delete(this.backend_url + 'deleteAcrInfo/' + id)
                 .then((res) => {
                     console.log('Delete Successfully', res);
                     this.getAcrList();
@@ -673,35 +603,22 @@ export default {
 
                 })
         },
-        viewDetails(id) {
-            console.log(id);
-            this.axios
-                .get(this.backend_url + 'specificUserTransferRecord/' + id)
-                .then((response) => {
-                    console.log(response);
-                    this.transferRecordById = response.data.data;
-                    console.log(this.transferRecordById.transfer_type);
-                    this.tansfer.id = id;
-                    this.tansfer.employee_name = this.transferRecordById.employee_name;
-                    this.tansfer.employee_id = this.transferRecordById.employee_id;
-                    this.tansfer.transfer_type = this.transferRecordById.transfer_type;
-                    this.tansfer.transfer_order = this.transferRecordById.transfer_order;
-                    this.tansfer.transfer_order_number = this.transferRecordById.transfer_order_number;
-                    this.tansfer.to_office = this.transferRecordById.to_office;
-                    this.tansfer.from_office = this.transferRecordById.from_office;
-                    this.tansfer.to_designation = this.transferRecordById.to_designation;
-                    this.tansfer.from_designation = this.transferRecordById.from_designation;
-                    this.tansfer.transfer_date = this.transferRecordById.transfer_date;
-                    this.tansfer.join_date = this.transferRecordById.join_date;
-                    this.tansfer.transfer_letter = this.transferRecordById.transfer_letter;
-                    this.tansfer.to_department = this.transferRecordById.to_department;
-                    this.tansfer.from_department = this.transferRecordById.from_department;
+        viewDetails(item) {
+            this.value.id = item.employee_id;
+            this.value.emp = item.name;
 
-                    this.edit = false;
-                })
-                .catch((e) => {
-                    console.log(e)
-                })
+            this.editAcr.employee_id = item.employee_id,
+                this.Acr.name = item.name,
+                this.Acr.remarks = item.remarks,
+                this.Acr.designation = item.designation,
+                this.Acr.department = item.department,
+                this.Acr.office_name = item.office_name,
+                this.Acr.rack_number = item.rack_number,
+                this.Acr.bin_number = item.bin_number,
+                this.Acr.file = item.file,
+                this.Acr.file_number = item.file_number,
+                this.Acr.acr_year = item.acr_year,
+                this.Acr.score = item.score
         },
         getAcrList() {
             this.axios
@@ -754,7 +671,7 @@ export default {
                 .then((res) => {
                     this.user = res.data.userDetail.employee_id;
                     // console.log(this.user);
-                    this.tansfer.employee_id = this.user
+                    this.Acr.employee_id = this.user
                     // console.log(this.storageData.id);
                 })
         },
@@ -769,21 +686,20 @@ export default {
         saveTranfer() {
             let formData = new FormData;
 
-            formData.append('employee_id', this.tansfer.employee_id);
-            formData.append('transfer_type', this.tansfer.transfer_type);
-            formData.append('transfer_order', this.tansfer.transfer_order);
-            formData.append('transfer_order_number', this.tansfer.transfer_order_number);
-            formData.append('to_office', this.tansfer.to_office);
-            formData.append('from_office', this.tansfer.from_office);
-            formData.append('to_designation', this.tansfer.to_designation);
-            formData.append('from_designation', this.tansfer.from_designation);
-            formData.append('transfer_date', this.tansfer.transfer_date);
-            formData.append('join_date', this.tansfer.join_date);
-            formData.append('transfer_letter', this.tansfer.transfer_letter);
-            formData.append('to_department', this.tansfer.to_department);
-            formData.append('from_department', this.tansfer.from_department);
+
+            formData.append('employee_id', this.Acr.employee_id);
+            formData.append('remarks', this.Acr.remarks);
+            formData.append('designation', this.Acr.designation);
+            formData.append('department', this.Acr.department);
+            formData.append('office_name', this.Acr.office_name);
+            formData.append('rack_number', this.Acr.rack_number);
+            formData.append('bin_number', this.Acr.bin_number);
+            formData.append('file', this.Acr.file);
+            formData.append('file_number', this.Acr.file_number);
+            formData.append('acr_year', this.Acr.acr_year);
+            formData.append('score', this.Acr.score);
             try {
-                // this.tansfer.employee_id = this.storageData.id;
+                // this.Acr.employee_id = this.storageData.id;
                 this.axios
                     .post(this.backend_url + 'addTransferRecord', formData)
                     .then((res) => {
@@ -807,23 +723,20 @@ export default {
         EditTranfer() {
             let formData = new FormData;
 
-            formData.append('employee_id', this.edittansfer.employee_id);
-            formData.append('transfer_type', this.edittansfer.transfer_type);
-            formData.append('transfer_order', this.edittansfer.transfer_order);
-            formData.append('transfer_order_number', this.edittansfer.transfer_order_number);
-            formData.append('to_office', this.edittansfer.to_office);
-            formData.append('from_office', this.edittansfer.from_office);
-            formData.append('to_designation', this.edittansfer.to_designation);
-            formData.append('from_designation', this.edittansfer.from_designation);
-            formData.append('transfer_date', this.edittansfer.transfer_date);
-            formData.append('join_date', this.edittansfer.join_date);
-            formData.append('transfer_letter', this.edittansfer.transfer_letter);
-            formData.append('to_department', this.edittansfer.to_department);
-            formData.append('from_department', this.edittansfer.from_department);
-
+            formData.append('employee_id', this.editAcr.employee_id);
+            formData.append('remarks', this.editAcr.remarks);
+            formData.append('designation', this.editAcr.designation);
+            formData.append('department', this.editAcr.department);
+            formData.append('office_name', this.editAcr.office_name);
+            formData.append('rack_number', this.editAcr.rack_number);
+            formData.append('bin_number', this.editAcr.bin_number);
+            formData.append('file', this.editAcr.file);
+            formData.append('file_number', this.editAcr.file_number);
+            formData.append('acr_year', this.editAcr.acr_year);
+            formData.append('score', this.editAcr.score);
             try {
                 this.axios
-                    .post(this.backend_url + `updateTransferRecord/${this.edittansfer.id}`, formData)
+                    .post(this.backend_url + `updateTransferRecord/${this.editAcr.id}`, formData)
                     .then((res) => {
                         console.log(res);
                         this.getAcrList();
@@ -839,8 +752,24 @@ export default {
                 console.error("An error occurred:", error);
                 this.$toast.error(`Failed to update transfer record.`);
             }
-        }
+        },
+        nameWithLang({ emp }) {
+            return `${emp}`
+        },
+        getEmployeeList() {
+            this.axios
+                .get(this.backend_url + 'employeeList')
+                .then((res) => {
+                    console.log(res.data.employeeList);
+                    this.employeeList = res.data.employeeList;
+                    //   this.options =  res.data.employeeList;
 
+                })
+
+                .catch((e) => {
+                    console.log(e)
+                })
+        },
 
     },
 
@@ -851,6 +780,7 @@ export default {
         this.getTransfertype();
         this.getUser();
         this.getOffice();
+        this.getEmployeeList();
     },
     mounted() {
 

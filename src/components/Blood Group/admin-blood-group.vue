@@ -1,13 +1,13 @@
 <template>
     <div>
-        <h5><i class="fa fa-thin fa-arrow-left"></i> Transfer</h5>
+        <h5><i class="fa fa-thin fa-arrow-left"></i> Blood Group</h5>
         <div class="card card-default">
             <div class="card-body">
                 <div style="display: flex;justify-content: space-between;">
-                    <h3>My Blood Group History</h3>
-                    <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
+                    <h3>All Blood Group List</h3>
+                    <!-- <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
                         @click="clear()">+ Add
-                        Blood Group</a>
+                        Blood Group</a> -->
 
                     <!-- hidden model  -->
                     <!-- Add and Edit Modal -->
@@ -42,19 +42,27 @@
 
 
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Blood Group:</label>
-                                                        <Field type="text" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
+                                                        <label for="bloodGroupSelect">Blood Group:</label>
+                                                        <select class="form-control" id="bloodGroupSelect"
                                                             v-model="bloodgroupList.blood_group" name="blood_group"
-                                                            :class="{ 'is-invalid': errors.blood_group }" />
-                                                        <div class="invalid-feedback">{{ errors.blood_group }}
-                                                        </div>
-
+                                                            :class="{ 'is-invalid': errors.blood_group }">
+                                                            <option value="" disabled>Select Blood Group</option>
+                                                            <option value="A+">A+</option>
+                                                            <option value="A-">A-</option>
+                                                            <option value="B+">B+</option>
+                                                            <option value="B-">B-</option>
+                                                            <option value="AB+">AB+</option>
+                                                            <option value="AB-">AB-</option>
+                                                            <option value="O+">O+</option>
+                                                            <option value="O-">O-</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">{{ errors.blood_group }}</div>
                                                     </div>
+
 
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Last Donate:</label>
-                                                        <Field type="text" class="form-control" id="exampleInputEmail1"
+                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
                                                             aria-describedby="emailHelp" placeholder="Transfer Order Number"
                                                             v-model="bloodgroupList.last_donate" name="last_donate"
                                                             :class="{ 'is-invalid': errors.last_donate }" />
@@ -93,8 +101,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <Form @submit.prevent="saveTranfer" :validation-schema="schema"
-                                        v-slot="{ errors }" >
+                                    <Form @submit.prevent="saveTranfer" :validation-schema="schema" v-slot="{ errors }">
                                         <div>
                                             <div class="row">
 
@@ -126,8 +133,7 @@
                                                         <label for="exampleInputEmail1">Last Donate:</label>
                                                         <Field type="text" class="form-control" id="exampleInputEmail1"
                                                             aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="editbloodgroupList.last_donate"
-                                                            name="last_donate"
+                                                            v-model="editbloodgroupList.last_donate" name="last_donate"
                                                             :class="{ 'is-invalid': errors.last_donate }" />
                                                         <div class="invalid-feedback">{{ errors.last_donate }}
                                                         </div>
@@ -142,8 +148,8 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                              >Cancel</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
                                             <button type="submit" class="btn btn-primary" @click="EditBlood()">Edit</button>
                                         </div>
                                     </Form>

@@ -516,15 +516,15 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Employee</th>
+                                    <th>Transfer Date</th>
+                                    <th>Transfer Order</th>
                                     <th>To Department</th>
                                     <th>From Department</th>
                                     <th>To Designation</th>
                                     <th>From Designation</th>
                                     <th>Transfer Type</th>
-                                    <th>Transfer Order</th>
                                     <th>To Office</th>
                                     <th>From office</th>
-                                    <th>Transfer Date</th>
                                     <th>Join Date</th>
                                     <th>Status</th>
                                     <th>Transfer Letter</th>
@@ -535,15 +535,15 @@
                                 <tr v-for="(item, index) in transferList" :key="index">
                                     <td>{{ item.id }}</td>
                                     <td>{{ item.employee_name }}</td>
+                                    <td>{{ item.transfer_date }}</td>
+                                    <td>{{ item.transfer_order }}</td>
                                     <td>{{ item.to_department }}</td>
                                     <td>{{ item.from_department }}</td>
                                     <td>{{ item.to_designation }}</td>
                                     <td>{{ item.from_designation }}</td>
                                     <td>{{ item.t_type }}</td>
-                                    <td>{{ item.transfer_order }}</td>
                                     <td>{{ item.to_office }}</td>
                                     <td>{{ item.from_office }}</td>
-                                    <td>{{ item.transfer_date }}</td>
                                     <td>{{ item.join_date }}</td>
                                     <td>
                                         <p v-if="item.status == 1" class="text-success font-weight-bold"> Verified</p>
