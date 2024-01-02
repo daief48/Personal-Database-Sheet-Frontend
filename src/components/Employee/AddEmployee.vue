@@ -385,7 +385,7 @@
                       <div class="input-group-append">
                         <span class="input-group-text">Office:</span>
                       </div>
-                      <Field name="department" as="select" v-model="jobs.office" class="form-control"
+                      <Field name="office" as="select" v-model="jobs.office" class="form-control"
                         :class="{ 'is-invalid': errors.office }">
                         <option :value="office.id" v-for="office in office" :key="office.id">
                           {{ office.office_name }}
@@ -425,7 +425,7 @@
                       <div class="input-group-append">
                         <span class="input-group-text"> Grade:</span>
                       </div>
-                      <Field name="designation" as="select" v-model="jobs.job_grade" class="form-control"
+                      <Field name="job_grade" as="select" v-model="jobs.job_grade" class="form-control"
                         :class="{ 'is-invalid': errors.designation }">
                         <option :value="grade.id" v-for="grade in job_grade" :key="grade.id">
                           {{ grade.job_grade }}
@@ -528,7 +528,7 @@
                                 <span class="input-group-text">Board</span>
                               </div>
                               <Field type="text" v-model="education.board" class="form-control" autocomplete="off"
-                                name="subject" :class="{ 'is-invalid': errors.board }" />
+                                name="board" :class="{ 'is-invalid': errors.board }" />
                               <div class="invalid-feedback">{{ errors.board }}</div>
 
                             </div>
@@ -548,7 +548,7 @@
                                 <span class="input-group-text">Group</span>
                               </div>
                               <Field type="text" v-model="education.group" class="form-control" autocomplete="off"
-                                name="upazila" :class="{ 'is-invalid': errors.group }" />
+                                name="group" :class="{ 'is-invalid': errors.group }" />
                               <div class="invalid-feedback">{{ errors.group }}</div>
                             </div>
                             <div class="input-group mb-4">

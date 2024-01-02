@@ -200,19 +200,20 @@
 
                 <div class="row">
                     <div class="col-md-12">
-
-                        <table class="table text-center" id="datatable">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Employee</th>
-                                    <th>Blood Group</th>
-                                    <th>Last Donate</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- "id": 2,
+                        <div class="table-responsive">
+                            <table class="table text-center" id="datatable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Employee</th>
+                                        <th>Blood Group</th>
+                                        <th>Mobile Number</th>
+                                        <th>Last Donate</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- "id": 2,
                                 "employee_id": 1,
                                 "blood_group": "o+",
                                 "last_donate": 24,
@@ -223,39 +224,43 @@
                                 "name": null,
                                 "mobile_number": null -->
 
-                                <tr v-for="(item, index) in AcrList" :key="index">
-                                    <td>{{ item.employee_id }}</td>
-                                    <td>{{ item.name }}</td>
-                                    <td>{{ item.blood_group }}</td>
-                                    <td>{{ item.last_donate }}</td>
+                                    <tr v-for="(item, index) in AcrList" :key="index">
+                                        <td>{{ item.employee_id }}</td>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.blood_group }}</td>
+                                        <td>{{ item.mobile_number }}</td>
+                                        <td>{{ item.last_donate }}</td>
 
-                                    <td style="width: 185px;">
-
-
-                                        <a @click="viewDetails(item)" class="mr-2" data-toggle="modal"
-                                            data-target="#exampleModal2">
-                                            <i class="fa fa-eye"
-                                                style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                        </a>
-                                        <i class="fas fa-edit"
-                                            style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
-                                            data-toggle="modal" data-target="#exampleModal1" @click="editbutton(item)"></i>
-                                        <!-- Corrected edit icon class -->
-                                        <i class="fa-solid fa-trash ml-1"
-                                            style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
-                                            @click="deletebutton(item.id)"></i>
+                                        <td style="width: 185px;">
 
 
+                                            <a @click="viewDetails(item)" class="mr-2" data-toggle="modal"
+                                                data-target="#exampleModal2">
+                                                <i class="fa fa-eye"
+                                                    style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                            </a>
+                                            <i class="fas fa-edit"
+                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                data-toggle="modal" data-target="#exampleModal1"
+                                                @click="editbutton(item)"></i>
+                                            <!-- Corrected edit icon class -->
+                                            <i class="fa-solid fa-trash ml-1"
+                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                @click="deletebutton(item.id)"></i>
 
 
 
 
-                                    </td>
 
-                                </tr>
 
-                            </tbody>
-                        </table>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>

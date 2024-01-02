@@ -49,7 +49,7 @@
                 aria-labelledby="pills-basic-info">
                 <Form class="form" method="post" action="#" @submit="saveProfile('basicInfo')"
                   :validation-schema="schema_basicInfo" v-slot="{ errors }">
-
+<!-- {{ basicInfo }} -->
                   <div class="d-flex p-2">
                     <div class="d-flex p-2">
                       <div class="bg-light p-2">
@@ -60,7 +60,7 @@
                         <!-- {{  freedomFighter}} -->
                         <table class="table table-borderless">
                           <tbody>
-                            {{  basicInfo.designation}}
+                            <!-- {{  basicInfo.designation}} -->
                             <tr class="basic_info">
                               <td><strong>Name:</strong></td>
                               <td>
@@ -73,7 +73,7 @@
                             <tr>
                               <td><strong>Designation:</strong></td>
                               <td>
-                                <select v-model="basicInfo.designation" class="form-control">
+                                <select v-model="basicInfo.designation" class="form-control" name="designation" >
                                   <option :value="designation.id" v-for="designation in designations"
                                     :key="designation.id">
                                     {{ designation.designation_name }}
@@ -84,7 +84,7 @@
                             <tr>
                               <td><strong>Department:</strong></td>
                               <td>
-                                <select v-model="basicInfo.department" class="form-control">
+                                <select v-model="basicInfo.department" class="form-control" name="department">
                                   <option :value="department.id" v-for="department in departments" :key="department.id">
                                     {{ department.dept_name }}
                                   </option>
@@ -136,7 +136,7 @@
                               <td><strong>Blood Group:</strong></td>
                               <td>
                                 <select v-model="basicInfo.blood_group" class="form-control"
-                                  :class="{ 'is-invalid': errors.blood_group }">
+                                  :class="{ 'is-invalid': errors.blood_group }" name="blood_group">
                                   <option value="" disabled>Select Blood Group</option>
                                   <option value="A+">A+</option>
                                   <option value="A-">A-</option>
@@ -172,7 +172,7 @@
                             <tr>
                               <td><strong>User Role*:</strong></td>
                               <td>
-                                <select v-model="basicInfo.status" class="form-control">
+                                <select v-model="basicInfo.status" class="form-control" name="status">
                                   <option value="1" class="bg-success">Active</option>
                                   <option value="0" class="bg-danger">Inactive</option>
                                 </select>
@@ -360,7 +360,7 @@
                           <tr>
                             <td><strong>Department Name:</strong></td>
                             <td>
-                              <select v-model="jobs.department" class="form-control" style="width: 428px;">
+                              <select v-model="jobs.department" class="form-control" style="width: 428px;" name="department">
                                 <option :value="department.id" v-for="department in departments" :key="department.id">
                                   {{ department.dept_name }}
                                 </option>
@@ -1414,6 +1414,7 @@ export default {
       this.basicInfo.mobileNumber = newValue.mobile_number;
       this.basicInfo.email = newValue.email == "null" ? "" : newValue.email;
       this.basicInfo.designation = newValue.designation;
+      this.basicInfo.department = newValue.department;
       this.basicInfo.designation_id = newValue.designation_id;
       this.imgDataUrl = this.base_url_for_resource + "images/" + newValue.image;
 

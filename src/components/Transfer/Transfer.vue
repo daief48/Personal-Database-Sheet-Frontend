@@ -443,72 +443,74 @@
 
         <div class="row">
           <div class="col-md-12">
-
-            <table class="table text-center" id="datatable">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Employee</th>
-                  <th>Transfer Date</th>
-                  <th>Transfer Order</th>
-                  <th>To Department</th>
-                  <th>From Department</th>
-                  <th>To Designation</th>
-                  <th>From Designation</th>
-                  <th>Transfer Type</th>
-                  <th>To Office</th>
-                  <th>From office</th>
-                  <th>Join Date</th>
-                  <th>Status</th>
-                  <th>Transfer Letter</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, index) in transferList1" :key="index">
-                  <td>{{ item.id }}</td>
-                  <td>{{ item.employee_name }}</td>
-                  <td>{{ item.transfer_date }}</td>
-                  <td>{{ item.transfer_order }}</td>
-                  <td>{{ item.to_department }}</td>
-                  <td>{{ item.from_department }}</td>
-                  <td>{{ item.to_designation }}</td>
-                  <td>{{ item.from_designation }}</td>
-                  <td>{{ item.t_type }}</td>
-                  <td>{{ item.to_office }}</td>
-                  <td>{{ item.from_office }}</td>
-                  <td>{{ item.join_date }}</td>
-                  <td>
-                    <p v-if="item.status == 1" class="text-warning font-weight-bold"> Verified</p>
-                    <p v-else class="text-success font-weight-bold">Pending</p>
-                  </td>
-                  <td>
-                    <a :href="'http://localhost/pds-backend/public/transferLetters/' + item.transfer_letter"
-                      download="transfer_letter.pdf" class="btn btn-success" target="blank">Download</a>
-                  </td>
-                  <td style="width: 185px;">
-                    <button v-if="item.status === 1" @click="viewDetails(item)" class="btn btn-outline-primary mr-2"
-                      style="border: 3px solid;font-weight: bolder; width: 124px;" data-toggle="modal"
-                      data-target="#exampleModal2">
-                      View Details
-                    </button>
-                    <div v-else>
-                      <button @click="editbutton(item.id)" class="btn btn-primary mr-2" data-toggle="modal"
-                        data-target="#exampleModal1">
-                        Edit
+            <div class="table-responsive">
+              <table class="table text-center" id="datatable">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Employee</th>
+                    <th>Transfer Date</th>
+                    <th>Transfer Order</th>
+                    <th>To Department</th>
+                    <th>From Department</th>
+                    <th>To Designation</th>
+                    <th>From Designation</th>
+                    <th>Transfer Type</th>
+                    <th>To Office</th>
+                    <th>From office</th>
+                    <th>Join Date</th>
+                    <th>Status</th>
+                    <th>Transfer Letter</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(item, index) in transferList1" :key="index">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.employee_name }}</td>
+                    <td>{{ item.transfer_date }}</td>
+                    <td>{{ item.transfer_order }}</td>
+                    <td>{{ item.to_department }}</td>
+                    <td>{{ item.from_department }}</td>
+                    <td>{{ item.to_designation }}</td>
+                    <td>{{ item.from_designation }}</td>
+                    <td>{{ item.t_type }}</td>
+                    <td>{{ item.to_office }}</td>
+                    <td>{{ item.from_office }}</td>
+                    <td>{{ item.join_date }}</td>
+                    <td>
+                      <p v-if="item.status == 1" class="text-warning font-weight-bold"> Verified</p>
+                      <p v-else class="text-success font-weight-bold">Pending</p>
+                    </td>
+                    <td>
+                      <a :href="'http://localhost/pds-backend/public/transferLetters/' + item.transfer_letter"
+                        download="transfer_letter.pdf" class="btn btn-success" target="blank">Download</a>
+                    </td>
+                    <td style="width: 185px;">
+                      <button v-if="item.status === 1" @click="viewDetails(item)" class="btn btn-outline-primary mr-2"
+                        style="border: 3px solid;font-weight: bolder; width: 124px;" data-toggle="modal"
+                        data-target="#exampleModal2">
+                        View Details
                       </button>
-                      <button @click="deletebutton(item.id)" class="btn btn-danger mr-2">
-                        Delete
-                      </button>
-                    </div>
+                      <div v-else>
+                        <button @click="editbutton(item.id)" class="btn btn-primary mr-2" data-toggle="modal"
+                          data-target="#exampleModal1">
+                          Edit
+                        </button>
+                        <button @click="deletebutton(item.id)" class="btn btn-danger mr-2">
+                          Delete
+                        </button>
+                      </div>
 
 
-                  </td>
+                    </td>
 
-                </tr>
+                  </tr>
 
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
+
           </div>
         </div>
       </div>

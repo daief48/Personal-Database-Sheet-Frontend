@@ -2,7 +2,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background: #107ac0;">
 
     <!-- Admin-Panel-View-Top-Left -->
-    <a data-v-6ee7d3b8="" href="#" class="brand-link" style="background-color: rgb(16, 122, 192);border-bottom: solid 1px;text-decoration: none;">
+    <a data-v-6ee7d3b8="" href="#" class="brand-link"
+      style="background-color: rgb(16, 122, 192);border-bottom: solid 1px;text-decoration: none;">
 
       <div class="d-flex align-items-center justify-content-center">
         <img width="45" src="@/assets/img/govt_logo.png" style="margin-left: -36px;">
@@ -13,15 +14,17 @@
     <div class="sidebar" style="padding: 0px 7px;height: 100%;width: 100%;background-color: #107ac0;opacity: .8;">
       <nav class="mt-3">
 
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" style="padding:6px">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"
+          style="padding:6px">
 
           <li v-for="(menu, index) in sidebarMenu" :key="index" class="nav-item nav-item-design mb-1"
             :class="$route.path == menu.slug ? 'active' : ''">
 
             <div v-if="menu.setting !== true">
               <!-- {{ menu.slug }} -->
-              <router-link :to="menu.slug" class="nav-link" >
-                <i :class="menu.icon" class="text-white" style="font-size: 18px !important;"></i> <span class="ml-1 first"  style="font-size: 19px; color:white">{{ menu.title }}</span>
+              <router-link :to="menu.slug" class="nav-link">
+                <i :class="menu.icon" class="text-white" style="font-size: 18px !important;"></i> <span class="ml-1 first"
+                  style="font-size: 19px; color:white">{{ menu.title }}</span>
 
               </router-link>
             </div>
@@ -52,20 +55,25 @@
                             ], -->
             <div v-else>
               <a :href="'#submenu' + index" data-toggle="collapse" role="button"
-                :aria-expanded="in_array($route.path, ['/admin-department', '/admin-designation', '/training-setup', '/admin-office', '/admin-leave-type', '/admin-training-type', '/admin-transfer-type', '/admin-grade-type']) ? true : false"
+                :aria-expanded="in_array($route.path, ['/admin-department', '/admin-designation', '/training-setup', '/admin-office', '/admin-leave-type', '/admin-training-type', '/admin-transfer-type', '/admin-grade-type']) ? true : true"
                 :class="in_array($route.path, ['/admin-department', '/admin-designation', '/training-setup', '/admin-office', '/admin-leave-type', '/admin-training-type', '/admin-transfer-type', '/admin-grade-type']) ? 'active' : ''"
                 aria-controls="multiCollapseExample1" class="ml-3"
                 style="display: flex;align-items: center;font-size: 16px; text-decoration: none;">
-                <i data-v-6ee7d3b8="" class="fa fa-solid fa-gear mr-1 text-white" style="font-size: 24px;"></i> <span class="text-center" style="font-size: 19px; color:white;margin-left: 12px;">Settings</span>
+
+                <i data-v-6ee7d3b8="" class="fa fa-solid fa-gear mr-1 text-white" style="font-size: 24px;"></i>
+                <span class="text-center" style="font-size: 19px; color:white;margin-left: 12px;">Settings</span>
               </a>
               <ul :id="'submenu' + index" class="collapse multi-collapse"
                 :class="in_array($route.path, ['/admin-department', '/admin-designation', '/training-setup', '/admin-office', '/admin-leave-type', '/admin-training-type', '/admin-transfer-type', '/admin-grade-type']) ? 'show' : ''"
                 style="list-style: none;    padding: 9px;">
+                
                 <li v-for="(subMenu, subIndex) in menu.slug" :key="subIndex">
-                  <router-link :to="subMenu.slug" class="nav-link text-white">
+                  <router-link :to="subMenu.slug" class="nav-link text-white" @click="setActiveLink(subMenu.slug)"
+                    :class="{ 'active': activeLink === subMenu.slug }">
                     <i :class="subMenu.icon" class="text-white"></i>{{ subMenu.title }}
                   </router-link>
                 </li>
+
               </ul>
             </div>
           </li>
@@ -115,9 +123,14 @@ export default {
   data() {
     return {
       sidebarMenu: [],
+      activeLink: null,
+
     }
   },
   methods: {
+    setActiveLink(slug) {
+      this.activeLink = slug;
+    },
     is2DArray(arr) {
       if (!Array.isArray(arr)) {
         return false;
@@ -199,6 +212,9 @@ export default {
 </script>
 
 <style scoped>
+.active {
+  background: #2385c5!important;
+}
 .admin-panel-view-top-left {
   /* font-family: 'Russo One', sans-serif; */
   font-size: 15px;
@@ -212,7 +228,8 @@ export default {
   /* font-variant: small-caps; */
   /* font-style: oblique; */
 }
+
 ul li:first-child {
-      color: green;
-    }
+  color: green;
+}
 </style>

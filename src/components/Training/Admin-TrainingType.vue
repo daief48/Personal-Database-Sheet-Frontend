@@ -4,7 +4,7 @@
         <div class="card card-default">
             <div class="card-body">
                 <div style="display: flex;justify-content: space-between;">
-                    <h3>All Training Name List</h3>
+                    <h3>My Training Type List</h3>
                     <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
                         >+ Add
                         Training Name</a>
@@ -183,7 +183,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table text-center" id="datatable">
+                        <div class="table-responsive">
+                            <table class="table text-center" id="datatable">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -275,6 +276,8 @@
 
                             </tbody>
                         </table>
+</div>
+                      
                     </div>
                 </div>
             </div>

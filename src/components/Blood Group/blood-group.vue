@@ -6,7 +6,7 @@
                 <div style="display: flex;justify-content: space-between;">
                     <h3>All Blood Group List</h3>
                     <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
-                        @click="clear()">+Add Last Donate</a>
+                        @click="addModal()">+Add Last Donate</a>
 
                     <!-- hidden model  -->
                     <!-- Add and Edit Modal -->
@@ -14,73 +14,42 @@
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content" style="width: 34vw;top: 46px;">
+                            <div class="modal-content" style="width: 121%;">
                                 <div class="modal-header">
-                                    <h5 class="modal-title text-center" id="exampleModalLabel">Add Blood Group</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <Form @submit.prevent="saveTranfer" :validation-schema="schema"
-                                        v-slot="{ errors, resetForm }" ref="form">
-                                        <div>
-                                            <div class="row">
 
-                                                <div class="col-12">
+                                <div class="modal-body card">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="modal-title text-center" id="exampleModalLabel" style="font-size: 25px;">
+                                            Blood Group Details</h5>
+                                        <hr>
 
-                                                    <input type="hidden" placeholder="Enter text here"
-                                                        v-model="bloodgroupList.employee_id">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Name:</label>
-                                                        <Field type="text" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="bloodgroupList.name" name="employee_id"
-                                                            :class="{ 'is-invalid': errors.employee_id }" readonly />
-                                                        <div class="invalid-feedback">{{ errors.employee_id }}
-                                                        </div>
+                                        <h2 class="card-title text-center mb-4">Employee Name: {{ bloodgroupList.name }}
+                                        </h2>
+                                        <h2 class="card-title text-center mb-4">Blood Group: {{ bloodgroupList.blood_group
+                                        }}</h2>
 
-                                                    </div>
+                                        <!-- Using a div for Last Donate details -->
+                                        <div v-for="donate in lastDonate" :key="donate.id" class="card p-4 mb-4">
+                                            <h5 class="card-title">Donate Date: {{ donate.last_donate }}</h5>
+                                        </div>
 
-
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Blood Group:</label>
-                                                        <Field type="text" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="bloodgroupList.blood_group" name="blood_group"
-                                                            :class="{ 'is-invalid': errors.blood_group }" readonly />
-                                                        <div class="invalid-feedback">{{ errors.blood_group }}
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Last Donate:</label>
-                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="bloodgroupList.last_donate" name="last_donate"
-                                                            :class="{ 'is-invalid': errors.last_donate }" />
-                                                        <div class="invalid-feedback">{{ errors.last_donate }}
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-
-
-
-
+                                        <form class="text-center" @submit.prevent="addLastDonate">
+                                            <div class="mb-3">
+                                                <label for="lastDonateDate" class="form-label">Last Donate Date</label>
+                                                <input type="date" class="form-control" id="lastDonateDate"
+                                                    v-model="bloodgroupList.last_donate" required>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                                @click="resetForm()">Cancel</button>
-                                            <button type="submit" class="btn btn-primary"
-                                                @click="saveTranfer()">Add</button>
-                                        </div>
-                                    </Form>
+                                            <button type="submit" class="btn btn-primary">+Add Last Donate Date</button>
+                                        </form>
+                                    </div>
+
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -88,67 +57,30 @@
                     <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content" style="width: 34vw;top: 46px;">
+                            <div class="modal-content" style="width: 121%; top: 164px;">
                                 <div class="modal-header">
-                                    <h5 class="modal-title text-center" id="exampleModalLabel">Edit Blood Group</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <Form @submit.prevent="saveTranfer" :validation-schema="schema" v-slot="{ errors }">
-                                        <div>
-                                            <div class="row">
 
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label class="typo__label">Select with search</label>
-                                                        <multiselect v-model="value" :options="employeeList"
-                                                            :custom-label="nameWithLang" :close-on-select="true"
-                                                            placeholder="Select one" label="name" track-by="id">
-                                                        </multiselect>
+                                <div class="modal-body card">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="modal-title text-center" id="exampleModalLabel" style="font-size: 25px;">
+                                            Blood Group Details
+                                        </h5>
+                                        <hr>
+                                        <h1 class="card-title ">Employee Name: {{ bloodgroupList.name }}</h1>
+                                        <h1 class="card-title">Blood Group: {{ bloodgroupList.blood_group }}</h1>
 
-                                                    </div>
-
-
-
-
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Blood Group:</label>
-                                                        <Field type="text" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="editbloodgroupList.blood_group" name="blood_group"
-                                                            :class="{ 'is-invalid': errors.blood_group }" />
-                                                        <div class="invalid-feedback">{{ errors.blood_group }}
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Last Donate:</label>
-                                                        <Field type="text" class="form-control" id="exampleInputEmail1"
-                                                            aria-describedby="emailHelp" placeholder="Transfer Order Number"
-                                                            v-model="editbloodgroupList.last_donate" name="last_donate"
-                                                            :class="{ 'is-invalid': errors.last_donate }" />
-                                                        <div class="invalid-feedback">{{ errors.last_donate }}
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-
-
-
-
-                                            </div>
+                                        <!-- Using a div for Last Donate details -->
+                                        <div v-for="donate in lastDonate" :key="donate.id" class="card p-4">
+                                            <h5 class="card-title"> Donate Date: {{ donate.last_donate }}</h5>
                                         </div>
-                                        <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-primary" @click="EditBlood()">Edit</button>
-                                        </div>
-                                    </Form>
+                                    </div>
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -158,7 +90,7 @@
                     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content" style="width: 121%; top: 164px;">
+                            <div class="modal-content" style="width: 121%;">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -196,19 +128,19 @@
 
                 <div class="row">
                     <div class="col-md-12">
-
-                        <table class="table text-center" id="datatable">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Employee</th>
-                                    <th>Blood Group</th>
-                                    <th>Last Donate</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- "id": 2,
+                        <div class="table-responsive">
+                            <table class="table text-center" id="datatable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Employee</th>
+                                        <th>Blood Group</th>
+                                        <th>Last Donate</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- "id": 2,
                                 "employee_id": 1,
                                 "blood_group": "o+",
                                 "last_donate": 24,
@@ -219,29 +151,31 @@
                                 "name": null,
                                 "mobile_number": null -->
 
-                                <tr v-for="(item, index) in BloodList" :key="index">
-                                    <td>{{ item.employee_id }}</td>
-                                    <td>{{ item.name }}</td>
-                                    <td>{{ item.blood_group }}</td>
-                                    <td>{{ item.last_donate }}</td>
+                                    <tr v-for="(item, index) in BloodList" :key="index">
+                                        <td>{{ item.employee_id }}</td>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.blood_group }}</td>
+                                        <td>{{ item.last_donate }}</td>
 
-                                    <td style="width: 185px;" v-if="item.name === this.storageData.name">
-
-
-                                        <a @click="viewDetails(item)" class="mr-2 btn btn-outline-success"
-                                            data-toggle="modal" data-target="#exampleModal2">
-                                            View Details
-                                        </a>
-                                    </td>
-                                    <td style="width: 185px;" v-else>
+                                        <td style="width: 185px;" v-if="item.name === this.storageData.name">
 
 
-                                    </td>
+                                            <a @click="viewDetails(item)" class="mr-2 btn btn-outline-success"
+                                                data-toggle="modal" data-target="#exampleModal2">
+                                                View Details
+                                            </a>
+                                        </td>
+                                        <td style="width: 185px;" v-else>
 
-                                </tr>
 
-                            </tbody>
-                        </table>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -261,9 +195,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
-import { Form, Field } from 'vee-validate';
 import * as Yup from "yup";
-import Multiselect from 'vue-multiselect';
 
 
 
@@ -271,7 +203,6 @@ import Multiselect from 'vue-multiselect';
 export default {
     components: {
         // DataTable,
-        Form, Field, Multiselect
 
     },
 
@@ -292,6 +223,7 @@ export default {
             backend_url: process.env.VUE_APP_API_URL,
             storageData,
             user: "",
+            user_id: "",
             departments: "",
             designations: "",
             transferType: "",
@@ -337,17 +269,39 @@ export default {
     computed: {},
 
     methods: {
-        clear() {
+        addLastDonate() {
             this.axios
-                .get(this.backend_url + 'getBloodGroup')
+                .post(this.backend_url + `addBloodGroup`, this.bloodgroupList)
                 .then((res) => {
-                    console.log(res.data.list);
-                    this.BloodList = res.data.list;
-                    this.bloodgroupListN = this.BloodList[this.BloodList.length - 1]
-                    this.bloodgroupList.employee_id = this.bloodgroupListN.employee_id;
-                    this.bloodgroupList.blood_group = this.bloodgroupListN.blood_group;
-                    this.bloodgroupList.name = this.bloodgroupListN.name;
-
+                    console.log(res);
+                    this.getBloodGroupList();
+                    $("#exampleModal").modal('hide');
+                    $('#datatable').DataTable().destroy();
+                    this.$toast.success(`Add Data Successfully!`);
+                })
+                .catch((error) => {
+                    console.error("An error occurred while updating the transfer record:", error);
+                    this.$toast.error(`Failed to update transfer record.`);
+                });
+        },
+        addModal() {
+            this.axios
+                .get(this.backend_url + 'user/getprofile/' + this.user_id)
+                .then((res) => {
+                    console.log(res.data.data);
+                    this.bloodgroupList.employee_id = res.data.data.id;
+                    this.bloodgroupList.name = res.data.data.name;
+                    this.bloodgroupList.blood_group = res.data.data.blood_group;
+                    this.bloodgroupList.last_donate = res.data.data.last_donate;
+                    console.log(this.bloodgroupList);
+                    this.axios
+                        .get(this.backend_url + 'specificBloodGroupbyEmployee/' + this.user)
+                        .then((res) => {
+                            this.lastDonate = res.data.data;
+                        })
+                        .catch((e) => {
+                            console.log(e)
+                        })
                 })
                 .catch((e) => {
                     console.log(e)
@@ -406,7 +360,7 @@ export default {
             this.bloodgroupList.last_donate = item.last_donate;
 
             this.axios
-                .get(this.backend_url + 'specificBloodGroupbyEmployee/' + item.employee_id)
+                .get(this.backend_url + 'specificBloodGroupbyEmployee/' + this.user)
                 .then((res) => {
                     this.lastDonate = res.data.data;
                 })
@@ -464,7 +418,8 @@ export default {
                 .get(this.backend_url + `users/${this.storageData.id}`)
                 .then((res) => {
                     this.user = res.data.userDetail.employee_id;
-                    // console.log(this.user);
+                    this.user_id = res.data.userDetail.id;
+                    console.log(this.user_id);
                     this.bloodgroupList.employee_id = this.user
                     // console.log(this.storageData.id);
                 })

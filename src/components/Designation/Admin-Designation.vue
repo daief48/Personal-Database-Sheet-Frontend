@@ -5,8 +5,7 @@
             <div class="card-body">
                 <div style="display: flex;justify-content: space-between;">
                     <h3>My Designation List</h3>
-                    <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
-                       >+ Add
+                    <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal">+ Add
                         Designation</a>
 
                     <!-- hidden model  -->
@@ -25,7 +24,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <Form @submit.prevent="saveDesignation" :validation-schema="schema"
-                                    v-slot="{ errors, resetForm }" ref="form" >
+                                        v-slot="{ errors, resetForm }" ref="form">
                                         <div>
                                             <div class="row">
                                                 <!-- {{ designation }} -->
@@ -66,10 +65,10 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal" @click="resetForm">Cancel</button>
-                                            <button type="submit" class="btn btn-primary" @click="saveDesignation()"
-                                               >Add</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                @click="resetForm">Cancel</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                @click="saveDesignation()">Add</button>
                                         </div>
                                     </Form>
                                 </div>
@@ -89,8 +88,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <Form @submit.prevent="EditTranfer" :validation-schema="schema"
-                                        v-slot="{ errors }">
+                                    <Form @submit.prevent="EditTranfer" :validation-schema="schema" v-slot="{ errors }">
                                         <div>
                                             <div class="row">
                                                 <!-- {{ designation }} -->
@@ -116,8 +114,9 @@
                                                         <div class="form-group mr-2 w-50">
                                                             <label for="exampleFormControlSelect1">Status</label>
                                                             <Field class="form-control" as="select"
-                                                                id="exampleFormControlSelect1" v-model="editdesignation.status"
-                                                                name="status" :class="{ 'is-invalid': errors.status }">
+                                                                id="exampleFormControlSelect1"
+                                                                v-model="editdesignation.status" name="status"
+                                                                :class="{ 'is-invalid': errors.status }">
                                                                 <option value="1">Approved</option>
                                                                 <option value="2">Cancel</option>
 
@@ -133,8 +132,8 @@
                                         <div class="modal-footer d-flex justify-content-center">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-primary" @click="EditTranfer()"
-                                           >Edit</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                @click="EditTranfer()">Edit</button>
                                         </div>
                                     </Form>
                                 </div>
@@ -187,104 +186,107 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table text-center" id="datatable">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Designation Name</th>
-                                    <th>Create Date</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(item, index) in designatioList" :key="index">
-                                    <td>{{ item.id }}</td>
-                                    <td>{{ item.designation_name }}</td>
-                                    <td>{{ item.created_at.slice(0, 10) }}</td>
-                                    <td>
-                                        <p v-if="item.status == 1" class="text-success font-weight-bold"> Verified</p>
-                                        <p v-else-if="item.status == 2" class="text-danger font-weight-bold"> Cancel</p>
-                                        <p v-else class="text-warning font-weight-bold">Pending</p>
-                                    </td>
-                                    <td style="width: 185px;">
-                                        <div v-if="item.status === 0">
-                                            <!-- <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                        <div class="table-responsive">
+                            <table class="table text-center" id="datatable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Designation Name</th>
+                                        <th>Create Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(item, index) in designatioList" :key="index">
+                                        <td>{{ item.id }}</td>
+                                        <td>{{ item.designation_name }}</td>
+                                        <td>{{ item.created_at.slice(0, 10) }}</td>
+                                        <td>
+                                            <p v-if="item.status == 1" class="text-success font-weight-bold"> Verified</p>
+                                            <p v-else-if="item.status == 2" class="text-danger font-weight-bold"> Cancel</p>
+                                            <p v-else class="text-warning font-weight-bold">Pending</p>
+                                        </td>
+                                        <td style="width: 185px;">
+                                            <div v-if="item.status === 0">
+                                                <!-- <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                             </a> -->
 
-                                            <a @click="inactivestatus(item.id)" class="mr-2">
-                                                <i class="fa fa-times"
-                                                    style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
+                                                <a @click="inactivestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-times"
+                                                        style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
 
-                                            <a @click="activestatus(item.id)" class="mr-2">
-                                                <i class="fa fa-check"
-                                                    style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
-                                            <i class="fas fa-edit"
-                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                data-toggle="modal" data-target="#exampleModal1"
-                                                @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
-                                            <i class="fa-solid fa-trash ml-1"
-                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                @click="deleterecord(item.id)"></i>
+                                                <a @click="activestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-check"
+                                                        style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deleterecord(item.id)"></i>
 
 
-                                        </div>
+                                            </div>
 
-                                        <div v-else-if="item.status === 1">
-                                            <!-- <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                                            <div v-else-if="item.status === 1">
+                                                <!-- <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                             </a> -->
 
-                                            <a @click="inactivestatus(item.id)" class="mr-2">
-                                                <i class="fa fa-times"
-                                                    style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
-                                            <i class="fas fa-edit"
-                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                data-toggle="modal" data-target="#exampleModal1"
-                                                @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
-                                            <i class="fa-solid fa-trash ml-1"
-                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                @click="deleterecord(item.id)"></i>
+                                                <a @click="inactivestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-times"
+                                                        style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deleterecord(item.id)"></i>
 
 
-                                        </div>
+                                            </div>
 
-                                        <div v-else-if="item.status === 2">
-                                            <!-- <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
+                                            <div v-else-if="item.status === 2">
+                                                <!-- <a @click="viewDetails(item.id)" class="mr-2" data-toggle="modal"
                                                 data-target="#exampleModal2">
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                             </a> -->
 
-                                            <a @click="activestatus(item.id)" class="mr-2">
-                                                <i class="fa fa-check"
-                                                    style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
-                                            <i class="fas fa-edit"
-                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                data-toggle="modal" data-target="#exampleModal1"
-                                                @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
-                                            <i class="fa-solid fa-trash ml-1"
-                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                @click="deleterecord(item.id)"></i>
+                                                <a @click="activestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-check"
+                                                        style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deleterecord(item.id)"></i>
 
 
-                                        </div>
+                                            </div>
 
-                                    </td>
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -361,8 +363,7 @@ export default {
     computed: {},
 
     methods: {
-        deleterecord(id)
-        {
+        deleterecord(id) {
             this.axios
                 .delete(this.backend_url + 'deleteDesignationMgt/' + id)
                 .then((res) => {
@@ -372,10 +373,10 @@ export default {
                     $('#datatable').DataTable().destroy();
                     this.$toast.error("Delete Successfully");
 
-                })    .catch((error) => {
-                        console.error("An error occurred while updating the transfer record:", error);
-                        this.$toast.error("Record cannot be deleted. Associated data exists.");
-                    });
+                }).catch((error) => {
+                    console.error("An error occurred while updating the transfer record:", error);
+                    this.$toast.error("Record cannot be deleted. Associated data exists.");
+                });
         },
         EditTranfer() {
             try {
@@ -607,4 +608,5 @@ export default {
 .dark-mode div::v-deep .modal-content {
     border-color: #2d3748;
     background-color: #1a202c;
-}</style>
+}
+</style>

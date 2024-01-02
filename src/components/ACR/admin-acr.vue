@@ -365,8 +365,8 @@
 
                 <div class="row">
                     <div class="col-md-12">
-
-                        <table class="table text-center" id="datatable">
+                        <div class="table-responsive">
+                            <table class="table text-center" id="datatable">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -427,6 +427,8 @@
 
                             </tbody>
                         </table>
+</div>
+                        
                     </div>
                 </div>
             </div>

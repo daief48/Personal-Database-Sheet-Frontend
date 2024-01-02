@@ -7,7 +7,8 @@
                     <h3>All Leave History</h3>
                     <div>
 
-                        <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal" @click="clear()">+
+                        <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
+                            @click="clear()">+
                             Add
                             Leave</a>
                     </div>
@@ -131,8 +132,8 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <Form @submit.prevent="saveLeave" :validation-schema="schema"
-                                        v-slot="{ errors }" > <!-- <p></p> -->
+                                    <Form @submit.prevent="saveLeave" :validation-schema="schema" v-slot="{ errors }">
+                                        <!-- <p></p> -->
                                         <!-- {{ leave }} -->
                                         <!-- {{ storageData }} -->
                                         <div class="row">
@@ -214,9 +215,10 @@
                                         </div>
 
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                               >Cancel</button>
-                                            <button type="submit" class="btn btn-primary" @click="EditTranfer()">Edit</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                @click="EditTranfer()">Edit</button>
 
                                         </div>
                                     </Form>
@@ -267,9 +269,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table text-center" id="datatable">
-                            <thead>
-                                <!-- "employee_id": 1,
+                        <div class="table-responsive">
+                            <table class="table text-center" id="datatable">
+                                <thead>
+                                    <!-- "employee_id": 1,
       "employee_name": "Shakiur",
       "id": 2,
       "leave_type": 11,
@@ -280,105 +283,108 @@
       "status": 1,
       "created_at": "2023-10-21T09:15:01.000000Z",
       "updated_at": "2023-10-21T09:15:01.000000Z" -->
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Employee</th>
-                                    <th>Leave Type</th>
-                                    <th>From Date</th>
-                                    <th>To Date</th>
-                                    <th>day</th>
-                                    <th>Description</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(item, index) in transferList.list" :key="index">
-                                    <td>{{ item.employee_id }}</td>
-                                    <td>{{ item.employee_name }}</td>
-                                    <td>{{ item.leave_type }}</td>
-                                    <td>{{ item.from_date }}</td>
-                                    <td>{{ item.to_date }}</td>
-                                    <td>{{ item.day }}</td>
-                                    <td>{{ item.description }}</td>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Employee</th>
+                                        <th>Leave Type</th>
+                                        <th>From Date</th>
+                                        <th>To Date</th>
+                                        <th>day</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(item, index) in transferList.list" :key="index">
+                                        <td>{{ item.employee_id }}</td>
+                                        <td>{{ item.employee_name }}</td>
+                                        <td>{{ item.leave_type }}</td>
+                                        <td>{{ item.from_date }}</td>
+                                        <td>{{ item.to_date }}</td>
+                                        <td>{{ item.day }}</td>
+                                        <td>{{ item.description }}</td>
 
-                                    <td>
-                                        <p v-if="item.status == 1" class="text-success font-weight-bold"> Verified</p>
-                                        <p v-else-if="item.status == 2" class="text-danger font-weight-bold"> Cancel</p>
-                                        <p v-else class="text-warning font-weight-bold">Pending</p>
-                                    </td>
-                                    <td style="width: 185px;">
-                                        <div v-if="item.status === 0">
-                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
-                                                data-target="#exampleModal2">
-                                                <i class="fa fa-eye"
-                                                    style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
+                                        <td>
+                                            <p v-if="item.status == 1" class="text-success font-weight-bold"> Verified</p>
+                                            <p v-else-if="item.status == 2" class="text-danger font-weight-bold"> Cancel</p>
+                                            <p v-else class="text-warning font-weight-bold">Pending</p>
+                                        </td>
+                                        <td style="width: 185px;">
+                                            <div v-if="item.status === 0">
+                                                <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
+                                                    data-target="#exampleModal2">
+                                                    <i class="fa fa-eye"
+                                                        style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
 
-                                            <a @click="inactivestatus(item.id)" class="mr-2">
-                                                <i class="fa fa-times"
-                                                    style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
+                                                <a @click="inactivestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-times"
+                                                        style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
 
-                                            <a @click="activestatus(item.id)" class="mr-2">
-                                                <i class="fa fa-check"
-                                                    style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
-                                            <i class="fas fa-edit"
-                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                data-toggle="modal" data-target="#exampleModal1"
-                                                @click="editbutton(item.id,item)"></i> <!-- Corrected edit icon class -->
-                                            <i class="fa-solid fa-trash ml-1"
-                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                @click="deleterecord(item.id)"></i>
-                                        </div>
+                                                <a @click="activestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-check"
+                                                        style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id, item)"></i>
+                                                <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deleterecord(item.id)"></i>
+                                            </div>
 
-                                        <div v-else-if="item.status === 1">
-                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
-                                                data-target="#exampleModal2">
-                                                <i class="fa fa-eye"
-                                                    style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
+                                            <div v-else-if="item.status === 1">
+                                                <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
+                                                    data-target="#exampleModal2">
+                                                    <i class="fa fa-eye"
+                                                        style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
 
-                                            <a @click="inactivestatus(item.id)" class="mr-2">
-                                                <i class="fa fa-times"
-                                                    style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
-                                            <i class="fas fa-edit"
-                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                data-toggle="modal" data-target="#exampleModal1"
-                                                @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
-                                            <i class="fa-solid fa-trash ml-1"
-                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                @click="deleterecord(item.id)"></i>
-                                        </div>
+                                                <a @click="inactivestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-times"
+                                                        style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deleterecord(item.id)"></i>
+                                            </div>
 
-                                        <div v-else-if="item.status === 2">
-                                            <a @click="viewDetails(item.id,item)" class="mr-2" data-toggle="modal"
-                                                data-target="#exampleModal2">
-                                                <i class="fa fa-eye"
-                                                    style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
+                                            <div v-else-if="item.status === 2">
+                                                <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
+                                                    data-target="#exampleModal2">
+                                                    <i class="fa fa-eye"
+                                                        style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
 
-                                            <a @click="activestatus(item.id)" class="mr-2">
-                                                <i class="fa fa-check"
-                                                    style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
-                                            <i class="fas fa-edit"
-                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                data-toggle="modal" data-target="#exampleModal1"
-                                                @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
-                                            <i class="fa-solid fa-trash ml-1"
-                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                @click="deleterecord(item.id)"></i>
-                                        </div>
+                                                <a @click="activestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-check"
+                                                        style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id)"></i> <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deleterecord(item.id)"></i>
+                                            </div>
 
-                                    </td>
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -456,7 +462,7 @@ export default {
                 to_date: "",
                 day: "",
                 description: "",
-            },editleave: {
+            }, editleave: {
                 employee_id: "",
                 leave_type: "",
                 from_date: "",
@@ -496,14 +502,14 @@ export default {
                 this.$toast.error(`Failed to update Leave record.`);
             }
         },
-        editbutton(id,item) {
+        editbutton(id, item) {
             console.log(id);
             this.value.id = item.id;
             this.value.emp = item.employee_name;
             this.axios
                 .get(this.backend_url + 'specificUserLeave/' + id)
                 .then((response) => {
-                
+
                     this.LeaveRecordById = response.data.data;
                     console.log(this.LeaveRecordById);
                     this.editleave.id = id;
@@ -580,7 +586,7 @@ export default {
 
                 })
         },
-        viewDetails(id,item) {
+        viewDetails(id, item) {
             console.log(id);
             this.axios
                 .get(this.backend_url + 'specificUserLeave/' + id)

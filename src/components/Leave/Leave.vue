@@ -8,8 +8,8 @@
                     <div>
                         <a href="/" class="btn btn-primary mb-2 mr-2" data-toggle="modal" data-target="#exampleModal11"
                             @click="viewLeaveStatus(user)">View Leave Status</a>
-                        <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
-                            >+ Add
+                        <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal">+
+                            Add
                             Leave</a>
                     </div>
 
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <Form @submit.prevent="saveTranfer" :validation-schema="schema"
-                                    v-slot="{ errors, resetForm }" ref="form"> <!-- <p></p> -->
+                                        v-slot="{ errors, resetForm }" ref="form"> <!-- <p></p> -->
                                         <!-- {{ leave }} -->
                                         <!-- {{ storageData }} -->
                                         <div class="row">
@@ -105,10 +105,10 @@
                                         </div>
 
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal" @click="resetForm()">Cancel</button>
-                                            <button type="submit" class="btn btn-primary" @click="saveTranfer()"
-                                             >Add</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                @click="resetForm()">Cancel</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                @click="saveTranfer()">Add</button>
 
                                         </div>
                                     </Form>
@@ -128,15 +128,16 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <Form @submit.prevent="EditTranfer" :validation-schema="schema"
-                                        v-slot="{ errors }"> <!-- <p></p> -->
+                                    <Form @submit.prevent="EditTranfer" :validation-schema="schema" v-slot="{ errors }">
+                                        <!-- <p></p> -->
                                         <!-- {{ leave }} -->
                                         <!-- {{ storageData }} -->
                                         <div class="row">
                                             <div class="col-4">
                                                 <div class="form-group">
 
-                                                    <input type="text" v-model="editleave.employee_id" style="display:none;">
+                                                    <input type="text" v-model="editleave.employee_id"
+                                                        style="display:none;">
                                                     <label for="exampleFormControlSelect1"> Leave Type</label>
 
                                                     <Field as="select" class="form-control" id="exampleFormControlSelect1"
@@ -208,8 +209,8 @@
                                         <div class="modal-footer d-flex justify-content-center">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-primary" @click="EditTranfer()"
-                                             >Edit</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                @click="EditTranfer()">Edit</button>
                                         </div>
                                     </Form>
                                 </div>
@@ -239,32 +240,35 @@
 
                                         </div>
                                         <div class="col-7">
-                                            <table class="table text-center table-borderless">
+                                            <div class="table-responsive">
+                                                <table class="table text-center table-borderless">
 
 
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Leave Type</th>
-                                                        <th scope="col">Total Leave</th>
-                                                        <th scope="col">Used Leave</th>
-                                                        <th scope="col">Available Leave</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr v-for="(item, key) in leavestatus" :key="key">
-                                                        <td>{{ key }}</td>
-                                                        <td>{{ item.total_days }}</td>
-                                                        <td>{{ item.used }}</td>
-                                                        <td>{{ item.available }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Total</th>
-                                                        <th>{{ totalLeave.total }}</th>
-                                                        <th>{{ totalLeave.used }}</th>
-                                                        <th>{{ totalLeave.available }}</th>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Leave Type</th>
+                                                            <th scope="col">Total Leave</th>
+                                                            <th scope="col">Used Leave</th>
+                                                            <th scope="col">Available Leave</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="(item, key) in leavestatus" :key="key">
+                                                            <td>{{ key }}</td>
+                                                            <td>{{ item.total_days }}</td>
+                                                            <td>{{ item.used }}</td>
+                                                            <td>{{ item.available }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Total</th>
+                                                            <th>{{ totalLeave.total }}</th>
+                                                            <th>{{ totalLeave.used }}</th>
+                                                            <th>{{ totalLeave.available }}</th>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
 
                                         </div>
                                     </div>
@@ -360,7 +364,7 @@
                                         <p v-else class="text-success font-weight-bold">Pending</p>
                                     </td>
                                     <td style="width: 185px;">
-                                        <button v-if="item.status === 1" @click="viewDetails(item.id,item)"
+                                        <button v-if="item.status === 1" @click="viewDetails(item.id, item)"
                                             class="btn btn-outline-primary mr-2"
                                             style="border: 3px solid;font-weight: bolder; width: 124px;" data-toggle="modal"
                                             data-target="#exampleModal2">
@@ -445,7 +449,7 @@ export default {
             departments: "",
             designations: "",
             LeaveType: "",
-            totalLeave: {total:0,used:0,available:0},
+            totalLeave: { total: 0, used: 0, available: 0 },
             office: "",
             imgDataUrl: "",
             url: this.backendUrl + "/api/users",
@@ -517,13 +521,13 @@ export default {
                     console.log(this.userDetail);
                 })
         },
-    
+
         editbutton(id) {
             console.log(id);
             this.axios
                 .get(this.backend_url + 'specificUserLeave/' + id)
                 .then((response) => {
-                
+
                     this.LeaveRecordById = response.data.data;
                     console.log(this.LeaveRecordById);
                     this.editleave.id = id;
@@ -553,7 +557,7 @@ export default {
 
                 })
         },
-        viewDetails(id,item) {
+        viewDetails(id, item) {
             console.log(id);
             this.axios
                 .get(this.backend_url + 'specificUserLeave/' + id)
@@ -584,11 +588,11 @@ export default {
 
                     this.leavestatus = response.data.list;
                     for (let key in this.leavestatus) {
-                       console.log(this.leavestatus[key].total_days);
+                        console.log(this.leavestatus[key].total_days);
 
-                       this.totalLeave.total += this.leavestatus[key].total_days;
-                       this.totalLeave.used += this.leavestatus[key].used;
-                       this.totalLeave.available += this.leavestatus[key].available;
+                        this.totalLeave.total += this.leavestatus[key].total_days;
+                        this.totalLeave.used += this.leavestatus[key].used;
+                        this.totalLeave.available += this.leavestatus[key].available;
 
                     }
                     console.log(this.totalLeave)

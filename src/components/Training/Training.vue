@@ -24,11 +24,22 @@
                                 </div>
                                 <div class="modal-body">
 
+
                                     <Form @submit.prevent="saveTraining" :validation-schema="schema"
-                                    v-slot="{ errors, resetForm }" ref="form">
-                                        <!-- {{ training }} -->
+                                        v-slot="{ errors, resetForm }" ref="form">
                                         <div class="row">
                                             <div class="col-4">
+                                                
+                                                <!-- <div class="form-group">
+                                                    <label for="exampleInputEmail1">Employee ID</label>
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Enter Employee ID"
+                                                        v-model="training.employee_id" name="employee_id"
+                                                        :class="{ 'is-invalid': errors.employee_id }" />
+
+                                                    <div class="invalid-feedback">{{ errors.employee_id }}</div>
+
+                                                </div> -->
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Training Center Name</label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
@@ -40,33 +51,6 @@
 
                                                 </div>
 
-
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Training Eng Date</label>
-                                                    <Field type="date" class="form-control" id="exampleInputEmail1"
-                                                        aria-describedby="emailHelp" placeholder="Training Eng Date"
-                                                        v-model="training.training_end_date"
-                                                        :class="{ 'is-invalid': errors.training_end_date }"
-                                                        name="training_end_date" />
-                                                    <div class="invalid-feedback">{{ errors.training_end_date }}</div>
-
-
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleFormControlTextarea1">Description</label>
-                                                    <Field as="textarea" class="form-control"
-                                                        id="exampleFormControlTextarea1" rows="5" placeholder="Description"
-                                                        v-model="training.description"
-                                                        :class="{ 'is-invalid': errors.description }" name="description">
-                                                    </Field>
-                                                    <div class="invalid-feedback">{{ errors.description }}</div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                            <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Train Name</label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
@@ -79,6 +63,40 @@
 
                                                 </div>
 
+                                                <div class="d-flex">
+                                                    <div class="form-group w-50 mr-2">
+                                                        <label for="exampleInputEmail1">Training Start Date</label>
+                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" placeholder="Training Start Date"
+                                                            v-model="training.training_strt_date"
+                                                            :class="{ 'is-invalid': errors.training_strt_date }"
+                                                            name="training_strt_date" />
+                                                        <div class="invalid-feedback">{{ errors.training_strt_date }}</div>
+
+
+                                                    </div>
+
+                                                    <div class="form-group w-50">
+                                                        <label for="exampleInputEmail1">Training Eng Date</label>
+                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" placeholder="Training Eng Date"
+                                                            v-model="training.training_end_date"
+                                                            :class="{ 'is-invalid': errors.training_end_date }"
+                                                            name="training_end_date" />
+                                                        <div class="invalid-feedback">{{ errors.training_end_date }}</div>
+
+
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                            <div class="col-4">
+
+                                                
 
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Training Score</label>
@@ -91,22 +109,9 @@
 
 
                                                 </div>
-                                            </div>
 
 
 
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Training Start Date</label>
-                                                    <Field type="date" class="form-control" id="exampleInputEmail1"
-                                                        aria-describedby="emailHelp" placeholder="Training Start Date"
-                                                        v-model="training.training_strt_date"
-                                                        :class="{ 'is-invalid': errors.training_strt_date }"
-                                                        name="training_strt_date" />
-                                                    <div class="invalid-feedback">{{ errors.training_strt_date }}</div>
-
-
-                                                </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Training Feedback</label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
@@ -119,17 +124,32 @@
 
                                                 </div>
 
+                                            </div>
 
+
+
+                                            <div class="col-4">
+
+
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlTextarea1">Description</label>
+                                                    <Field as="textarea" class="form-control"
+                                                        id="exampleFormControlTextarea1" rows="5" placeholder="Description"
+                                                        v-model="training.description"
+                                                        :class="{ 'is-invalid': errors.description }" name="description">
+                                                    </Field>
+                                                    <div class="invalid-feedback">{{ errors.description }}</div>
+                                                </div>
 
                                             </div>
                                         </div>
 
 
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal" @click="resetForm()">Cancel</button>
-                                            <button type="submit" class="btn btn-primary" @click="saveTraining()"
-                                             >Add</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                @click="resetForm()">Cancel</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                @click="saveTraining()">Add</button>
                                         </div>
                                     </Form>
                                 </div>
@@ -150,11 +170,13 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <Form @submit.prevent=" EditTranfer" :validation-schema="schema"
-                                        v-slot="{ errors }">
+
+                                    <Form @submit.prevent="EditTraining" :validation-schema="schema" v-slot="{ errors }">
                                         <!-- {{ training }} -->
                                         <div class="row">
                                             <div class="col-4">
+                                                
+                                        
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Training Center Name</label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
@@ -166,33 +188,6 @@
 
                                                 </div>
 
-
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Training Eng Date</label>
-                                                    <Field type="date" class="form-control" id="exampleInputEmail1"
-                                                        aria-describedby="emailHelp" placeholder="Training Eng Date"
-                                                        v-model="edittraining.training_end_date"
-                                                        :class="{ 'is-invalid': errors.training_end_date }"
-                                                        name="training_end_date" />
-                                                    <div class="invalid-feedback">{{ errors.training_end_date }}</div>
-
-
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleFormControlTextarea1">Description</label>
-                                                    <Field as="textarea" class="form-control"
-                                                        id="exampleFormControlTextarea1" rows="5" placeholder="Description"
-                                                        v-model="edittraining.description"
-                                                        :class="{ 'is-invalid': errors.description }" name="description">
-                                                    </Field>
-                                                    <div class="invalid-feedback">{{ errors.description }}</div>
-                                                </div>
-
-
-
-                                            </div>
-
-                                            <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Train Name</label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
@@ -205,6 +200,40 @@
 
                                                 </div>
 
+                                                <div class="d-flex">
+                                                    <div class="form-group w-50 mr-2">
+                                                        <label for="exampleInputEmail1">Training Start Date</label>
+                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" placeholder="Training Start Date"
+                                                            v-model="edittraining.training_strt_date"
+                                                            :class="{ 'is-invalid': errors.training_strt_date }"
+                                                            name="training_strt_date" />
+                                                        <div class="invalid-feedback">{{ errors.training_strt_date }}</div>
+
+
+                                                    </div>
+
+                                                    <div class="form-group w-50">
+                                                        <label for="exampleInputEmail1">Training Eng Date</label>
+                                                        <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                            aria-describedby="emailHelp" placeholder="Training Eng Date"
+                                                            v-model="edittraining.training_end_date"
+                                                            :class="{ 'is-invalid': errors.training_end_date }"
+                                                            name="training_end_date" />
+                                                        <div class="invalid-feedback">{{ errors.training_end_date }}</div>
+
+
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                            <div class="col-4">
+
+                                                
 
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Training Score</label>
@@ -217,22 +246,9 @@
 
 
                                                 </div>
-                                            </div>
 
 
 
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Training Start Date</label>
-                                                    <Field type="date" class="form-control" id="exampleInputEmail1"
-                                                        aria-describedby="emailHelp" placeholder="Training Start Date"
-                                                        v-model="edittraining.training_strt_date"
-                                                        :class="{ 'is-invalid': errors.training_strt_date }"
-                                                        name="training_strt_date" />
-                                                    <div class="invalid-feedback">{{ errors.training_strt_date }}</div>
-
-
-                                                </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Training Feedback</label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
@@ -245,7 +261,22 @@
 
                                                 </div>
 
+                                            </div>
 
+
+
+                                            <div class="col-4">
+
+
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlTextarea1">Description</label>
+                                                    <Field as="textarea" class="form-control"
+                                                        id="exampleFormControlTextarea1" rows="5" placeholder="Description"
+                                                        v-model="edittraining.description"
+                                                        :class="{ 'is-invalid': errors.description }" name="description">
+                                                    </Field>
+                                                    <div class="invalid-feedback">{{ errors.description }}</div>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -254,8 +285,8 @@
                                         <div class="modal-footer d-flex justify-content-center">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-primary" @click="EditTraining()"
-                                            >Edit</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                @click="EditTraining()">Edit</button>
                                         </div>
                                     </Form>
                                 </div>
@@ -278,18 +309,8 @@
                                         <h5 class="modal-title text-center" id="exampleModalLabel" style="font-size: 25px;">
                                             Training Details
                                         </h5>
-                                        // <!-- training: {
-            //     employee_id: "",
-            //     training_center_name: "",
-            //     training_name: "",
-            //     training_score: "",
-            //     training_feedback: "",
-            //     training_strt_date: "",
-            //     training_end_date: "",
-            // } -->
-                                        <!-- {{  training }} -->
                                         <hr>
-                                        <h1 class="card-title "> Name: {{ this.training.employee_name }} </h1>
+                                        <h1 class="card-title "> Name: {{ training.employee_name }} </h1>
 
                                         <h1 class="card-title ">Training Center Name: {{ training.training_center_name }}
                                         </h1>
@@ -318,8 +339,8 @@
 
                 <div class="row">
                     <div class="col-md-12">
-
-                        <table class="table text-center" id="datatable">
+                        <div class="table-responsive">
+                            <table class="table text-center" id="datatable">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -375,6 +396,8 @@
 
                             </tbody>
                         </table>
+</div>
+                        
                     </div>
                 </div>
             </div>
@@ -418,20 +441,21 @@ export default {
         //         training_end_date: "",
         //     }
         const schema = Yup.object().shape({
+            // employee_id: Yup.string().required("Employee ID is required"),
             training_center_name: Yup.string().required("Training Center Name is required"),
             training_name: Yup.string().required("Training Name is required"),
-            description: Yup.string().required("Description is required"), // Corrected error message
-            training_score: Yup.string().required("Training Score is required"),
-            training_feedback: Yup.string().required("Training Feedback is required"),
-            training_start_date: Yup.date()
-                .required("Training Start Date is required")
-                .typeError("Invalid date format"),
-            training_strt_date: Yup.date()
-                .required("Training End Date is required")
-                .typeError("Invalid date format"),
-            training_end_date: Yup.date()
-                .required("Training End Date is required")
-                .typeError("Invalid date format"),
+            // description: Yup.string().required("Description is required"), // Corrected error message
+            // training_score: Yup.string().required("Training Score is required"),
+            // training_feedback: Yup.string().required("Training Feedback is required"),
+            // training_start_date: Yup.date()
+            //     .required("Training Start Date is required")
+            //     .typeError("Invalid date format"),
+            // training_strt_date: Yup.date()
+            //     .required("Training End Date is required")
+            //     .typeError("Invalid date format"),
+            // training_end_date: Yup.date()
+            //     .required("Training End Date is required")
+            //     .typeError("Invalid date format"),
         });
 
 
@@ -498,6 +522,7 @@ export default {
        
         editbutton(id) {
             console.log(id);
+            // this.value.emp = item.employee_name;
 
 
             this.axios
@@ -534,31 +559,25 @@ export default {
         },
         viewDetails(id,item) {
             console.log(id);
-            // <!-- training: {
-            //     employee_id: "",
-            //     training_center_name: "",
-            //     training_name: "",
-            //     training_score: "",
-            //     training_feedback: "",
-            //     training_strt_date: "",
-            //     training_end_date: "",
-            // } -->
             this.axios
                 .get(this.backend_url + 'specificUserTraining/' + id)
                 .then((response) => {
-                    this.trainingRecordById = response.data.data;
-                    console.log(this.trainingRecordById);
-                    this.training.id = id;
-                    this.training.employee_id = this.trainingRecordById.employee_id;
-                    this.training.employee_name = item.employee_name;
-                    this.training.training_center_name = this.trainingRecordById.training_center_name;
-                    this.training.training_name = this.trainingRecordById.training_name;
-                    this.training.training_score = this.trainingRecordById.training_score;
-                    this.training.training_feedback = this.trainingRecordById.training_feedback;
-                    this.training.training_strt_date = this.trainingRecordById.training_strt_date;
-                    this.training.training_end_date = this.trainingRecordById.training_end_date;
-                    this.training.description = this.trainingRecordById.description;
+                    console.log(response.data.data);
+                    this.transferRecordById = response.data.data;
+                    console.log("transformer" + this.transferRecordById);
+                    id
 
+
+
+                    this.training.id = id;
+                    this.training.employee_name = item.employee_name;
+                    this.training.training_center_name = this.transferRecordById.training_center_name;
+                    this.training.training_end_date = this.transferRecordById.training_end_date;
+                    this.training.training_feedback = this.transferRecordById.training_feedback;
+                    this.training.training_name = this.transferRecordById.training_name;
+                    this.training.training_score = this.transferRecordById.training_score;
+                    this.training.training_strt_date = this.transferRecordById.training_strt_date;
+                    this.training.status = this.transferRecordById.status;
 
                 })
                 .catch((e) => {

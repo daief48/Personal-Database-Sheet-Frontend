@@ -511,122 +511,128 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table text-center" id="datatable">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Employee</th>
-                                    <th>Transfer Date</th>
-                                    <th>Transfer Order</th>
-                                    <th>To Department</th>
-                                    <th>From Department</th>
-                                    <th>To Designation</th>
-                                    <th>From Designation</th>
-                                    <th>Transfer Type</th>
-                                    <th>To Office</th>
-                                    <th>From office</th>
-                                    <th>Join Date</th>
-                                    <th>Status</th>
-                                    <th>Transfer Letter</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(item, index) in transferList" :key="index">
-                                    <td>{{ item.id }}</td>
-                                    <td>{{ item.employee_name }}</td>
-                                    <td>{{ item.transfer_date }}</td>
-                                    <td>{{ item.transfer_order }}</td>
-                                    <td>{{ item.to_department }}</td>
-                                    <td>{{ item.from_department }}</td>
-                                    <td>{{ item.to_designation }}</td>
-                                    <td>{{ item.from_designation }}</td>
-                                    <td>{{ item.t_type }}</td>
-                                    <td>{{ item.to_office }}</td>
-                                    <td>{{ item.from_office }}</td>
-                                    <td>{{ item.join_date }}</td>
-                                    <td>
-                                        <p v-if="item.status == 1" class="text-success font-weight-bold"> Verified</p>
-                                        <p v-else-if="item.status == 2" class="text-danger font-weight-bold"> Cancel</p>
-                                        <p v-else class="text-warning font-weight-bold">Pending</p>
-                                    </td>
-                                    <td>
-                                        <a :href="'http://localhost/pds-backend/public/transferLetters/' + item.transfer_letter"
-                                            download="transfer_letter.pdf" class="btn btn-success"
-                                            target="blank">Download</a>
-                                    </td>
-                                    <td style="width: 185px;">
-                                        <div v-if="item.status === 0">
-                                            <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
-                                                data-target="#exampleModal2">
-                                                <i class="fa fa-eye"
-                                                    style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
+                        <div class="table-responsive">
+                            <table class="table text-center" id="datatable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Employee</th>
+                                        <th>Transfer Date</th>
+                                        <th>Transfer Order</th>
+                                        <th>To Department</th>
+                                        <th>From Department</th>
+                                        <th>To Designation</th>
+                                        <th>From Designation</th>
+                                        <th>Transfer Type</th>
+                                        <th>To Office</th>
+                                        <th>From office</th>
+                                        <th>Join Date</th>
+                                        <th>Status</th>
+                                        <th>Transfer Letter</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(item, index) in transferList" :key="index">
+                                        <td>{{ item.id }}</td>
+                                        <td>{{ item.employee_name }}</td>
+                                        <td>{{ item.transfer_date }}</td>
+                                        <td>{{ item.transfer_order }}</td>
+                                        <td>{{ item.to_department }}</td>
+                                        <td>{{ item.from_department }}</td>
+                                        <td>{{ item.to_designation }}</td>
+                                        <td>{{ item.from_designation }}</td>
+                                        <td>{{ item.t_type }}</td>
+                                        <td>{{ item.to_office }}</td>
+                                        <td>{{ item.from_office }}</td>
+                                        <td>{{ item.join_date }}</td>
+                                        <td>
+                                            <p v-if="item.status == 1" class="text-success font-weight-bold"> Verified</p>
+                                            <p v-else-if="item.status == 2" class="text-danger font-weight-bold"> Cancel</p>
+                                            <p v-else class="text-warning font-weight-bold">Pending</p>
+                                        </td>
+                                        <td>
+                                            <a :href="'http://localhost/pds-backend/public/transferLetters/' + item.transfer_letter"
+                                                download="transfer_letter.pdf" class="btn btn-success"
+                                                target="blank">Download</a>
+                                        </td>
+                                        <td style="width: 185px;">
+                                            <div v-if="item.status === 0">
+                                                <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
+                                                    data-target="#exampleModal2">
+                                                    <i class="fa fa-eye"
+                                                        style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
 
-                                            <a @click="deletebutton(item.id)" class="mr-2">
-                                                <i class="fa fa-times"
-                                                    style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
+                                                <a @click="deletebutton(item.id)" class="mr-2">
+                                                    <i class="fa fa-times"
+                                                        style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
 
-                                            <a @click="activestatus(item.id)" class="mr-2">
-                                                <i class="fa fa-check"
-                                                    style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
-                                            <i class="fas fa-edit"
-                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                data-toggle="modal" data-target="#exampleModal1"
-                                                @click="editbutton(item.id, item)"></i> <!-- Corrected edit icon class -->
-                                            <i class="fa-solid fa-trash ml-1"
-                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                @click="deleterecord(item.id)"></i>
-                                        </div>
+                                                <a @click="activestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-check"
+                                                        style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id, item)"></i>
+                                                <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deleterecord(item.id)"></i>
+                                            </div>
 
-                                        <div v-else-if="item.status === 1">
-                                            <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
-                                                data-target="#exampleModal2">
-                                                <i class="fa fa-eye"
-                                                    style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
+                                            <div v-else-if="item.status === 1">
+                                                <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
+                                                    data-target="#exampleModal2">
+                                                    <i class="fa fa-eye"
+                                                        style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
 
-                                            <a @click="inactivestatus(item.id)" class="mr-2">
-                                                <i class="fa fa-times"
-                                                    style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
-                                            <i class="fas fa-edit"
-                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                data-toggle="modal" data-target="#exampleModal1"
-                                                @click="editbutton(item.id, item)"></i> <!-- Corrected edit icon class -->
-                                            <i class="fa-solid fa-trash ml-1"
-                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                @click="deleterecord(item.id)"></i>
-                                        </div>
+                                                <a @click="inactivestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-times"
+                                                        style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id, item)"></i>
+                                                <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deleterecord(item.id)"></i>
+                                            </div>
 
-                                        <div v-else-if="item.status === 2">
-                                            <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
-                                                data-target="#exampleModal2">
-                                                <i class="fa fa-eye"
-                                                    style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
+                                            <div v-else-if="item.status === 2">
+                                                <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
+                                                    data-target="#exampleModal2">
+                                                    <i class="fa fa-eye"
+                                                        style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
 
-                                            <a @click="activestatus(item.id)" class="mr-2">
-                                                <i class="fa fa-check"
-                                                    style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
-                                            </a>
-                                            <i class="fas fa-edit"
-                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                data-toggle="modal" data-target="#exampleModal1"
-                                                @click="editbutton(item.id, item)"></i> <!-- Corrected edit icon class -->
-                                            <i class="fa-solid fa-trash ml-1"
-                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                @click="deleterecord(item.id)"></i>
-                                        </div>
+                                                <a @click="activestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-check"
+                                                        style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id, item)"></i>
+                                                <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deleterecord(item.id)"></i>
+                                            </div>
 
-                                    </td>
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -807,24 +813,7 @@ export default {
         },
         clear() {
             console.log("hi");
-            this.tansfer.id = "";
-            this.tansfer.employee_name = "";
-            this.tansfer.employee_id = "";
-            this.tansfer.transfer_type = "";
-            this.tansfer.transfer_order = "";
-            this.tansfer.transfer_order_number = "";
-            this.tansfer.to_office = "";
-            this.tansfer.from_office = "";
-            this.tansfer.to_designation = "";
-            this.tansfer.from_designation = "";
-            this.tansfer.transfer_date = "";
-            this.tansfer.join_date = "";
-            this.tansfer.transfer_letter = "";
-            this.tansfer.to_department = "";
-            this.tansfer.from_department = "";
-
-
-
+      
             this.$refs.form.resetForm();
         },
         deleterecord(id) {

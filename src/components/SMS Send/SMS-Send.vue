@@ -249,6 +249,9 @@ export default {
 /* .g-4, .gx-4 {
     --bs-gutter-x: 4.5rem;
 } */
+#exampleFormControlTextarea1::placeholder {
+        color: rgb(128, 119, 119); /* Change this to the desired color */
+    }
 textarea.form-control {
     min-height: calc(17.5em + .75rem + calc(var(--bs-border-width) * 2));
 }
