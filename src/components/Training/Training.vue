@@ -225,16 +225,9 @@
 
                                                     </div>
                                                 </div>
-
-
-
-
                                             </div>
 
                                             <div class="col-4">
-
-                                                
-
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Training Score</label>
                                                     <Field type="number" class="form-control" id="exampleInputEmail1"
@@ -243,11 +236,7 @@
                                                         :class="{ 'is-invalid': errors.training_score }"
                                                         name="training_score" />
                                                     <div class="invalid-feedback">{{ errors.training_score }}</div>
-
-
                                                 </div>
-
-
 
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Training Feedback</label>

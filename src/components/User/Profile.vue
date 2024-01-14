@@ -30,6 +30,15 @@
                 <a class="nav-link" id="pills-emergency-contact" data-toggle="pill" href="#emergency-contact" role="tab"
                   aria-controls="pills-emergency-contact" aria-selected="false">Emergrncy Contact</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-freedom-fighter" data-toggle="pill" href="#freedom-fighter" role="tab"
+                  aria-controls="pills-freedom-fighter" aria-selected="false">Freedom Fighter</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-documents" data-toggle="pill" href="#documents" role="tab"
+                  aria-controls="pills-documents" aria-selected="false">Add Documents</a>
+              </li>
+
             </ul>
             <div class="tab-content" id="pills-tabContent">
               <div class="tab-pane fade show active p-2" id="basic-info" role="tabpanel"
@@ -44,16 +53,12 @@
                           <td>{{ basicInfo.name }}</td>
                         </tr>
                         <tr>
-                          <td><strong>Mobile Number:</strong></td>
-                          <td>{{ basicInfo.mobileNumber }}</td>
-                        </tr>
-                        <tr>
-                          <td><strong>Email:</strong></td>
-                          <td>{{ basicInfo.email }}</td>
-                        </tr>
-                        <tr>
                           <td><strong>Designation:</strong></td>
                           <td>{{ basicInfo.designation }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Department Name:</strong></td>
+                          <td>{{ basicInfo.department }}</td>
                         </tr>
                         <tr>
                           <td><strong>Gender:</strong></td>
@@ -62,6 +67,14 @@
                         <tr>
                           <td><strong>Date of Birth:</strong></td>
                           <td>{{ basicInfo.date_of_birth }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Mobile Number:</strong></td>
+                          <td>{{ basicInfo.mobileNumber }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Email:</strong></td>
+                          <td>{{ basicInfo.email }}</td>
                         </tr>
                         <tr>
                           <td><strong>Blood Group:</strong></td>
@@ -176,6 +189,11 @@
                     <table class="table table-borderless d-flex">
                       <tbody>
                         <tr>
+                          <td><strong>Office Name:</strong></td>
+                          <td>{{ jobs.office_name }}</td>
+                        </tr>
+
+                        <tr>
                           <td><strong>Department Name:</strong></td>
                           <td>{{ jobs.department }}</td>
                         </tr>
@@ -189,6 +207,10 @@
                   <div class="col-md-6">
                     <table class="table table-borderless d-flex">
                       <tbody>
+                        <tr>
+                          <td><strong>Grade:</strong></td>
+                          <td>{{ jobs.job_grade_name }}</td>
+                        </tr>
                         <tr>
                           <td><strong>Joining Date:</strong></td>
                           <td>{{ jobs.joining_date }}</td>
@@ -229,8 +251,8 @@
                                     autocomplete="off" /></td>
                               </tr>
                               <tr>
-                                <td><strong>District:</strong></td>
-                                <td><input type="text" v-model="education.district" class="form-control"
+                                <td><strong>Board:</strong></td>
+                                <td><input type="text" v-model="education.board" class="form-control"
                                     autocomplete="off" /></td>
                               </tr>
                               <tr>
@@ -245,17 +267,17 @@
                           <table class="table table-borderless d-flex">
                             <tbody>
                               <tr>
-                                <td><strong>Upazila</strong></td>
-                                <td><input type="text" v-model="education.upazila" class="form-control"
+                                <td><strong>Group</strong></td>
+                                <td><input type="number" v-model="education.group" class="form-control"
                                     autocomplete="off" /></td>
                               </tr>
                               <tr>
                                 <td><strong>Passing Year:</strong></td>
-                                <td><input type="text" v-model="education.passing_year" class="form-control"
+                                <td><input type="date" v-model="education.passing_year" class="form-control"
                                     autocomplete="off" /></td>
                               </tr>
                               <tr>
-                                <td><strong>Grad</strong></td>
+                                <td><strong>Grade</strong></td>
                                 <td><input type="text" v-model="education.grade" class="form-control"
                                     autocomplete="off" /></td>
                               </tr>
@@ -308,6 +330,7 @@
                 <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal"
                   data-target="#famillyInfoModal">Edit Info</button>
               </div>
+
               <div class="tab-pane fade show" id="emergency-contact" role="tabpanel"
                 aria-labelledby="pills-emergency-contact">
                 <div class="row">
@@ -352,12 +375,102 @@
                   data-target="#emergencyContactModal">Edit Info</button>
               </div>
 
+              <div class="tab-pane fade show" id="freedom-fighter" role="tabpanel"
+                aria-labelledby="pills-freedom-fighter">
+                <div class="row" v-if="freedomFighter.freedom_fighter_num">
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <!-- freedomFighter: {
+                      freedom_fighter_num: "",
+                      fighting_divi: "",
+                      Sector: ""
+                      }, -->
+                      <tbody>
+                        <tr>
+                          <td><strong>Freedom Fighter Number:</strong></td>
+                          <td>{{ freedomFighter.freedom_fighter_num }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Freedom Fighter Division:</strong></td>
+                          <td>{{ freedomFighter.fighting_divi }}</td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-md-6">
+                    <table class="table table-borderless d-flex">
+                      <tbody>
+                        <tr>
+                          <td><strong>Freedom Fighter Sector:</strong></td>
+                          <td>{{ freedomFighter.Sector }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div>
+
+                </div>
+                <!-- <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal"
+                  data-target="#freedomFighterContactModal">Edit Info</button> -->
+              </div>
+
+              <div class="tab-pane fade show" id="documents" role="tabpanel" aria-labelledby="pills-documents">
+                <div class="row">
+                  <div class="col-12 mt-3 d-flex justify-content-end">
+                    <button class="btn btn-primary" @click="addField">
+                      Add Documents
+                    </button>
+                  </div>
+                  <div class="container m-0 mb-2 ">
+                    <!-- {{ document }} -->
+                    <div v-for="(document, index) in document" :key="index">
+                      <!-- {{index}} -->
+                      <div class="d-flex flex-row p-3 card">
+                        <div class="w-50">
+                          <div class="mt-3 p-3 border">
+                            <input class="form-control" v-model="document.document_name" placeholder="Document Name">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="mt-3 p-3 border d-flex flex-column align-items-center row">
+                            <!-- Show document_file only if it exists -->
+                            <span v-if="document.document_file" class="badge badge-secondary">{{ document.document_file
+                            }}</span>
+
+                            <!-- Input for file selection with Bootstrap styles -->
+                            <div class="custom-file mt-2">
+                              <input type="file" class="custom-file-input" id="fileInput"
+                                @change="handleFileChange($event, index)">
+                              <label class="custom-file-label" for="fileInput">Choose file</label>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="w-25 d-flex justify-content-center align-items-center">
+                          <button class="btn btn-danger mt-2" @click="deleteField(index)">
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-outline-primary float-right" @click="saveProfile()">Save</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
     </div>
+
 
     <!-- Modal Start -->
     <div class="modal" id="basicInfoModal">
@@ -382,14 +495,6 @@
                       <td><input type="text" class="form-control" v-model="basicInfo.name"></td>
                     </tr>
                     <tr>
-                      <td><strong>Mobile Number:</strong></td>
-                      <td><input type="text" class="form-control" v-model="basicInfo.mobileNumber"></td>
-                    </tr>
-                    <tr>
-                      <td><strong>Email:</strong></td>
-                      <td><input type="text" class="form-control" v-model="basicInfo.email"></td>
-                    </tr>
-                    <tr>
                       <td><strong>Designation:</strong></td>
                       <td>
                         <select v-model="basicInfo.designation_id" class="form-control">
@@ -399,10 +504,21 @@
                       </td>
                     </tr>
                     <tr>
+                      <td><strong>Department Name:</strong></td>
+                      <td>
+                        <select v-model="basicInfo.department_id" class="form-control">
+                          <option :value="department.id" v-for="department in departments" :key="department.id">{{
+                            department.dept_name }}</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
                       <td><strong>Gender:</strong></td>
                       <td>
-                        <input type="text" class="form-control" v-model="basicInfo.gender">
-
+                        <select v-model="basicInfo.gender" class="form-control">
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
                       </td>
                     </tr>
                     <tr>
@@ -412,9 +528,27 @@
                       </td>
                     </tr>
                     <tr>
+                      <td><strong>Mobile Number:</strong></td>
+                      <td><input type="text" class="form-control" v-model="basicInfo.mobileNumber"></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Email:</strong></td>
+                      <td><input type="text" class="form-control" v-model="basicInfo.email"></td>
+                    </tr>
+                    <tr>
                       <td><strong>Blood Group:</strong></td>
                       <td>
-                        <input type="text" class="form-control" v-model="basicInfo.blood_group">
+                        <select v-model="basicInfo.blood_group" class="form-control">
+                          <option value="" disabled>Select Blood Group</option>
+                          <option value="A+">A+</option>
+                          <option value="A-">A-</option>
+                          <option value="B+">B+</option>
+                          <option value="B-">B-</option>
+                          <option value="AB+">AB+</option>
+                          <option value="AB-">AB-</option>
+                          <option value="O+">O+</option>
+                          <option value="O-">O-</option>
+                        </select>
                       </td>
                     </tr>
                     <tr>
@@ -469,8 +603,14 @@
                       <td><input type="text" v-model="addressDetails.present_addr_area" class="form-control"></td>
                     </tr>
                     <tr>
+                      <!-- {{  present_district}} -->
                       <td><strong>District</strong></td>
-                      <td><input type="text" v-model="addressDetails.present_addr_district" class="form-control"></td>
+                      <td>
+                        <multiselect v-model="present_district" :options="district"
+                          :custom-label="nameWithPresentDistrict" class="form-control p-0" :close-on-select="true"
+                          placeholder="Select one" label="name" track-by="id">
+                        </multiselect>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -484,7 +624,12 @@
                     </tr>
                     <tr>
                       <td><strong>Upozila:</strong></td>
-                      <td><input type="text" v-model="addressDetails.present_addr_upazila" class="form-control"></td>
+                      <td>
+                        <multiselect v-model="present_addr_upazila" :options="upozila"
+                          :custom-label="nameWithPresentUpazila" class="form-control p-0" :close-on-select="true"
+                          placeholder="Select one" label="name" track-by="id">
+                        </multiselect>
+                      </td>
                     </tr>
                     <tr>
                       <td><strong>Post Code</strong></td>
@@ -511,7 +656,12 @@
                     </tr>
                     <tr>
                       <td><strong>District</strong></td>
-                      <td><input type="text" v-model="addressDetails.permanent_addr_district" class="form-control"></td>
+                      <td>
+                        <multiselect v-model="permanent_addr_district" :options="district"
+                          :custom-label="nameWithPresentDistrict" class="form-control p-0" :close-on-select="true"
+                          placeholder="Select one" label="name" track-by="id">
+                        </multiselect>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -525,7 +675,13 @@
                     </tr>
                     <tr>
                       <td><strong>Upozila:</strong></td>
-                      <td><input type="text" v-model="addressDetails.permanent_addr_upazila" class="form-control"></td>
+                      <td>
+                        <multiselect v-model="permanent_addr_upazila" :options="upozila"
+                          :custom-label="nameWithPresentUpazila" class="form-control p-0" :close-on-select="true"
+                          placeholder="Select one" label="name" track-by="id">
+                        </multiselect>
+
+                      </td>
                     </tr>
                     <tr>
                       <td><strong>Post Code</strong></td>
@@ -561,9 +717,18 @@
                 <table class="table table-borderless d-flex">
                   <tbody>
                     <tr>
+                      <td><strong>Office Name:</strong></td>
+                      <td>
+                        <select v-model="jobs.office" class="form-control">
+                          <option :value="office.id" v-for="office in office" :key="office.id">{{
+                            office.office_name }}</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
                       <td><strong>Department Name:</strong></td>
                       <td>
-                        <select v-model="jobs.department_id" class="form-control">
+                        <select v-model="basicInfo.department_id" class="form-control">
                           <option :value="department.id" v-for="department in departments" :key="department.id">{{
                             department.dept_name }}</option>
                         </select>
@@ -572,7 +737,7 @@
                     <tr>
                       <td><strong>Designation:</strong></td>
                       <td>
-                        <select v-model="jobs.designation_id" class="form-control">
+                        <select v-model="basicInfo.designation_id" class="form-control">
                           <option :value="designation.id" v-for="designation in designations" :key="designation.id">{{
                             designation.designation_name }}</option>
                         </select>
@@ -584,6 +749,16 @@
               <div class="col-md-6">
                 <table class="table table-borderless d-flex">
                   <tbody>
+                    <tr>
+
+                      <td><strong>Grade:</strong></td>
+                      <td>
+                        <select v-model="jobs.job_grade" class="form-control">
+                          <option :value="grade.id" v-for="grade in job_grade" :key="grade.id">{{
+                            grade.job_grade }}</option>
+                        </select>
+                      </td>
+                    </tr>
                     <tr>
                       <td><strong>Joining Date:</strong></td>
                       <td><input type="date" v-model="jobs.joining_date" class="form-control"></td>
@@ -700,7 +875,21 @@
                   <tbody>
                     <tr>
                       <td><strong>Relation :</strong></td>
-                      <td><input type="text" v-model="emergency_contact.emergency_relation" class="form-control"></td>
+                      <td>
+                        <select v-model="emergency_contact.emergency_relation" class="form-control"
+                          name="emergency_relation">
+                          <option value="" disabled>Select Relationship</option>
+                          <option value="Father">Father</option>
+                          <option value="Mother">Mother</option>
+                          <option value="Brother">Brother</option>
+                          <option value="Sister">Sister</option>
+                          <option value="Son">Son</option>
+                          <option value="Daughter">Daughter</option>
+                          <option value="Wife">Wife</option>
+                          <option value="Other">Other</option>
+                        </select>
+
+                      </td>
                     </tr>
                     <tr>
                       <td><strong>Email:</strong></td>
@@ -724,6 +913,61 @@
         </div>
       </div>
     </div>
+    <div class="modal" id="freedomFighterContactModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header p-0">
+            <h4 class="modal-title">Freedom Fighter</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="row">
+              <form class="form w-100" action="#">
+
+                <div v-show="check" class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="freedomFighterNum" class="form-label">Freedom Fighter Number:</label>
+                      <input type="number" v-model="freedomFighter.freedom_fighter_num" class="form-control"
+                        id="freedomFighterNum" name="freedom_fighter_num" />
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="freedomFighterSector" class="form-label">Freedom Fighter Sector:</label>
+                      <input type="number" v-model="freedomFighter.Sector" class="form-control" id="freedomFighterSector"
+                        name="Sector" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="fightingDivi" class="form-label">Freedom Fighter Division:</label>
+                      <input type="text" v-model="freedomFighter.fighting_divi" class="form-control" id="fighting_divi"
+                        name="fighting_divi" />
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-success" @click="saveFreedom()">Save
+              Profile</button>
+            <button type="button" class="btn btn-outline-danger ml-2 closeModal" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
 
 
     <!-- Modal End -->
@@ -744,11 +988,13 @@
 import myUpload from 'vue-image-crop-upload';
 import $ from 'jquery';
 import { VueDraggableNext } from 'vue-draggable-next';
+const address = require('@bangladeshi/bangladesh-address');
+import Multiselect from 'vue-multiselect';
 
 export default {
   components: {
     myUpload,
-    draggable: VueDraggableNext,
+    draggable: VueDraggableNext, Multiselect
   },
 
   data() {
@@ -759,8 +1005,7 @@ export default {
       url: this.backendUrl + "/api/users",
       users: {},
       testUrl: 'http://localhost/pds-backend/api/users/search?search=&page=1',
-
-      //image cropper
+      divisions: [], district: [], upozila: [],
       show: false,
       params: {
         token: '123456798',
@@ -799,10 +1044,12 @@ export default {
         name: '',
         mobileNumber: '',
         gender: '',
+        department: '',
         date_of_birth: '',
         email: '',
         designation: '',
         designation_id: '',
+        department_id: '',
         image: '',
         blood_group: "",
         nid_number: "",
@@ -832,10 +1079,13 @@ export default {
         designation_id: '',
         joining_date: '',
         job_location: '',
+        office: "",
+        job_grade: "",
+        job_grade_name: ""
       },
 
       educationArr: [],
-
+      emp_id:"",
       familly_info: {
         father_name: '',
         mother_name: '',
@@ -849,13 +1099,75 @@ export default {
         emergency_email: '',
         emergency_addr: '',
         emergency_district: '',
-      }
+      },
+      present_district: { district: '' },
+      present_addr_upazila: { upozila: '' },
+      permanent_addr_district: { district: '' },
+      permanent_addr_upazila: { upozila: '' },
+      office: "",
+      job_grade: "",
+      freedomFighter: {
+        id: '',
+        freedom_fighter_num: "",
+        fighting_divi: "",
+        Sector: "",
+        employee_id: ""
+      },
+      document:
+        [{
+          document_name: "",
+          document_file: ""
+
+        }]
+      ,
     };
   },
 
   computed: {},
 
   methods: {
+    deleteField(index) {
+      this.document.splice(index, 1);
+    },
+    handleFileChange(event, index) {
+      const selectedFile = event.target.files[0];
+
+      if (selectedFile) {
+        // Extract and update the document_name property with only the file name
+        const fileName = selectedFile.name;
+        this.document[index].document_file = fileName;
+      }
+    },
+
+    addField() {
+      this.document.push({ document_name: "", document_file: "" });
+    },
+    saveFreedom() {
+      console.log(this.freedomFighter.id);
+
+      // Send a PUT request to update freedom fighter
+      this.axios
+        .put(this.backend_url + "updateFreedomFighter/" + this.freedomFighter.id, this.freedomFighter)
+        .then((res) => {
+          console.log(res.data);
+          this.$toast.success("Freedom Fighter updated successfully.", {
+            position: "top-right",
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+          this.$toast.error("Failed to update Freedom Fighter.", {
+            position: "top-right",
+          });
+        });
+    },
+
+    nameWithPresentDistrict({ district }) {
+      return `${district}`
+    },
+    nameWithPresentUpazila({ upozila }) {
+      return `${upozila}`
+    },
     check() {
       this.axios
         .get(this.testUrl)
@@ -897,12 +1209,16 @@ export default {
         .get(this.backend_url + 'user/getprofile/' + this.storageData.id)
         .then((res) => {
           var profileData = res.data.data;
-          console.log(profileData);
+          console.log(profileData.document);
 
+          this.emp_id = profileData.id
           this.basicInfo.name = profileData.name;
+          this.document = profileData.document === null ? [] : JSON.parse(profileData.document);
           this.basicInfo.mobileNumber = profileData.mobile_number;
           this.basicInfo.email = profileData.email;
           this.basicInfo.designation = profileData.designation;
+          this.basicInfo.department = profileData.department;
+          this.basicInfo.department_id = profileData.department_id;
           this.basicInfo.gender = profileData.gender;
           this.basicInfo.date_of_birth = profileData.date_of_birth;
           this.basicInfo.blood_group = profileData.blood_group;
@@ -916,6 +1232,10 @@ export default {
           this.addressDetails.present_addr_area = profileData.present_addr_area;
           this.addressDetails.present_addr_upazila = profileData.present_addr_upazila;
           this.addressDetails.present_addr_district = profileData.present_addr_district;
+          this.present_district.district = profileData.present_addr_district;
+          this.present_addr_upazila.upozila = profileData.present_addr_upazila;
+          this.permanent_addr_district.district = profileData.permanent_addr_district;
+          this.permanent_addr_upazila.upozila = profileData.permanent_addr_upazila;
           this.addressDetails.present_addr_postcode = profileData.present_addr_postcode;
           this.addressDetails.permanent_addr_houseno = profileData.permanent_addr_houseno;
           this.addressDetails.permanent_addr_roadno = profileData.permanent_addr_roadno;
@@ -930,6 +1250,10 @@ export default {
           this.jobs.designation = profileData.designation;
           this.jobs.job_location = profileData.job_location;
           this.jobs.joining_date = profileData.joining_date;
+          this.jobs.office = profileData.office;
+          this.jobs.office_name = profileData.office_name;
+          this.jobs.job_grade_name = profileData.job_grade_name;
+          this.jobs.job_grade = profileData.job_grade;
 
           this.educationArr = JSON.parse(profileData.education_history);
 
@@ -947,64 +1271,104 @@ export default {
         })
     },
 
-    saveProfile(type) {
+    getFreedomFighterInfo() {
+      this.axios
+        .get(this.backend_url + 'user/getprofile/' + this.storageData.id)
+        .then((res) => {
+          this.axios
+            .get(this.backend_url + 'getFreedomFighterByEmpId/' + res.data.data.id)
+            .then((res) => {
+              console.log("hi", res.data.data);
+              this.freedomFighter.id = res.data.data.id;
+              this.freedomFighter.freedom_fighter_num = res.data.data.freedom_fighter_num;
+              this.freedomFighter.fighting_divi = res.data.data.fighting_divi;
+              this.freedomFighter.Sector = res.data.data.Sector;
+              this.freedomFighter.employee_id = res.data.data.employee_id;
+            })
+        })
+    },
+    saveProfile() {
       let formData = new FormData;
+      console.log(this.storageData)
       formData.append('user_id', this.storageData.id);
-      if (type == 'basicInfo') {
-        formData.append('name', this.basicInfo.name);
-        formData.append('mobile_number', this.basicInfo.mobileNumber);
-        formData.append('email', this.basicInfo.email);
-        formData.append('designation', this.basicInfo.designation_id);
-        formData.append('gender', this.basicInfo.gender);
-        formData.append('date_of_birth', this.basicInfo.date_of_birth);
-        formData.append('blood_group', this.basicInfo.blood_group);
-        formData.append('nid_number', this.basicInfo.nid_number);
-        formData.append('passport_number', this.basicInfo.passport_number);
-        formData.append('image', this.basicInfo.image);
-      }
-      if (type == 'addressDetail') {
-        formData.append('present_addr_houseno', this.addressDetails.present_addr_houseno);
-        formData.append('present_addr_roadno', this.addressDetails.present_addr_roadno);
-        formData.append('present_addr_area', this.addressDetails.present_addr_area);
-        formData.append('present_addr_upazila', this.addressDetails.present_addr_upazila);
-        formData.append('present_addr_district', this.addressDetails.present_addr_district);
-        formData.append('present_addr_postcode', this.addressDetails.present_addr_postcode);
+      formData.append('employee_id', this.emp_id);
 
-        formData.append('permanent_addr_houseno', this.addressDetails.permanent_addr_houseno);
-        formData.append('permanent_addr_roadno', this.addressDetails.permanent_addr_roadno);
-        formData.append('permanent_addr_area', this.addressDetails.permanent_addr_area);
-        formData.append('permanent_addr_upazila', this.addressDetails.permanent_addr_upazila);
-        formData.append('permanent_addr_district', this.addressDetails.permanent_addr_district);
-        formData.append('permanent_addr_postcode', this.addressDetails.permanent_addr_postcode);
-      }
+      // if (type == 'basicInfo') {
+      formData.append('name', this.basicInfo.name);
+      formData.append('mobile_number', this.basicInfo.mobileNumber);
+      formData.append('email', this.basicInfo.email);
+      formData.append('designation', this.basicInfo.designation_id);
+      formData.append('department', this.basicInfo.department_id);
+      formData.append('gender', this.basicInfo.gender);
+      formData.append('date_of_birth', this.basicInfo.date_of_birth);
+      formData.append('blood_group', this.basicInfo.blood_group);
+      formData.append('nid_number', this.basicInfo.nid_number);
+      formData.append('passport_number', this.basicInfo.passport_number);
+      formData.append('image', this.basicInfo.image);
+      // }
+      // if (type == 'addressDetail') {
+      formData.append('present_addr_houseno', this.addressDetails.present_addr_houseno);
+      formData.append('present_addr_roadno', this.addressDetails.present_addr_roadno);
+      formData.append('present_addr_area', this.addressDetails.present_addr_area);
+      formData.append('present_addr_upazila', this.present_addr_upazila.upozila);
+      formData.append('present_addr_district', this.present_district.district);
+      formData.append('present_addr_postcode', this.addressDetails.present_addr_postcode);
 
-      if (type == 'jobs') {
+      formData.append('permanent_addr_houseno', this.addressDetails.permanent_addr_houseno);
+      formData.append('permanent_addr_roadno', this.addressDetails.permanent_addr_roadno);
+      formData.append('permanent_addr_area', this.addressDetails.permanent_addr_area);
+      formData.append('permanent_addr_upazila', this.permanent_addr_upazila.upozila);
+      formData.append('permanent_addr_district', this.permanent_addr_district.district);
+      formData.append('permanent_addr_postcode', this.addressDetails.permanent_addr_postcode);
+      // }
+
+      // if (type == 'jobs') {
+      if (this.jobs.department == null) {
         formData.append('department', this.jobs.department_id);
-        formData.append('designation', this.jobs.designation_id);
-        formData.append('joining_date', this.jobs.joining_date);
-        formData.append('job_location', this.jobs.job_location);
-      }
+      } else {
+        formData.append('department', this.basicInfo.department_id);
 
-      if (type == 'education_history') {
-        formData.append('education_history', JSON.stringify(this.educationArr));
       }
+      if (this.jobs.designation == null) {
+        formData.append('department', this.jobs.designation_id);
+        // delete this.jobs.designation;
+      } else {
+        formData.append('designation', this.basicInfo.designation_id);
 
-      if (type == 'familly_info') {
-        formData.append('father_name', this.familly_info.father_name);
-        formData.append('mother_name', this.familly_info.mother_name);
-        formData.append('spouse_name', this.familly_info.spouse_name);
-        formData.append('number_of_child', this.familly_info.number_of_child);
       }
+      formData.append('joining_date', this.jobs.joining_date);
+      formData.append('job_location', this.jobs.job_location);
+      formData.append('office', this.jobs.office);
+      formData.append('job_grade', this.jobs.job_grade);
+      // }
 
-      if (type == 'emergency_contact') {
-        formData.append('emergency_name', this.emergency_contact.emergency_name);
-        formData.append('emergency_relation', this.emergency_contact.emergency_relation);
-        formData.append('emergency_phn_number', this.emergency_contact.emergency_phn_number);
-        formData.append('emergency_email', this.emergency_contact.emergency_email);
-        formData.append('emergency_addr', this.emergency_contact.emergency_addr);
-        formData.append('emergency_district', this.emergency_contact.emergency_district);
-      }
+      // if (type == 'education_history') {
+      formData.append('education_history', JSON.stringify(this.educationArr));
+      // }/
 
+      // if (type == 'familly_info') {
+      formData.append('father_name', this.familly_info.father_name);
+      formData.append('mother_name', this.familly_info.mother_name);
+      formData.append('spouse_name', this.familly_info.spouse_name);
+      formData.append('number_of_child', this.familly_info.number_of_child);
+      // }
+
+      // if (type == 'emergency_contact') {
+      formData.append('emergency_name', this.emergency_contact.emergency_name);
+      formData.append('emergency_relation', this.emergency_contact.emergency_relation);
+      formData.append('emergency_phn_number', this.emergency_contact.emergency_phn_number);
+      formData.append('emergency_email', this.emergency_contact.emergency_email);
+      formData.append('emergency_addr', this.emergency_contact.emergency_addr);
+      formData.append('emergency_district', this.emergency_contact.emergency_district);
+      // }
+      formData.append(
+        "document",
+        JSON.stringify(this.document)
+      );
+
+      // this.$toast.success("Employee Updated successfully.", {
+      //   position: "top-right",
+      // });
 
       this.axios
         .post(this.backend_url + 'user/updateProfile', formData)
@@ -1012,7 +1376,7 @@ export default {
           console.log(res.data);
           this.getProfileInfo();
           $(".closeModal").trigger("click");
-          this.$toast.success("Profile saved successfully.", {
+          this.$toast.success("Employee Updated successfully.", {
             position: "top-right",
           });
 
@@ -1059,20 +1423,60 @@ export default {
       console.log('-------- upload fail --------');
       console.log(status);
       console.log('field: ' + field);
-    }
-
+    },
+    getOffice() {
+      this.axios
+        .get(this.backend_url + `getOfficeMgt`)
+        .then((response) => {
+          this.office = response.data.list;
+          // console.log(this.office);
+        })
+    },
+    getGrade() {
+      this.axios
+        .get(this.backend_url + `getGradeMgt`)
+        .then((response) => {
+          this.job_grade = response.data.list;
+          console.log(this.job_grade);
+        })
+    },
   },
 
   created() {
     this.getProfileInfo();
     this.getDepartmentList();
     this.getDesignationList();
+    this.getOffice();
+    this.getGrade();
+    this.getFreedomFighterInfo();
   },
 
   watch: {
 
   },
+  mounted() {
+    // Use the package methods
+    this.divisions = address.allDivision();
+    this.district = address.allDistict();
+    this.upozila = address.allUpazila();
+    console.log("Hi");
+    console.log(this.divisions);
+    this.district = this.district.map(item => {
+      return {
+        district: item
+      };
+    });
 
+    this.upozila = this.upozila.map(item => {
+      return {
+        upozila: item
+      }
+    })
+    console.log(this.district);
+
+    console.log(this.upozila);
+
+  },
 }
 
 
@@ -1170,4 +1574,5 @@ export default {
   cursor: grab;
   cursor: move;
   position: relative;
-}</style>
+}
+</style>

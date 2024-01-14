@@ -11,7 +11,7 @@
       </div>
     </a>
 
-    <div class="sidebar" style="padding: 0px 7px;height: 100%;width: 100%;background-color: #107ac0;opacity: .8;">
+    <div class="sidebar" style="padding: 0px 7px;height: 115vh;width: 100%;background-color: #107ac0;opacity: .8;">
       <nav class="mt-3">
 
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"

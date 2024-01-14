@@ -23,6 +23,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
+                  <!-- {{ tansfer }} -->
                   <Form @submit.prevent="saveTranfer" :validation-schema="schema" v-slot="{ errors, resetForm }"
                     ref="form">
                     <div>
@@ -216,6 +217,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
+                  <!-- {{ edittansfer }} -->
                   <Form @submit.prevent="EditTranfer" :validation-schema="schema" v-slot="{ errors }">
                     <div>
                       <div class="row">
@@ -378,10 +380,15 @@
                           <div class="mb-3">
                             <label for="formFileSm" class="form-label">Transfer Letter</label>
                             <div class="input-group">
+                              <a :href="'http://localhost/pds-backend/public/transferLetters/' + edittansfer.transfer_letter"
+                                download="transfer_letter.pdf" class="btn btn-secondary"
+                                target="_blank">{{ edittansfer.transfer_letter }}</a>
+
                               <input type="file" class="form-control" id="formFileSm" @change="edithandleFileChange"
                                 aria-describedby="inputGroupFileAddon03" aria-label="Upload">
                             </div>
                           </div>
+
 
 
                         </div>
@@ -451,6 +458,7 @@
                     <th>Employee</th>
                     <th>Transfer Date</th>
                     <th>Transfer Order</th>
+                    <th>Transfer Order Number</th>
                     <th>To Department</th>
                     <th>From Department</th>
                     <th>To Designation</th>
@@ -470,6 +478,7 @@
                     <td>{{ item.employee_name }}</td>
                     <td>{{ item.transfer_date }}</td>
                     <td>{{ item.transfer_order }}</td>
+                    <td>{{ item.transfer_order_number }}</td>
                     <td>{{ item.to_department }}</td>
                     <td>{{ item.from_department }}</td>
                     <td>{{ item.to_designation }}</td>
@@ -548,18 +557,18 @@ export default {
     const storageData = JSON.parse(localStorage.getItem('user'));
 
     const schema = Yup.object().shape({
+      // employee_id: Yup.string().required("Employee ID is required"),
       transfer_type: Yup.string().required("Transfer Type is required"),
-      to_department: Yup.string().required("To Department is required"),
-      from_department: Yup.string().required("From Department is required"),
-      transfer_date: Yup.date().required("Transfer Date is required").typeError("Invalid date format"),
+      // to_department: Yup.string().required("To Department is required"),
+      // from_department: Yup.string().required("From Department is required"),
+      // transfer_date: Yup.date().required("Transfer Date is required").typeError("Invalid date format"),
       transfer_order_number: Yup.string().required("Transfer Order Number is required"),
-      to_designation: Yup.string().required("To Designation is required"),
-      from_designation: Yup.string().required("From Designation is required"),
-      join_date: Yup.date().required("Join Date is required").typeError("Invalid date format"),
-      to_office: Yup.string().required("To Office is required"),
-      from_office: Yup.string().required("From Office is required"),
-      transfer_order: Yup.string().required("Transfer Order is required"),
-      transfer_letter: Yup.string().required("Transfer Letter is required"),
+      // to_designation: Yup.string().required("To Designation is required"),
+      // from_designation: Yup.string().required("From Designation is required"),
+      // join_date: Yup.date().required("Join Date is required").typeError("Invalid date format"),
+      // to_office: Yup.string().required("To Office is required"),
+      // from_office: Yup.string().required("From Office is required"),
+      // transfer_order: Yup.string().required("Transfer Order is required"),
     });
 
 
@@ -629,6 +638,7 @@ export default {
     edithandleFileChange(event) {
       const selectedFile = event.target.files[0];
       this.edittansfer.transfer_letter = selectedFile;
+      console.log(selectedFile);
     },
 
     editbutton(id) {
@@ -637,7 +647,7 @@ export default {
         .get(this.backend_url + 'specificUserTransferRecord/' + id)
         .then((response) => {
           this.transferRecordById = response.data.data;
-          console.log(this.transferRecordById);
+          console.log(this.transferRecordById.transfer_letter);
           this.edittansfer.id = id;
           this.edittansfer.employee_name = this.transferRecordById.employee_name;
           this.edittansfer.employee_id = this.transferRecordById.employee_id;
@@ -704,6 +714,7 @@ export default {
         .then((res) => {
           console.log(res.data.data);
           this.transferList1 = res.data.data;
+          console.log(this.transferList1);
           setTimeout(function () {
             $("#datatable").DataTable({
               "processing": true,
@@ -764,19 +775,21 @@ export default {
     saveTranfer() {
       let formData = new FormData;
 
-      formData.append('employee_id', this.tansfer.employee_id);
-      formData.append('transfer_type', this.tansfer.transfer_type);
-      formData.append('transfer_order', this.tansfer.transfer_order);
-      formData.append('transfer_order_number', this.tansfer.transfer_order_number);
-      formData.append('to_office', this.tansfer.to_office);
-      formData.append('from_office', this.tansfer.from_office);
-      formData.append('to_designation', this.tansfer.to_designation);
-      formData.append('from_designation', this.tansfer.from_designation);
-      formData.append('transfer_date', this.tansfer.transfer_date);
-      formData.append('join_date', this.tansfer.join_date);
-      formData.append('transfer_letter', this.tansfer.transfer_letter);
-      formData.append('to_department', this.tansfer.to_department);
-      formData.append('from_department', this.tansfer.from_department);
+      formData.append('employee_id', this.tansfer.employee_id !== undefined ? this.tansfer.employee_id : '');
+      formData.append('transfer_type', this.tansfer.transfer_type !== undefined ? this.tansfer.transfer_type : '');
+      formData.append('transfer_order', this.tansfer.transfer_order !== undefined ? this.tansfer.transfer_order : '');
+      formData.append('transfer_order_number', this.tansfer.transfer_order_number !== undefined ? this.tansfer.transfer_order_number : '');
+      formData.append('to_office', this.tansfer.to_office !== undefined ? this.tansfer.to_office : '');
+      formData.append('from_office', this.tansfer.from_office !== undefined ? this.tansfer.from_office : '');
+      formData.append('to_designation', this.tansfer.to_designation !== undefined ? this.tansfer.to_designation : '');
+      formData.append('from_designation', this.tansfer.from_designation !== undefined ? this.tansfer.from_designation : '');
+      formData.append('transfer_date', this.tansfer.transfer_date !== undefined ? this.tansfer.transfer_date : '');
+      formData.append('join_date', this.tansfer.join_date !== undefined ? this.tansfer.join_date : '');
+      formData.append('transfer_letter', this.tansfer.transfer_letter !== undefined ? this.tansfer.transfer_letter : '');
+      formData.append('to_department', this.tansfer.to_department !== undefined ? this.tansfer.to_department : '');
+      formData.append('from_department', this.tansfer.from_department !== undefined ? this.tansfer.from_department : '');
+
+
       try {
         // this.tansfer.employee_id = this.storageData.id;
         this.axios
@@ -802,19 +815,19 @@ export default {
     EditTranfer() {
       let formData = new FormData;
 
-      formData.append('employee_id', this.edittansfer.employee_id);
-      formData.append('transfer_type', this.edittansfer.transfer_type);
-      formData.append('transfer_order', this.edittansfer.transfer_order);
-      formData.append('transfer_order_number', this.edittansfer.transfer_order_number);
-      formData.append('to_office', this.edittansfer.to_office);
-      formData.append('from_office', this.edittansfer.from_office);
-      formData.append('to_designation', this.edittansfer.to_designation);
-      formData.append('from_designation', this.edittansfer.from_designation);
-      formData.append('transfer_date', this.edittansfer.transfer_date);
-      formData.append('join_date', this.edittansfer.join_date);
-      formData.append('transfer_letter', this.edittansfer.transfer_letter);
-      formData.append('to_department', this.edittansfer.to_department);
-      formData.append('from_department', this.edittansfer.from_department);
+      formData.append('employee_id', this.edittansfer.employee_id !== null ? this.edittansfer.employee_id : '');
+      formData.append('transfer_type', this.edittansfer.transfer_type !== null ? this.edittansfer.transfer_type : '');
+      formData.append('transfer_order', this.edittansfer.transfer_order !== null ? this.edittansfer.transfer_order : '');
+      formData.append('transfer_order_number', this.edittansfer.transfer_order_number !== null ? this.edittansfer.transfer_order_number : '');
+      formData.append('to_office', this.edittansfer.to_office !== null ? this.edittansfer.to_office : '');
+      formData.append('from_office', this.edittansfer.from_office !== null ? this.edittansfer.from_office : '');
+      formData.append('to_designation', this.edittansfer.to_designation !== null ? this.edittansfer.to_designation : '');
+      formData.append('from_designation', this.edittansfer.from_designation !== null ? this.edittansfer.from_designation : '');
+      formData.append('transfer_date', this.edittansfer.transfer_date !== null ? this.edittansfer.transfer_date : '');
+      formData.append('join_date', this.edittansfer.join_date !== null ? this.edittansfer.join_date : '');
+      formData.append('transfer_letter', this.edittansfer.transfer_letter !== null ? this.edittansfer.transfer_letter : '');
+      formData.append('to_department', this.edittansfer.to_department !== null ? this.edittansfer.to_department : '');
+      formData.append('from_department', this.edittansfer.from_department !== null ? this.edittansfer.from_department : '');
 
       try {
         this.axios
