@@ -924,17 +924,17 @@
 
           <transition name="slide-fade">
             <section v-show="step === 8">
-
+              <h3 class="text-center text-dark mb-4">
+                <span class="s-title">Documents</span>
+              </h3>
+              <div class="col-12 mt-3 d-flex justify-content-end">
+                <button class="btn btn-primary" @click="addField">
+                  Add Documents
+                </button>
+              </div>
               <Form class="form" action="#" @submit="saveProfile(); saveFreedom()"
                 :validation-schema="schema_emergency_contact">
-                <h3 class="text-center text-dark mb-4">
-                  <span class="s-title">Documents</span>
-                </h3>
-                <div class="col-12 mt-3 d-flex justify-content-end">
-                  <button class="btn btn-primary" @click="addField">
-                    Add Documents
-                  </button>
-                </div>
+
                 <div class="container m-0 mb-2 ">
                   <!-- {{ document }} -->
                   <div v-for="(document, index) in document" :key="index">
@@ -1337,17 +1337,16 @@ export default {
       this.$emit("cancel"); // Emit the 'cancel' event
     },
 
-    saveFreedom()
-    {
-    // another request 
-    this.axios
+    saveFreedom() {
+      // another request 
+      this.axios
         .post(this.backend_url + "addFreedomFighter", this.freedomFighter)
         .then((res) => {
           console.log(res.data);
           this.$toast.success("Employee Updated successfully.", {
             position: "top-right",
           });
-          
+
         })
         .error((res) => {
           this.$toast.error(res.message, {
@@ -1471,7 +1470,7 @@ export default {
       console.log(formData);
 
       console.log(this.freedomFighter);
-  
+
       // this.saveFreedom();
 
       this.axios

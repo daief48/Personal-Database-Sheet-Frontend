@@ -17,7 +17,7 @@
                             <div class="modal-content" style="width: 82vw;left: -457px;top: 164px;">
                                 <div class="modal-header">
                                     <h5 class="modal-title text-center" id="exampleModalLabel">Add
-                                        Transfer Type</h5>
+                                        Grade Type</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -27,7 +27,7 @@
                                         v-slot="{ errors, resetForm }" ref="form">
                                         <div>
                                             <div class="row">
-                                                {{ gradeType }}
+                                                <!-- {{ gradeType }} -->
                                                 <div class="col-4 w-100">
 
                                                     <div data-v-b1d61d26="" class="d-flex"

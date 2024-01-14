@@ -28,7 +28,7 @@
                                     v-slot="{ errors, resetForm }" ref="form" >
                                         <div>
                                             <div class="row">
-                                                {{ trainingType }}
+                                                <!-- {{ trainingType }} -->
                                                 <div class="col-4 w-100">
 
                                                     <div data-v-b1d61d26="" class="d-flex"

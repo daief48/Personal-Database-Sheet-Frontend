@@ -28,7 +28,7 @@
                                     v-slot="{ errors, resetForm }" ref="form" >
                                         <div>
                                             <div class="row">
-                                                {{ trainingType }}
+                                                <!-- {{ trainingType }} -->
                                                 <div class="col-4 w-100">
 
                                                     <div data-v-b1d61d26="" class="d-flex"
@@ -36,7 +36,7 @@
                                                         <div class="form-group mr-2 w-50">
                                                             <label for="exampleFormControlSelect1"> Transfer Name</label>
                                                             <Field type="text" class="form-control" id="exampleInputEmail1"
-                                                                aria-describedby="emailHelp" placeholder="trainingType Name"
+                                                                aria-describedby="emailHelp" placeholder="Transfer Name"
                                                                 v-model="trainingType.title" name="title"
                                                                 :class="{ 'is-invalid': errors.title }"/>
 
@@ -188,7 +188,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Training Name</th>
+                                    <th>Transfer Name</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

@@ -5,7 +5,8 @@
             <div class="card-body">
                 <div style="display: flex;justify-content: space-between;">
                     <h3>All Acr History</h3>
-                    <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal">+ Add
+                    <a href="/" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#exampleModal"
+                        @click="clear()">+ Add
                         Acr</a>
 
                     <!-- hidden model  -->
@@ -22,7 +23,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    {{ Acr }}
+                                    <!-- {{ Acr }} -->
                                     <Form @submit.prevent="saveTranfer" :validation-schema="schema"
                                         v-slot="{ errors, resetForm }" ref="form">
                                         <div class="row">
@@ -173,8 +174,8 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    {{ editAcr }}
-                                    <Form @submit.prevent="EditTranfer" :validation-schema="schema" v-slot="{ errors }">
+                                    <!-- {{ editAcr }} -->
+                                    <Form @submit.prevent="saveTranfer" :validation-schema="schema" v-slot="{ errors }">
                                         <div class="row">
                                             <!-- Left Column -->
                                             <div class="col-6">
@@ -252,7 +253,7 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">ACR Year:</label>
-                                                    <Field type="text" class="form-control" id="exampleInputEmail1"
+                                                    <Field type="date" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Enter email"
                                                         v-model="editAcr.acr_year" name="acr_year"
                                                         :class="{ 'is-invalid': errors.acr_year }" />
@@ -322,32 +323,21 @@
                                 </div>
                                 <div class="modal-body card">
                                     <div class="card-body d-flex flex-column">
-                                        <!-- <td>{{ item.employee_id }}</td>
-                                    <td>{{ item.name }}</td>
-                                    <td>{{ item.designation }}</td>
-                                    <td>{{ item.department }}</td>
-                                    <td>{{ item.office_name }}</td>
-                                    <td>{{ item.rack_number }}</td>
-                                    <td>{{ item.bin_number }}</td>
-                                    <td>{{ item.file }}</td>
-                                    <td>{{ item.file_number }}</td>
-                                    <td>{{ item.acr_year }}</td>
-                                    <td>{{ item.score }}</td> -->
                                         <h5 class="modal-title text-center" id="exampleModalLabel" style="font-size: 25px;">
                                             Transfer Details
                                         </h5>
                                         <hr>
                                         <h1 class="card-title ">Employee Name: {{ Acr.name }}</h1>
-                                        <h5 class="card-title">Transfer Order: {{ Acr.designation }}</h5>
-                                        <h5 class="card-title">Transfer Order Number: {{ Acr.department }}
+                                        <h5 class="card-title">Designation: {{ Acr.designation }}</h5>
+                                        <h5 class="card-title">Department: {{ Acr.department }}
                                         </h5>
-                                        <h5 class="card-title">To Office: {{ Acr.office_name }}</h5>
-                                        <h5 class="card-title">From Office: {{ Acr.rack_number }}</h5>
-                                        <h5 class="card-title">To Designation: {{ Acr.bin_number }}</h5>
-                                        <h5 class="card-title">From Designation: {{ Acr.file }}</h5>
-                                        <h5 class="card-title">Transfer Date: {{ Acr.file_number }}</h5>
-                                        <h5 class="card-title">Join Date: {{ Acr.acr_year }}</h5>
-                                        <h5 class="card-title">Transfer Letter: {{ Acr.score }}</h5>
+                                        <h5 class="card-title">Office Name: {{ Acr.office_name }}</h5>
+                                        <h5 class="card-title">Rack Number: {{ Acr.rack_number }}</h5>
+                                        <h5 class="card-title">Bin Number: {{ Acr.bin_number }}</h5>
+                                        <h5 class="card-title">File: {{ Acr.file }}</h5>
+                                        <h5 class="card-title">File Number: {{ Acr.file_number }}</h5>
+                                        <h5 class="card-title">Acr Year: {{ Acr.acr_year }}</h5>
+                                        <h5 class="card-title">Acr Score: {{ Acr.score }}</h5>
                                     </div>
                                 </div>
 
@@ -367,68 +357,105 @@
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table class="table text-center" id="datatable">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Employee</th>
-                                    <th>Designation</th>
-                                    <th>Department</th>
-                                    <th>Office Name</th>
-                                    <th>Rack Number</th>
-                                    <th>Bin Number</th>
-                                    <th>File</th>
-                                    <th>File Number</th>
-                                    <th>Acr Year</th>
-                                    <th>Total Score</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Employee</th>
+                                        <th>Designation</th>
+                                        <th>Department</th>
+                                        <th>Office Name</th>
+                                        <th>Rack Number</th>
+                                        <th>Bin Number</th>
+                                        <th>File</th>
+                                        <th>File Number</th>
+                                        <th>Acr Year</th>
+                                        <th>Total Score</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                <tr v-for="(item, index) in AcrList" :key="index">
-                                    <td>{{ item.employee_id }}</td>
-                                    <td>{{ item.name }}</td>
-                                    <td>{{ item.designation }}</td>
-                                    <td>{{ item.department }}</td>
-                                    <td>{{ item.office_name }}</td>
-                                    <td>{{ item.rack_number }}</td>
-                                    <td>{{ item.bin_number }}</td>
-                                    <td>{{ item.file }}</td>
-                                    <td>{{ item.file_number }}</td>
-                                    <td>{{ item.acr_year }}</td>
-                                    <td>{{ item.score }}</td>
-                                    <td>
-                                        <p v-if="item.status == 1" class="text-warning font-weight-bold"> Verified</p>
-                                        <p v-else class="text-success font-weight-bold">Pending</p>
-                                    </td>
+                                    <tr v-for="(item, index) in AcrList" :key="index">
+                                        <td>{{ item.employee_id }}</td>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.designation }}</td>
+                                        <td>{{ item.department }}</td>
+                                        <td>{{ item.office_name }}</td>
+                                        <td>{{ item.rack_number }}</td>
+                                        <td>{{ item.bin_number }}</td>
+                                        <td>
+                                            <a :href="'http://localhost/pds-backend/public/Acr_file/' + item.file"
+                                                download="Acr.pdf" class="btn btn-success" target="blank">Download</a>
+                                        </td>
 
-                                    <td style="width: 185px;">
-                                        <button v-if="item.status === 1" @click="viewDetails(item)"
-                                            class="btn btn-outline-primary mr-2"
-                                            style="border: 3px solid;font-weight: bolder; width: 124px;" data-toggle="modal"
-                                            data-target="#exampleModal2">
-                                            View Details
-                                        </button>
-                                        <div v-else>
-                                            <button @click="editbutton(item.id)" class="btn btn-primary mr-2"
-                                                data-toggle="modal" data-target="#exampleModal1">
-                                                Edit
-                                            </button>
-                                            <button @click="deletebutton(item.id)" class="btn btn-danger mr-2">
-                                                Delete
-                                            </button>
-                                        </div>
+                                        <!-- <td>{{ item.file }}</td> -->
+                                        <td>{{ item.file_number }}</td>
+                                        <td>{{ item.acr_year }}</td>
+                                        <td>{{ item.score }}</td>
+                                        <td>
+                                            <p v-if="item.status == 1" class="text-warning font-weight-bold"> Verified</p>
+                                            <p v-else class="text-success font-weight-bold">Pending</p>
+                                        </td>
 
+                                        <td style="width: 185px;">
+                                            <div v-if="item.status === 0">
+                                                <a @click="viewDetails(item)" class="mr-2" data-toggle="modal"
+                                                    data-target="#exampleModal2">
+                                                    <i class="fa fa-eye"
+                                                        style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id, item)"></i>
+                                                <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deletebutton(item.id)"></i>
+                                            </div>
 
-                                    </td>
+                                            <div v-else-if="item.status === 1">
+                                                <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
+                                                    data-target="#exampleModal2">
+                                                    <i class="fa fa-eye"
+                                                        style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
 
-                                </tr>
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id, item)"></i>
+                                                <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deletebutton(item.id)"></i>
+                                            </div>
 
-                            </tbody>
-                        </table>
-</div>
-                        
+                                            <div v-else-if="item.status === 2">
+                                                <a @click="viewDetails(item.id, item)" class="mr-2" data-toggle="modal"
+                                                    data-target="#exampleModal2">
+                                                    <i class="fa fa-eye"
+                                                        style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+
+                                                <i class="fas fa-edit"
+                                                    style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    data-toggle="modal" data-target="#exampleModal1"
+                                                    @click="editbutton(item.id, item)"></i>
+                                                <!-- Corrected edit icon class -->
+                                                <i class="fa-solid fa-trash ml-1"
+                                                    style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
+                                                    @click="deletebutton(item.id)"></i>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -436,6 +463,15 @@
 
         <!-- Modal Start -->
 
+        <vuejs-datepicker 
+        :value="defaultDate"
+        :format="DatePickerFormat"
+        :language="language"
+        minimum-view="year"              
+        name="datepicker"
+        id="input-id"
+        input-class="input-class"
+    ></vuejs-datepicker>
 
 
     </div>
@@ -451,6 +487,8 @@ import $ from "jquery";
 import { Form, Field } from 'vee-validate';
 import * as Yup from "yup";
 import Multiselect from 'vue-multiselect';
+import { ref } from 'vue';
+import vuejsDatepicker from 'vuejs-datepicker';
 
 
 
@@ -458,27 +496,46 @@ import Multiselect from 'vue-multiselect';
 export default {
     components: {
         // DataTable,
-        Form, Field, Multiselect
+        Form, Field, Multiselect,
+        'vuejs-datepicker': vuejsDatepicker
 
     },
+    setup() {
+    const defaultDate = ref('2018-12-04');
+    const DatePickerFormat = ref('yyyy');
+    
+    const language = ref({
+      language: 'English', 
+      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], 
+      monthsAbbr: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], 
+      days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], 
+      rtl: false, 
+      ymd: false, 
+      yearSuffix: ''
+    });
+
+    return {
+      defaultDate,
+      DatePickerFormat,
+      language,
+    };
+  },
 
 
     data() {
         const storageData = JSON.parse(localStorage.getItem('user'));
 
         const schema = Yup.object().shape({
-            transfer_type: Yup.string().required("Transfer Type is required"),
-            to_department: Yup.string().required("To Department is required"),
-            from_department: Yup.string().required("From Department is required"),
-            transfer_date: Yup.date().required("Transfer Date is required").typeError("Invalid date format"),
-            transfer_order_number: Yup.string().required("Transfer Order Number is required"),
-            to_designation: Yup.string().required("To Designation is required"),
-            from_designation: Yup.string().required("From Designation is required"),
-            join_date: Yup.date().required("Join Date is required").typeError("Invalid date format"),
-            to_office: Yup.string().required("To Office is required"),
-            from_office: Yup.string().required("From Office is required"),
-            transfer_order: Yup.string().required("Transfer Order is required"),
-            transfer_letter: Yup.string().required("Transfer Letter is required"),
+            designation: Yup.string().required("Designation is required"),
+            department: Yup.string().required("Department is required"),
+            office_name: Yup.string().required("Office Name is required"),
+            score: Yup.string().required("Score is required"),
+            remarks: Yup.string().required("Remarks is required"),
+            file: Yup.mixed().required("File is required"), // Assuming it's a file upload
+            rack_number: Yup.string().required("Rack Number is required"),
+            bin_number: Yup.string().required("Bin Number is required"),
+            file_number: Yup.string().required("File Number is required"),
+            acr_year: Yup.string().required("ACR Year is required"),
         });
 
 
@@ -541,22 +598,9 @@ export default {
     computed: {},
 
     methods: {
-        change1() {
-            this.axios
-                    .post(this.backend_url + 'addTransferRecord', this.Acr)
-                    .then((res) => {
-                        console.log(res);
-                        this.getTransferList();
-                        $("#exampleModal").modal('hide');
-                        $('#datatable').DataTable().destroy();
-                        this.$toast.success(`Add Data Successfully!`);
-                        this.$refs.form.resetForm();
-
-                    })
-                    .catch((error) => {
-                        console.error("An error occurred while saving the transfer record:", error);
-                        this.$toast.error(`Failed to save transfer record.`);
-                    });
+        clear() {
+            console.log("hi");
+            this.$refs.form.resetForm();
 
         },
         handleFileChange(event) {
@@ -575,6 +619,7 @@ export default {
                 .then((response) => {
                     this.value.id = response.data.data.employee_id;
                     this.value.emp = response.data.data.name;
+                    this.editAcr.id = response.data.data.id;
 
                     this.editAcr.employee_id = response.data.data.employee_id,
                         this.editAcr.emp_name = response.data.data.emp_name,
@@ -606,11 +651,9 @@ export default {
                 })
         },
         viewDetails(item) {
-            this.value.id = item.employee_id;
-            this.value.emp = item.name;
 
-            this.editAcr.employee_id = item.employee_id,
-                this.Acr.name = item.name,
+            console.log(item);
+            this.Acr.name = item.name,
                 this.Acr.remarks = item.remarks,
                 this.Acr.designation = item.designation,
                 this.Acr.department = item.department,
@@ -621,6 +664,7 @@ export default {
                 this.Acr.file_number = item.file_number,
                 this.Acr.acr_year = item.acr_year,
                 this.Acr.score = item.score
+            console.log(this.Acr);
         },
         getAcrList() {
             this.axios
@@ -689,7 +733,8 @@ export default {
             let formData = new FormData;
 
 
-            formData.append('employee_id', this.Acr.employee_id);
+
+            formData.append('employee_id', this.value.id);
             formData.append('remarks', this.Acr.remarks);
             formData.append('designation', this.Acr.designation);
             formData.append('department', this.Acr.department);
@@ -703,7 +748,7 @@ export default {
             try {
                 // this.Acr.employee_id = this.storageData.id;
                 this.axios
-                    .post(this.backend_url + 'addTransferRecord', formData)
+                    .post(this.backend_url + 'addacr', formData)
                     .then((res) => {
                         console.log(res);
                         this.getAcrList();
@@ -736,9 +781,11 @@ export default {
             formData.append('file_number', this.editAcr.file_number);
             formData.append('acr_year', this.editAcr.acr_year);
             formData.append('score', this.editAcr.score);
+
+
             try {
                 this.axios
-                    .post(this.backend_url + `updateTransferRecord/${this.editAcr.id}`, formData)
+                    .post(this.backend_url + `updateAcrMgt/${this.editAcr.id}`, formData)
                     .then((res) => {
                         console.log(res);
                         this.getAcrList();
@@ -755,6 +802,7 @@ export default {
                 this.$toast.error(`Failed to update transfer record.`);
             }
         },
+
         nameWithLang({ emp }) {
             return `${emp}`
         },

@@ -595,13 +595,13 @@ export default {
         //         description: ""
         //     }
         const schema = Yup.object().shape({
-            // employee_id: Yup.string().required("Employee ID is required"),
-            // promotion_ref_number: Yup.string().required("Promotion Reference Number is required"),
+            employee_id: Yup.string().required("Employee ID is required"),
+            promotion_ref_number: Yup.string().required("Promotion Reference Number is required"),
             promoted_designation: Yup.string().required("Promoted Designation is required"),
-            // promotion_date: Yup.date()
-            //     .required("Promotion Date is required")
-            //     .typeError("Invalid date format"),
-            // description: Yup.string().required("Description is required"),
+            promotion_date: Yup.date()
+                .required("Promotion Date is required")
+                .typeError("Invalid date format"),
+            description: Yup.string().required("Description is required"),
         });
 
 
