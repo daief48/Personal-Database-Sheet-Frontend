@@ -405,6 +405,15 @@
                                                     <i class="fa fa-eye"
                                                         style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                                 </a>
+                                                <a @click="inactivestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-times"
+                                                        style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+
+                                                <a @click="activestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-check"
+                                                        style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
                                                 <i class="fas fa-edit"
                                                     style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
                                                     data-toggle="modal" data-target="#exampleModal1"
@@ -421,6 +430,11 @@
                                                     <i class="fa fa-eye"
                                                         style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                                 </a>
+                                                <a @click="inactivestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-times"
+                                                        style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+
 
                                                 <i class="fas fa-edit"
                                                     style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
@@ -438,6 +452,11 @@
                                                     <i class="fa fa-eye"
                                                         style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                                 </a>
+                                                <a @click="activestatus(item.id)" class="mr-2">
+                                                    <i class="fa fa-check"
+                                                        style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                                                </a>
+
 
                                                 <i class="fas fa-edit"
                                                     style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
@@ -463,15 +482,6 @@
 
         <!-- Modal Start -->
 
-        <vuejs-datepicker 
-        :value="defaultDate"
-        :format="DatePickerFormat"
-        :language="language"
-        minimum-view="year"              
-        name="datepicker"
-        id="input-id"
-        input-class="input-class"
-    ></vuejs-datepicker>
 
 
     </div>
@@ -487,8 +497,6 @@ import $ from "jquery";
 import { Form, Field } from 'vee-validate';
 import * as Yup from "yup";
 import Multiselect from 'vue-multiselect';
-import { ref } from 'vue';
-import vuejsDatepicker from 'vuejs-datepicker';
 
 
 
@@ -496,30 +504,9 @@ import vuejsDatepicker from 'vuejs-datepicker';
 export default {
     components: {
         // DataTable,
-        Form, Field, Multiselect,
-        'vuejs-datepicker': vuejsDatepicker
+        Form, Field, Multiselect
 
     },
-    setup() {
-    const defaultDate = ref('2018-12-04');
-    const DatePickerFormat = ref('yyyy');
-    
-    const language = ref({
-      language: 'English', 
-      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], 
-      monthsAbbr: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], 
-      days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], 
-      rtl: false, 
-      ymd: false, 
-      yearSuffix: ''
-    });
-
-    return {
-      defaultDate,
-      DatePickerFormat,
-      language,
-    };
-  },
 
 
     data() {
@@ -576,6 +563,7 @@ export default {
                 file_number: "",
                 acr_year: "",
                 score: "",
+                acr_date:""
             },
             editAcr: {
                 employee_id: "",
@@ -590,6 +578,7 @@ export default {
                 file_number: "",
                 acr_year: "",
                 score: "",
+                acr_date:""
             }
 
         };
@@ -598,6 +587,32 @@ export default {
     computed: {},
 
     methods: {
+        activestatus(id) {
+            this.axios
+                .patch(this.backend_url + `activeAcrRecord/${id}`)
+                .then((response) => {
+                    console.log(response);
+                    this.getAcrList();
+                    $('#datatable').DataTable().destroy();
+                    this.$toast.success(`Active status Successfully!!`);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
+        inactivestatus(id) {
+            this.axios
+                .patch(this.backend_url + `inactiveAcrRecord/${id}`)
+                .then((response) => {
+                    console.log(response);
+                    this.getAcrList();
+                    $('#datatable').DataTable().destroy();
+                    this.$toast.success(`Status Cancel!!`);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
         clear() {
             console.log("hi");
             this.$refs.form.resetForm();
@@ -745,6 +760,9 @@ export default {
             formData.append('file_number', this.Acr.file_number);
             formData.append('acr_year', this.Acr.acr_year);
             formData.append('score', this.Acr.score);
+            formData.append('acr_date', this.Acr.acr_year);
+
+
             try {
                 // this.Acr.employee_id = this.storageData.id;
                 this.axios

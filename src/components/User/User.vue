@@ -77,7 +77,7 @@
           </Form>
 
           <div v-if="message" class="alert" :class="successful ? 'alert-success' : 'alert-danger'" >
-            {{ message }}
+            <!-- {{ message }} -->
           </div>
 
         </div>

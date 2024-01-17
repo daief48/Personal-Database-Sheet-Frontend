@@ -114,7 +114,7 @@
 
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Promotion Reference Number</label>
+                                                    <label for="exampleInputEmail1">Promotion Reference Number <span style="color:red">*</span> </label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Reference number here"
                                                         v-model="promotion.promotion_ref_number"
@@ -127,7 +127,7 @@
 
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Promotion Date</label>
+                                                    <label for="exampleInputEmail1">Promotion Date <span style="color:red">*</span> </label>
                                                     <Field type="date" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Enter email"
                                                         v-model="promotion.promotion_date" name="promotion_date"
@@ -178,7 +178,7 @@
 
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <label for="exampleFormControlTextarea1">Description</label>
+                                                    <label for="exampleFormControlTextarea1">Description <span style="color:red">*</span></label>
                                                     <Field as="textarea" class="form-control"
                                                         id="exampleFormControlTextarea1" rows="9"
                                                         placeholder="Write your comment here"
@@ -310,7 +310,7 @@
 
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Promotion Reference Number</label>
+                                                    <label for="exampleInputEmail1">Promotion Reference Number <span style="color:red">*</span> </label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Reference number here"
                                                         v-model="editpromotion.promotion_ref_number"
@@ -323,7 +323,7 @@
 
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Promotion Date</label>
+                                                    <label for="exampleInputEmail1">Promotion Date <span style="color:red">*</span> </label>
                                                     <Field type="date" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Enter email"
                                                         v-model="editpromotion.promotion_date" name="promotion_date"
@@ -374,7 +374,7 @@
 
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <label for="exampleFormControlTextarea1">Description</label>
+                                                    <label for="exampleFormControlTextarea1">Description <span style="color:red">*</span></label>
                                                     <Field as="textarea" class="form-control"
                                                         id="exampleFormControlTextarea1" rows="9"
                                                         placeholder="Write your comment here"

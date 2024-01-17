@@ -52,6 +52,18 @@ const routes = [
         }
       ]
     }, 
+    {
+      path: '/acr',
+      name: 'acr',
+      component: () => import('../Layout/Fullpagelayout.vue'),
+      children:[
+        {
+          path: '/acr',
+          name: 'acr',
+          component: () => import('../components/ACR/ACR.vue'),
+        }
+      ]
+    },
 
     {
       path: '/employees',

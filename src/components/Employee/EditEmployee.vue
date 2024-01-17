@@ -49,7 +49,7 @@
                 aria-labelledby="pills-basic-info">
                 <Form class="form" method="post" action="#" @submit="saveProfile('basicInfo')"
                   :validation-schema="schema_basicInfo" v-slot="{ errors }">
-<!-- {{ basicInfo }} -->
+                  <!-- {{ basicInfo }} -->
                   <div class="d-flex p-2">
                     <div class="d-flex p-2">
                       <div class="bg-light p-2">
@@ -73,7 +73,7 @@
                             <tr>
                               <td><strong>Designation:</strong></td>
                               <td>
-                                <select v-model="basicInfo.designation" class="form-control" name="designation" >
+                                <select v-model="basicInfo.designation" class="form-control" name="designation">
                                   <option :value="designation.id" v-for="designation in designations"
                                     :key="designation.id">
                                     {{ designation.designation_name }}
@@ -360,7 +360,8 @@
                           <tr>
                             <td><strong>Department Name:</strong></td>
                             <td>
-                              <select v-model="jobs.department" class="form-control" style="width: 428px;" name="department">
+                              <select v-model="jobs.department" class="form-control" style="width: 428px;"
+                                name="department">
                                 <option :value="department.id" v-for="department in departments" :key="department.id">
                                   {{ department.dept_name }}
                                 </option>
@@ -714,27 +715,40 @@
 
               <div class="tab-pane fade show" id="emergency-other" role="tabpanel"
                 aria-labelledby="pills-emergency-other">
-
+                <div class="col-12 mt-3 d-flex justify-content-end">
+                  <button class="btn btn-primary" @click="addField">
+                    Add Documents
+                  </button>
+                </div>
                 <Form class="form" action="#" @submit="saveProfile()" :validation-schema="schema_emergency_contact">
-                  <div class="col-12 mt-3 d-flex justify-content-end">
-                    <button class="btn btn-primary" @click="addField">
-                      Add Documents
-                    </button>
-                  </div>
+
                   <div class="container m-0 mb-2 ">
                     <!-- {{ document }} -->
                     <div v-for="(document, index) in document" :key="index">
+                      <!-- {{index}} -->
                       <div class="d-flex flex-row p-3 card">
                         <div class="w-50">
                           <div class="mt-3 p-3 border">
                             <input class="form-control" v-model="document.document_name" placeholder="Document Name">
                           </div>
                         </div>
-                        <div class="w-25">
-                          <div class="mt-3 p-3 border d-flex flex-column align-items-center">
-                            <input type="file" class="form-control" id="fileInput" @change="handleFileChange">
+                        <div class="col-md-3">
+                          <div class="mt-3 p-3 border d-flex flex-column align-items-center row">
+                            <!-- Show document_file only if it exists -->
+                            <span v-if="document.document_file" class="badge badge-secondary">{{ document.document_file
+                            }}</span>
+
+                            <!-- Input for file selection with Bootstrap styles -->
+                            <div class="custom-file mt-2">
+                              <input type="file" class="custom-file-input" id="fileInput"
+                                @change="handleFileChange($event, index)">
+                              <label class="custom-file-label" for="fileInput">Choose file</label>
+                            </div>
                           </div>
                         </div>
+
+
+
 
 
 
@@ -746,9 +760,6 @@
                       </div>
                     </div>
                   </div>
-
-
-
 
                   <button type="submit" class="btn btn-outline-success">
                     Save
@@ -1038,29 +1049,28 @@ export default {
     nameWithPresentUpazila({ upazila }) {
       return `${upazila}`
     },
-    handleFileChange(event) {
-      // Access the selected file using event.target.files[0]
+    handleFileChange(event, index) {
       const selectedFile = event.target.files[0];
 
-      // Extract and update the document_name property with only the file name
       if (selectedFile) {
+        // Extract and update the document_name property with only the file name
         const fileName = selectedFile.name;
-        this.document[0].document_file = fileName;
-      } else {
-        // Handle the case where no file is selected, you may want to clear the existing file name
-        this.document[0].document_file = "";
+        this.document[index].document_file = fileName;
       }
     },
 
     addField() {
-      this.fields.push({ firstName: "", lastName: "" });
+      this.document.push({ document_name: "", document_file: "" });
     },
     setData() {
+      // console.log("...",this.data)
       this.empData = this.data;
+      console.log("...", this.empData);
       this.basicInfo.name = this.data.name;
       this.basicInfo.mobileNumber = this.data.mobile_number;
       this.basicInfo.gender = this.data.gender;
       this.basicInfo.department = this.data.department;
+      this.document = this.data.document === null ? [] : JSON.parse(this.data.document);
 
       this.basicInfo.date_of_birth = this.data.date_of_birth;
       this.basicInfo.email = this.data.email == "null" ? "" : this.data.email;
@@ -1180,6 +1190,21 @@ export default {
       console.log(type);
       let formData = new FormData();
       formData.append("user_id", this.empData.user_id);
+
+      this.axios
+        .get(this.backend_url + "users/" + this.empData.user_id)
+        .then((res) => {
+          console.log(res.data.userDetail.employee_id);
+          formData.append("employee_id", res.data.userDetail.employee_id);
+
+        })
+        .catch((error) => {
+          this.$toast.error(error.response.data.message, {
+            position: "top-right",
+          });
+        });
+
+      formData.append("document", this.basicInfo.name);
       formData.append("name", this.basicInfo.name);
       formData.append("mobile_number", this.basicInfo.mobileNumber);
       formData.append("department", this.basicInfo.department);
@@ -1295,6 +1320,11 @@ export default {
       formData.append(
         "Sector",
         this.freedomFighter.Sector
+      );
+
+      formData.append(
+        "document",
+        JSON.stringify(this.document)
       );
 
       this.axios

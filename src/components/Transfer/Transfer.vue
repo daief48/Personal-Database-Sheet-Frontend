@@ -34,7 +34,7 @@
                             <input type="text" v-model="tansfer.employee_id" style="display:none;" autocomplete="off">
                             <!-- <div class="invalid-feedback">{{ errors.name }}</div> -->
 
-                            <label for="exampleFormControlSelect1">Transfer Type </label>
+                            <label for="exampleFormControlSelect1">Transfer Type <span style="color:red">*</span>  </label>
 
 
 
@@ -89,7 +89,7 @@
 
                         <div class="col-4">
                           <div class="form-group">
-                            <label for="exampleInputEmail1">Transfer Order Number</label>
+                            <label for="exampleInputEmail1">Transfer Order Number <span style="color:red">*</span> </label>
                             <Field type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                               placeholder="Transfer Order Number" v-model="tansfer.transfer_order_number"
                               name="transfer_order_number" :class="{ 'is-invalid': errors.transfer_order_number }" />
@@ -227,7 +227,7 @@
                             <input type="text" v-model="edittansfer.employee_id" style="display:none;" autocomplete="off">
                             <!-- <div class="invalid-feedback">{{ errors.name }}</div> -->
 
-                            <label for="exampleFormControlSelect1">Transfer Type </label>
+                            <label for="exampleFormControlSelect1">Transfer Type <span style="color:red">*</span>  </label>
 
 
 
@@ -282,7 +282,7 @@
 
                         <div class="col-4">
                           <div class="form-group">
-                            <label for="exampleInputEmail1">Transfer Order Number</label>
+                            <label for="exampleInputEmail1">Transfer Order Number <span style="color:red">*</span> </label>
                             <Field type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                               placeholder="Transfer Order Number" v-model="edittansfer.transfer_order_number"
                               name="transfer_order_number" :class="{ 'is-invalid': errors.transfer_order_number }" />
@@ -491,11 +491,11 @@
                       <p v-if="item.status == 1" class="text-warning font-weight-bold"> Verified</p>
                       <p v-else class="text-success font-weight-bold">Pending</p>
                     </td>
-                    <td>
+                    <td >
                       <a :href="'http://localhost/pds-backend/public/transferLetters/' + item.transfer_letter"
                         download="transfer_letter.pdf" class="btn btn-success" target="blank">Download</a>
                     </td>
-                    <td style="width: 185px;">
+                    <td style="width: 258px;">
                       <button v-if="item.status === 1" @click="viewDetails(item)" class="btn btn-outline-primary mr-2"
                         style="border: 3px solid;font-weight: bolder; width: 124px;" data-toggle="modal"
                         data-target="#exampleModal2">

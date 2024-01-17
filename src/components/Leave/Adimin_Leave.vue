@@ -43,7 +43,7 @@
                                                 <div class="form-group">
 
                                                     <input type="text" v-model="leave.employee_id" style="display:none;">
-                                                    <label for="exampleFormControlSelect1">Leave Type </label>
+                                                    <label for="exampleFormControlSelect1">Leave Type <span style="color:red">*</span> </label>
 
                                                     <Field as="select" class="form-control" id="exampleFormControlSelect1"
                                                         v-model="leave.leave_type" name="leave_type"
@@ -65,7 +65,7 @@
                                             <div class="col-6">
                                                 <div class="d-flex">
                                                     <div class="form-group w-25 mr-2">
-                                                        <label for="exampleInputEmail1">From Date</label>
+                                                        <label for="exampleInputEmail1">From Date <span style="color:red">*</span> </label>
                                                         <Field type="date" class="form-control" id="exampleInputEmail1"
                                                             aria-describedby="emailHelp" placeholder="Enter email"
                                                             v-model="leave.from_date" @change="getDays"
@@ -74,7 +74,7 @@
 
                                                     </div>
                                                     <div class="form-group w-25 mr-2">
-                                                        <label for="exampleInputEmail1">To Date</label>
+                                                        <label for="exampleInputEmail1">To Date <span style="color:red">*</span> </label>
                                                         <Field type="date" class="form-control" id="exampleInputEmail1"
                                                             aria-describedby="emailHelp" placeholder="Enter email"
                                                             v-model="leave.to_date" @change="getDays"
@@ -84,7 +84,7 @@
                                                     </div>
 
                                                     <div class="form-group w-50">
-                                                        <label for="exampleInputEmail1">Total Leave Days</label>
+                                                        <label for="exampleInputEmail1">Total Leave Days <span style="color:red">*</span> </label>
                                                         <Field type="text" class="form-control" id="exampleInputEmail1"
                                                             aria-describedby="emailHelp" v-model="leave.day"
                                                             :class="{ 'is-invalid': errors.day }" name="day" readonly />
@@ -94,7 +94,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Description</label>
+                                                    <label for="exampleInputEmail1">Description <span style="color:red">*</span> </label>
                                                     <Field as="textarea" class="form-control "
                                                         id="exampleFormControlTextarea1" rows="5" placeholder="Description"
                                                         v-model="leave.description"
@@ -148,7 +148,7 @@
                                                 <div class="form-group">
 
                                                     <input type="text" v-model="leave.employee_id" style="display:none;">
-                                                    <label for="exampleFormControlSelect1">Leave Type </label>
+                                                    <label for="exampleFormControlSelect1">Leave Type <span style="color:red">*</span> </label>
 
                                                     <Field as="select" class="form-control" id="exampleFormControlSelect1"
                                                         v-model="editleave.leave_type" name="leave_type"
@@ -170,7 +170,7 @@
                                             <div class="col-6">
                                                 <div class="d-flex">
                                                     <div class="form-group w-25 mr-2">
-                                                        <label for="exampleInputEmail1">From Date</label>
+                                                        <label for="exampleInputEmail1">From Date <span style="color:red">*</span> </label>
                                                         <Field type="date" class="form-control" id="exampleInputEmail1"
                                                             aria-describedby="emailHelp" placeholder="Enter email"
                                                             v-model="editleave.from_date" @change="getDays"
@@ -179,7 +179,7 @@
 
                                                     </div>
                                                     <div class="form-group w-25 mr-2">
-                                                        <label for="exampleInputEmail1">To Date</label>
+                                                        <label for="exampleInputEmail1">To Date <span style="color:red">*</span> </label>
                                                         <Field type="date" class="form-control" id="exampleInputEmail1"
                                                             aria-describedby="emailHelp" placeholder="Enter email"
                                                             v-model="editleave.to_date" @change="getDays"
@@ -189,7 +189,7 @@
                                                     </div>
 
                                                     <div class="form-group w-50">
-                                                        <label for="exampleInputEmail1">Total Leave Days</label>
+                                                        <label for="exampleInputEmail1">Total Leave Days <span style="color:red">*</span> </label>
                                                         <Field type="text" class="form-control" id="exampleInputEmail1"
                                                             aria-describedby="emailHelp" v-model="editleave.day"
                                                             :class="{ 'is-invalid': errors.day }" name="day" readonly />
@@ -199,7 +199,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Description</label>
+                                                    <label for="exampleInputEmail1">Description <span style="color:red">*</span> </label>
                                                     <Field as="textarea" class="form-control "
                                                         id="exampleFormControlTextarea1" rows="5" placeholder="Description"
                                                         v-model="editleave.description"
@@ -423,12 +423,11 @@ export default {
 
 
         const schema = Yup.object().shape({
-            // employee_id: Yup.string().required("Employee ID is required"),
             leave_type: Yup.string().required("Leave Type is required"),
             from_date: Yup.date().required("From Date is required").typeError("Invalid date format"),
             to_date: Yup.date().required("To Date is required").typeError("Invalid date format"),
-            // day: Yup.number().required("Number of Days is required").typeError("Invalid number format"),
-            // description: Yup.string().required("Description is required"),
+            day: Yup.number().required("Number of Days is required").typeError("Invalid number format"),
+            description: Yup.string().required("Description is required"),
         });
 
 

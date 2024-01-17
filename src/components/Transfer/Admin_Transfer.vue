@@ -41,7 +41,7 @@
 
                                                         <!-- <div class="invalid-feedback">{{ errors.name }}</div> -->
 
-                                                        <label for="exampleFormControlSelect1">Transfer Type </label>
+                                                        <label for="exampleFormControlSelect1">Transfer Type <span style="color:red">*</span> </label>
 
 
 
@@ -58,7 +58,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Transfer Order Number</label>
+                                                        <label for="exampleInputEmail1">Transfer Order Number <span style="color:red">*</span> </label>
                                                         <Field type="number" class="form-control" id="exampleInputEmail1"
                                                             aria-describedby="emailHelp" placeholder="Transfer Order Number"
                                                             v-model="tansfer.transfer_order_number"
@@ -267,7 +267,7 @@
 
                                                         <!-- <div class="invalid-feedback">{{ errors.name }}</div> -->
 
-                                                        <label for="exampleFormControlSelect1">Transfer Type </label>
+                                                        <label for="exampleFormControlSelect1">Transfer Type <span style="color:red">*</span>  </label>
 
 
 
@@ -284,7 +284,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Transfer Order Number</label>
+                                                        <label for="exampleInputEmail1">Transfer Order Number <span style="color:red">*</span> </label>
                                                         <Field type="number" class="form-control" id="exampleInputEmail1"
                                                             aria-describedby="emailHelp" placeholder="Transfer Order Number"
                                                             v-model="edittansfer.transfer_order_number"

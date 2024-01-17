@@ -36,7 +36,7 @@
                                                 <div class="form-group">
 
                                                     <input type="text" v-model="leave.employee_id" style="display:none;">
-                                                    <label for="exampleFormControlSelect1"> Leave Type</label>
+                                                    <label for="exampleFormControlSelect1"> Leave Type <span style="color:red">*</span> </label>
 
                                                     <Field as="select" class="form-control" id="exampleFormControlSelect1"
                                                         v-model="leave.leave_type" name="leave_type"
@@ -53,7 +53,7 @@
 
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">To Date</label>
+                                                    <label for="exampleInputEmail1">To Date <span style="color:red">*</span> </label>
                                                     <Field type="date" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Enter email"
                                                         v-model="leave.to_date" @change="getDays"
@@ -65,7 +65,7 @@
 
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">From Date</label>
+                                                    <label for="exampleInputEmail1">From Date <span style="color:red">*</span> </label>
                                                     <Field type="date" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Enter email"
                                                         v-model="leave.from_date" @change="getDays"
@@ -77,7 +77,7 @@
 
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Total Leave Days</label>
+                                                    <label for="exampleInputEmail1">Total Leave Days <span style="color:red">*</span> </label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" v-model="leave.day"
                                                         :class="{ 'is-invalid': errors.day }" name="day" readonly />
@@ -91,7 +91,7 @@
                                             <div class="col-4">
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Description</label>
+                                                    <label for="exampleInputEmail1">Description <span style="color:red">*</span> </label>
                                                     <Field as="textarea" class="form-control "
                                                         id="exampleFormControlTextarea1" rows="5" placeholder="Description"
                                                         v-model="leave.description"
@@ -138,7 +138,7 @@
 
                                                     <input type="text" v-model="editleave.employee_id"
                                                         style="display:none;">
-                                                    <label for="exampleFormControlSelect1"> Leave Type</label>
+                                                    <label for="exampleFormControlSelect1"> Leave Type <span style="color:red">*</span> </label>
 
                                                     <Field as="select" class="form-control" id="exampleFormControlSelect1"
                                                         v-model="editleave.leave_type" name="leave_type"
@@ -155,7 +155,7 @@
 
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">To Date</label>
+                                                    <label for="exampleInputEmail1">To Date <span style="color:red">*</span> </label>
                                                     <Field type="date" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Enter email"
                                                         v-model="editleave.to_date" @change="getDays"
@@ -167,7 +167,7 @@
 
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">From Date</label>
+                                                    <label for="exampleInputEmail1">From Date <span style="color:red">*</span> </label>
                                                     <Field type="date" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Enter email"
                                                         v-model="editleave.from_date" @change="getDays"
@@ -179,7 +179,7 @@
 
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Total Leave Days</label>
+                                                    <label for="exampleInputEmail1">Total Leave Days <span style="color:red">*</span> </label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" v-model="editleave.day"
                                                         :class="{ 'is-invalid': errors.day }" name="day" readonly />
@@ -193,7 +193,7 @@
                                             <div class="col-4">
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Description</label>
+                                                    <label for="exampleInputEmail1">Description <span style="color:red">*</span> </label>
                                                     <Field as="textarea" class="form-control "
                                                         id="exampleFormControlTextarea1" rows="5" placeholder="Description"
                                                         v-model="editleave.description"

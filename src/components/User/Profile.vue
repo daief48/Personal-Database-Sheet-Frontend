@@ -57,7 +57,7 @@
                           <td>{{ basicInfo.designation }}</td>
                         </tr>
                         <tr>
-                          <td><strong>Department Name:</strong></td>
+                          <td><strong>Department:</strong></td>
                           <td>{{ basicInfo.department }}</td>
                         </tr>
                         <tr>
@@ -268,7 +268,7 @@
                             <tbody>
                               <tr>
                                 <td><strong>Group</strong></td>
-                                <td><input type="number" v-model="education.group" class="form-control"
+                                <td><input type="text" v-model="education.group" class="form-control"
                                     autocomplete="off" /></td>
                               </tr>
                               <tr>
@@ -840,7 +840,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header p-0">
-            <h4 class="modal-title">Jobs</h4>
+            <h4 class="modal-title">Emergrncy Contact</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <!-- Modal body -->
@@ -1255,7 +1255,7 @@ export default {
           this.jobs.job_grade_name = profileData.job_grade_name;
           this.jobs.job_grade = profileData.job_grade;
 
-          this.educationArr = JSON.parse(profileData.education_history);
+          this.educationArr = profileData.education_history ? JSON.parse(profileData.education_history) : [];
 
           this.familly_info.father_name = profileData.father_name;
           this.familly_info.mother_name = profileData.mother_name;
@@ -1324,13 +1324,13 @@ export default {
 
       // if (type == 'jobs') {
       if (this.jobs.department == null) {
-        formData.append('department', this.jobs.department_id);
+        formData.append('department', this.basicInfo.department_id);
       } else {
         formData.append('department', this.basicInfo.department_id);
 
       }
       if (this.jobs.designation == null) {
-        formData.append('department', this.jobs.designation_id);
+        formData.append('designation', this.basicInfo.designation_id);
         // delete this.jobs.designation;
       } else {
         formData.append('designation', this.basicInfo.designation_id);

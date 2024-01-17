@@ -41,7 +41,7 @@
 
                                                 </div> -->
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Training Center Name</label>
+                                                    <label for="exampleInputEmail1">Training Center Name <span style="color:red">*</span> </label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Training Center Name"
                                                         v-model="training.training_center_name"
@@ -52,7 +52,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Train Name</label>
+                                                    <label for="exampleInputEmail1">Train Name <span style="color:red">*</span> </label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Train Name"
                                                         v-model="training.training_name"
@@ -178,7 +178,7 @@
                                                 
                                         
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Training Center Name</label>
+                                                    <label for="exampleInputEmail1">Training Center Name <span style="color:red">*</span> </label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Training Center Name"
                                                         v-model="edittraining.training_center_name"
@@ -189,7 +189,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Train Name</label>
+                                                    <label for="exampleInputEmail1">Train Name <span style="color:red">*</span> </label>
                                                     <Field type="text" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Train Name"
                                                         v-model="edittraining.training_name"
