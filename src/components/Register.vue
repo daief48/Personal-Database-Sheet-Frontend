@@ -128,26 +128,6 @@ export default {
 						this.invalidphonePassword = 1;
 						console.log(error);
 					});
-			}else{
-				if (this.name === '') {
-					this.errorname = 1;
-				} 
-				else {
-					this.errorname = 0;
-				}
-				if (this.phone === '') {
-					this.errorphone = 1;
-				} 
-				else {
-					this.errorphone = 0;
-				}
-
-				if (this.password === '') {
-					this.errorPassword = 1;
-				} else {
-					this.errorPassword = 0;
-				}
-
 			}
   		}
   	},

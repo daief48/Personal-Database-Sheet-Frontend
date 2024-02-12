@@ -10,12 +10,12 @@
           <Form @submit="handleUser" :validation-schema="userForm" ref="form">
             <div>
               <div class="form-group">
-                <label for="username">Username*</label>
-                <Field name="username" type="text" v-model="username" class="form-control" autocomplete="off"/>
+                <label for="username">Username<span style="color:red;">*</span></label>
+                <Field name="username" type="text" v-model="username" class="form-control" autocomplete="off" />
                 <ErrorMessage name="username" v-model="username" class="error-feedback" />
               </div>
               <div class="form-group">
-                <label for="userrole">User Role*</label>
+                <label for="userrole">User Role<span style="color:red;">*</span></label>
                 <Field name="userrole" as="select" class="form-control" v-model="userrole">
                   <option value="">-- Select Role --</option>
                   <option value="1">Admin</option>
@@ -24,22 +24,22 @@
                 <ErrorMessage name="userrole" class="error-feedback" />
               </div>
               <div class="form-group">
-                <label for="phone">Phone*</label>
-                <Field name="phone" type="text" class="form-control" v-model="phone" autocomplete="off"/>
+                <label for="phone">Phone<span style="color:red;">*</span></label>
+                <Field name="phone" type="text" class="form-control" v-model="phone" autocomplete="off" />
                 <ErrorMessage name="phone" class="error-feedback" />
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <Field name="email" type="email" class="form-control" v-model="email" autocomplete="off"/>
+                <Field name="email" type="email" class="form-control" v-model="email" autocomplete="off" />
                 <ErrorMessage name="email" class="error-feedback" />
               </div>
               <div class="form-group">
-                <label for="password">Password*</label>
-                <Field name="password" type="password" class="form-control" v-model="password"/>
+                <label for="password">Password<span style="color:red;">*</span></label>
+                <Field name="password" type="password" class="form-control" v-model="password" />
                 <ErrorMessage name="password" class="error-feedback" />
               </div>
               <div class="form-group">
-                <label for="userstatus">Status*</label>
+                <label for="userstatus">Status<span style="color:red;">*</span></label>
                 <Field name="userstatus" as="select" class="form-control" v-model="userstatus">
                   <option value="">-- Select Status --</option>
                   <option value="1">Active</option>
@@ -49,18 +49,9 @@
               </div>
 
               <a class="btn" @click="toggleShow">set avatar</a>
-              <my-upload field="img"
-                    @crop-success="cropSuccess"
-                    @crop-upload-success="cropUploadSuccess"
-                    @crop-upload-fail="cropUploadFail"
-                    v-model="show"
-                    :width="300"
-                    :height="300"
-                    :params="params"
-                    :headers="headers"
-                    :langExt="langExt"
-                    langType="en"
-                    img-format="png">
+              <my-upload field="img" @crop-success="cropSuccess" @crop-upload-success="cropUploadSuccess"
+                @crop-upload-fail="cropUploadFail" v-model="show" :width="300" :height="300" :params="params"
+                :headers="headers" :langExt="langExt" langType="en" img-format="png">
               </my-upload>
               <img :src="imgDataUrl">
 
@@ -76,7 +67,7 @@
             </div>
           </Form>
 
-          <div v-if="message" class="alert" :class="successful ? 'alert-success' : 'alert-danger'" >
+          <div v-if="message" class="alert" :class="successful ? 'alert-success' : 'alert-danger'">
             <!-- {{ message }} -->
           </div>
 
@@ -87,32 +78,27 @@
           <div class="user-list" style="position:relative; top:-20px;">
             <div class="row justify-content-center mt-2 mb-2 ml-0 mr-0">
               <div class="col-8">
-                
+
               </div>
               <div class="col-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search Users..."
-                  @input="searchUsers"
-                  v-model="query.search"
-                />
+                <input type="text" class="form-control" placeholder="Search Users..." @input="searchUsers"
+                  v-model="query.search" />
               </div>
             </div>
 
             <div class="pl-2 pr-2">
               <div class="" v-if="!isLoading" style="border:1px solid #eeeeee">
-              <div class="col-md-12">
-                <div class="row border-bottom border-top p-2 bg-light">
-                  <div class="col-1 text-center">Sl</div>
-                  <div class="col-3">User Name</div>
-                  <div class="col-2">Phone</div>
-                  <div class="col-2">User Email</div>
-                  <div class="col-1 text-center">Role</div>
-                  <div class="col-1 text-center">Status</div>
-                  <div class="col-2">Actions</div>
+                <div class="col-md-12">
+                  <div class="row border-bottom border-top p-2 bg-light">
+                    <div class="col-1 text-center">Sl</div>
+                    <div class="col-3">User Name</div>
+                    <div class="col-2">Phone</div>
+                    <div class="col-2">User Email</div>
+                    <div class="col-1 text-center">Role</div>
+                    <div class="col-1 text-center">Status</div>
+                    <div class="col-2">Actions</div>
+                  </div>
                 </div>
-              </div>
                 <div class="col-md-12 customize-border" v-for="(item, index) in usersPaginatedData.data" :key="item.id">
                   <div class="row border-bottom border-top p-2">
                     <div class="col-1 text-center">
@@ -128,24 +114,28 @@
                       <strong class="text-info">{{ item.email }} </strong>
                     </div>
                     <div class="col-1 text-center">
-                      <span class="badge" :class="item.role_id == 1 ? 'badge-success' : 'badge-info'">{{ item.role_id == 1 ? 'Admin' : 'Editor'}}</span>
+                      <span class="badge" :class="item.role_id == 1 ? 'badge-success' : 'badge-info'">{{ item.role_id == 1
+                        ? 'Admin' : 'Editor' }}</span>
                     </div>
                     <div class="col-1 text-center">
-                      <span class="badge" :class="item.status == 1 ? 'badge-success' : 'badge-info'">{{ item.status == 1 ? 'Active' : 'Inactive'}}</span>
+                      <span class="badge" :class="item.status == 1 ? 'badge-success' : 'badge-info'">{{ item.status == 1 ?
+                        'Active' : 'Inactive' }}</span>
                     </div>
                     <div class="col-2">
-                      <button
-                        class="btn btn-warning mx-2 btn-sm"
-                        title="Delete User"
-                        @click="onEdit(item)"
-                      >
-                      
+                      <a @click="activestatus(item.id)" class="mr-2">
+                        <i class="fa fa-check"
+                          style="color: #57b75e;border: 2px solid #57b75e;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                      </a>
+                      <a @click="inactivestatus(item.id)" class="mr-2">
+                        <i class="fa fa-times"
+                          style="color:#ff0a0a;border: 2px solid #ff0a0a;padding: 3px;font-size: 16px;cursor: pointer;"></i>
+                      </a>
+
+                      <button class="btn btn-warning mx-2 btn-sm" title="Delete User" @click="onEdit(item)">
+
                         <font-awesome-icon icon="fa-solid  fa-pencil" />
                       </button>
-                      <button
-                        class="btn btn-danger mx-2 btn-sm"
-                        title="Delete User"
-                        @click="deleteUserModal(item.id)">
+                      <button class="btn btn-danger mx-2 btn-sm" title="Delete User" @click="deleteUserModal(item.id)">
                         <font-awesome-icon icon="fa-solid  fa-trash" />
                       </button>
                     </div>
@@ -162,38 +152,31 @@
             </div>
 
             <!-- Insert Pagination Part -->
-            
+
             <div v-if="usersPaginatedData !== null" class="vertical-center mt-3 mb-5">
-          
-              <v-pagination
-                v-model="query.page"
-                :pages="usersPaginatedData.pagination.total_pages"
-                :range-size="2"
-                active-color="#DCEDFF"
-                @update:modelValue="getResults"
-                :class="justify-center"
-              />
-            </div>        
+
+              <v-pagination v-model="query.page" :pages="usersPaginatedData.pagination.total_pages" :range-size="2"
+                active-color="#DCEDFF" @update:modelValue="getResults" :class="justify - center" />
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <div>
-    <vue-final-modal v-model="showModal" classes="modal-container" content-class="modal-content">
-      <button class="modal__close" @click="showModal = false">
-        <mdi-close></mdi-close>
-      </button>
-      <span class="modal__title">Hello, vue-final-modal</span>
-      <div class="modal__content">
-        <p>Vue Final Modal is a renderless, stackable, detachable and lightweight modal component.</p>
-      </div>
-    </vue-final-modal>
-    <v-button class="d-none" @click="showModal = true">Open modal</v-button>
-  </div>
+      <vue-final-modal v-model="showModal" classes="modal-container" content-class="modal-content">
+        <button class="modal__close" @click="showModal = false">
+          <mdi-close></mdi-close>
+        </button>
+        <span class="modal__title">Hello, vue-final-modal</span>
+        <div class="modal__content">
+          <p>Vue Final Modal is a renderless, stackable, detachable and lightweight modal component.</p>
+        </div>
+      </vue-final-modal>
+      <v-button class="d-none" @click="showModal = true">Open modal</v-button>
+    </div>
 
   </div>
-
 </template>
 
 <script>
@@ -202,7 +185,7 @@
 
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
-import {useStore, mapGetters, mapActions } from "vuex"
+import { useStore, mapGetters, mapActions } from "vuex"
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 
@@ -228,72 +211,72 @@ export default {
     const store = useStore();
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
     const validationCreate = yup.object().shape({
-          username: yup
-            .string()
-            .required("Username is required!")
-            .min(3, "Must be at least 3 characters!")
-            .max(20, "Must be maximum 20 characters!"),
-          // email: yup
-          //   .string()
-          //   .required("Email is required!")
-          //   .email("Email is invalid!")
-          //   .max(50, "Must be maximum 50 characters!"),
+      username: yup
+        .string()
+        .required("Username is required!")
+        .min(3, "Must be at least 3 characters!")
+        .max(20, "Must be maximum 20 characters!"),
+      // email: yup
+      //   .string()
+      //   .required("Email is required!")
+      //   .email("Email is invalid!")
+      //   .max(50, "Must be maximum 50 characters!"),
 
-          phone: yup
-            .string()
-            .required("Phone Number is required!")
-            .matches(phoneRegExp, 'Phone number is not valid')
-            .min(11, "too short")
-            .max(11, "too long"),
+      phone: yup
+        .string()
+        .required("Phone Number is required!")
+        .matches(phoneRegExp, 'Phone number is not valid')
+        .min(11, "too short")
+        .max(11, "too long"),
 
-          password: yup
-            .string()
-            .required("Password is required")
-            .min(6, "Must be at least 6 characters!")
-            .max(40, "Must be maximum 40 characters!"),
+      password: yup
+        .string()
+        .required("Password is required")
+        .min(6, "Must be at least 6 characters!")
+        .max(40, "Must be maximum 40 characters!"),
 
-          userrole: yup
-            .number()
-            .typeError('User Role is required!')
-            .required("User Role is required!"), 
-          userstatus: yup
-            .number()
-            .typeError('User Status is required!')
-            .required("User Role is required!")    
-      });
+      userrole: yup
+        .number()
+        .typeError('User Role is required!')
+        .required("User Role is required!"),
+      userstatus: yup
+        .number()
+        .typeError('User Status is required!')
+        .required("User Role is required!")
+    });
 
-      const validationEdit = yup.object().shape({
-          username: yup
-            .string()
-            .required("Username is required!")
-            .min(3, "Must be at least 3 characters!")
-            .max(20, "Must be maximum 20 characters!"),
+    const validationEdit = yup.object().shape({
+      username: yup
+        .string()
+        .required("Username is required!")
+        .min(3, "Must be at least 3 characters!")
+        .max(20, "Must be maximum 20 characters!"),
 
-          phone: yup
-            .string()
-            .required("Phone Number is required!")
-            .matches(phoneRegExp, 'Phone number is not valid')
-            .min(11, "too short")
-            .max(11, "too long"),
+      phone: yup
+        .string()
+        .required("Phone Number is required!")
+        .matches(phoneRegExp, 'Phone number is not valid')
+        .min(11, "too short")
+        .max(11, "too long"),
 
-          // email: yup
-          //   .string()
-          //   .required("Email is required!")
-          //   .email("Email is invalid!")
-          //   .max(50, "Must be maximum 50 characters!"),
+      // email: yup
+      //   .string()
+      //   .required("Email is required!")
+      //   .email("Email is invalid!")
+      //   .max(50, "Must be maximum 50 characters!"),
 
-          userrole: yup
-            .number()
-            .typeError('User Role is required!')
-            .required("User Role is required!"), 
-          userstatus: yup
-            .number()
-            .typeError('User Status is required!')
-            .required("User Role is required!")    
-      });
+      userrole: yup
+        .number()
+        .typeError('User Role is required!')
+        .required("User Role is required!"),
+      userstatus: yup
+        .number()
+        .typeError('User Status is required!')
+        .required("User Role is required!")
+    });
 
     return {
-      backend_url: process.env.VUE_APP_API_URL, 
+      backend_url: process.env.VUE_APP_API_URL,
       store,
       url: this.backendUrl + "/api/users",
       users: {},
@@ -303,7 +286,7 @@ export default {
       password: '',
       userstatus: '',
       loading: false,
-      id:0,
+      id: 0,
       query: {
         page: 1,
         search: "",
@@ -311,50 +294,77 @@ export default {
       myValue: '',
       validationCreate: validationCreate,
       validationEdit: validationEdit,
-      userForm: validationCreate, 
-      image:"https://images.pexels.com/photos/4218687/pexels-photo-4218687.jpeg",
-      showModal: false, 
+      userForm: validationCreate,
+      image: "https://images.pexels.com/photos/4218687/pexels-photo-4218687.jpeg",
+      showModal: false,
 
 
       show: false,
-			params: {
-				token: '123456798',
-				name: 'avatar'
-			},
-			headers: {
-				smail: '*_~'
-			},
-			imgDataUrl: '',
+      params: {
+        token: '123456798',
+        name: 'avatar'
+      },
+      headers: {
+        smail: '*_~'
+      },
+      imgDataUrl: '',
 
       langExt: {
-          hint: 'Click or drag the file here to upload',
-          loading: 'Uploading…',
-          noSupported: 'Browser is not supported, please use IE10+ or other browsers',
-          success: 'Upload success',
-          fail: 'Upload failed',
-          preview: 'Preview',
-          btn: {
-            off: 'Cancel',
-            close: 'Close',
-            back: 'Back',
-            save: 'Crop'
-          },
-          error: {
-            onlyImg: 'Image only',
-            outOfSize: 'Image exceeds size limit: ',
-            lowestPx: 'Image\'s size is too low. Expected at least: '
-          }
+        hint: 'Click or drag the file here to upload',
+        loading: 'Uploading…',
+        noSupported: 'Browser is not supported, please use IE10+ or other browsers',
+        success: 'Upload success',
+        fail: 'Upload failed',
+        preview: 'Preview',
+        btn: {
+          off: 'Cancel',
+          close: 'Close',
+          back: 'Back',
+          save: 'Crop'
+        },
+        error: {
+          onlyImg: 'Image only',
+          outOfSize: 'Image exceeds size limit: ',
+          lowestPx: 'Image\'s size is too low. Expected at least: '
+        }
       },
     };
   },
 
-  
-  
-  computed: { ...mapGetters(["usersPaginatedData", "isLoading","isDeleting", "deletedData"
-              , "isCreating", "createdData", "isUpdating", "updatedData", "formAction","message","successStatus"]) },
+
+
+  computed: {
+    ...mapGetters(["usersPaginatedData", "isLoading", "isDeleting", "deletedData"
+      , "isCreating", "createdData", "isUpdating", "updatedData", "formAction", "message", "successStatus"])
+  },
 
   methods: {
-    ...mapActions(["fetchAllUsers", "deleteUser", "storeUser","updateUser",]),
+    activestatus(id) {
+      this.axios
+        .patch(this.backend_url + `activeUser/${id}`)
+        .then((response) => {
+          console.log(response);
+          this.fetchAllUsers(this.query);
+          this.$toast.success(`Active status Successfully!!`);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    
+    inactivestatus(id) {
+      this.axios
+        .patch(this.backend_url + `inactiveUser/${id}`)
+        .then((response) => {
+          console.log(response);
+          this.fetchAllUsers(this.query);
+          this.$toast.success(`Inactive status!!`);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    ...mapActions(["fetchAllUsers", "deleteUser", "storeUser", "updateUser",]),
 
     getResults() {
       this.fetchAllUsers(this.query);
@@ -366,7 +376,7 @@ export default {
     },
 
     handleUser(user) {
-      if (this.$store.getters.formAction == 'insert'){
+      if (this.$store.getters.formAction == 'insert') {
         this.storeUser({
           name: user.username,
           role_id: user.userrole,
@@ -374,8 +384,8 @@ export default {
           phone: user.phone,
           password: user.password,
           status: user.userstatus,
-        });                 
-      }else{  //edit
+        });
+      } else {  //edit
         this.updateUser({
           id: this.id,
           name: user.username,
@@ -385,7 +395,7 @@ export default {
           password: user.password,
           status: user.userstatus,
         });
-      }   
+      }
     },
 
     onEdit(user) {
@@ -393,7 +403,7 @@ export default {
       this.username = user.name;
       this.email = user.email;
       this.phone = user.phone,
-      this.userrole = user.role_id;
+        this.userrole = user.role_id;
       this.userstatus = user.status;
       this.$store.commit('fromActionStatus', 'edit');
       this.userForm = this.validationEdit;
@@ -424,53 +434,53 @@ export default {
             });
           }
         });
-    }, 
+    },
 
 
 
-    closeModal(){
+    closeModal() {
 
     },
 
     toggleShow() {
-				this.show = !this.show;
-			},
-            /**
-			 * crop success
-			 *
-			 * [param] imgDataUrl
-			 * [param] field
-			 */
-			cropSuccess(imgDataUrl, field){
-				console.log('-------- crop success --------');
-				this.imgDataUrl = imgDataUrl;
-        console.log('field: ' + field);
-        console.log('dataUrl: ' + imgDataUrl);
-        this.show = !this.show;
-			},
-			/**
-			 * upload success
-			 *
-			 * [param] jsonData  server api return data, already json encode
-			 * [param] field
-			 */
-			cropUploadSuccess(jsonData, field){
-				console.log('-------- upload success --------');
-				console.log(jsonData);
-				console.log('field: ' + field);
-        
-			},
-			/**
-			 * upload fail
-			 *
-			 * [param] status    server api return error status, like 500
-			 * [param] field
-			 */
-			cropUploadFail(status, field){
-				console.log('-------- upload fail --------');
-				console.log(status);
-				console.log('field: ' + field);
-			}
+      this.show = !this.show;
+    },
+    /**
+* crop success
+*
+* [param] imgDataUrl
+* [param] field
+*/
+    cropSuccess(imgDataUrl, field) {
+      console.log('-------- crop success --------');
+      this.imgDataUrl = imgDataUrl;
+      console.log('field: ' + field);
+      console.log('dataUrl: ' + imgDataUrl);
+      this.show = !this.show;
+    },
+    /**
+     * upload success
+     *
+     * [param] jsonData  server api return data, already json encode
+     * [param] field
+     */
+    cropUploadSuccess(jsonData, field) {
+      console.log('-------- upload success --------');
+      console.log(jsonData);
+      console.log('field: ' + field);
+
+    },
+    /**
+     * upload fail
+     *
+     * [param] status    server api return error status, like 500
+     * [param] field
+     */
+    cropUploadFail(status, field) {
+      console.log('-------- upload fail --------');
+      console.log(status);
+      console.log('field: ' + field);
+    }
 
 
 
@@ -485,9 +495,9 @@ export default {
     createdData: function () {
       if (this.createdData !== null && !this.isCreating) {
         this.fetchAllUsers({
-              page: 1,
-              search: ''
-            });
+          page: 1,
+          search: ''
+        });
         this.$swal.fire({
           text: "Success, User has been added successfully.",
           icon: "success",
@@ -501,9 +511,9 @@ export default {
     updatedData: function () {
       if (this.updatedData !== null && !this.isUpdating) {
         this.fetchAllUsers({
-              page: 1,
-              search: ''
-            });
+          page: 1,
+          search: ''
+        });
         this.$store.commit('fromActionStatus', 'insert');
         this.userForm = this.validationCreate;
         this.$swal.fire({
@@ -526,16 +536,15 @@ export default {
 </script>
 
 <style>
-
 .ui.inverted.dimmer {
   color: #009688 !important;
 
 }
 
 .cropper {
-	height: 400px;
-	width: 400px;
-	background: #DDD;
+  height: 400px;
+  width: 400px;
+  background: #DDD;
 }
 
 
@@ -544,50 +553,52 @@ export default {
   display: block;
   cursor: pointer;
 }
-.file-btn input {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    cursor: pointer;
-}    
-    
 
+.file-btn input {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
 </style>
 
 <style scoped>
-  ::v-deep .modal-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  ::v-deep .modal-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin: 0 1rem;
-    padding: 1rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.25rem;
-    background: #fff;
-  }
-  .modal__title {
-    margin: 0 2rem 0 0;
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-  .modal__close {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-  }
-  </style>
+::v-deep .modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::v-deep .modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0 1rem;
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  background: #fff;
+}
+
+.modal__title {
+  margin: 0 2rem 0 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+</style>
   
-  <style scoped>
-  .dark-mode div::v-deep .modal-content {
-    border-color: #2d3748;
-    background-color: #1a202c;
-  }
-  </style>
+<style scoped>
+.dark-mode div::v-deep .modal-content {
+  border-color: #2d3748;
+  background-color: #1a202c;
+}
+</style>

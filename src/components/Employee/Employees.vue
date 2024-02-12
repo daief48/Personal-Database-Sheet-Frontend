@@ -14,13 +14,8 @@
             <div class="row justify-content-center mt-2 mb-2 ml-0 mr-0">
               <div class="col-8"></div>
               <div class="col-4 mt-1 mb-1">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search Employee..."
-                  @input="searchEmployee"
-                  v-model="query.search"
-                />
+                <input type="text" class="form-control" placeholder="Search Employee..." @input="searchEmployee"
+                  v-model="query.search" />
               </div>
             </div>
 
@@ -50,74 +45,48 @@
                           <td>{{ emp.mobile_number }}</td>
                           <td>{{ emp.email }}</td>
                           <td class="text-center">
-                            <span
-                              class="badge"
-                              :class="
-                                emp.status == 1
-                                  ? 'badge-success'
-                                  : 'badge-danger'
-                              "
-                              >{{
-                                emp.status == 1 ? "Active" : "Inactive"
-                              }}</span
-                            >
+                            <span class="badge" :class="emp.emp_status == 1
+                              ? 'badge-success'
+                              : 'badge-danger'
+                              ">{{emp.emp_status == 1 ? "Active" : "Inactive"}} </span>
                           </td>
                           <td>
-                            <button
-                              class="btn btn-sm btn-warning"
-                              @click="editEmp(emp)"
-                            >
-                              Edit
+
+
+                            <button class="btn btn-sm btn-success ml-1" type="button"  @click="activeStatus(emp.emp_id)">
+                              Approve 
                             </button>
-                            <button
-                              class="btn btn-sm btn-info ml-1"
-                              type="button"
-                              data-toggle="modal"
-                              data-target="#exampleModal"
-                            >
+                            <button class="btn btn-sm btn-warning ml-1" type="button"  @click="inactiveStatus(emp.emp_id)">
+                              Decline
+                            </button>
+                            <button class="btn btn-sm btn-info ml-1" type="button" data-toggle="modal"
+                              data-target="#exampleModal">
                               Detail
                             </button>
-                            <button
-                              class="btn btn-sm btn-danger ml-1"
-                              @click="deleteEmployee(emp.id, emp.user_id)"
-                            >
+                            <button class="btn btn-sm btn-primary ml-1" @click="editEmp(emp)">
+                              Edit
+                            </button>
+                            <button class="btn btn-sm btn-danger ml-1" @click="deleteEmployee(emp.id, emp.user_id)">
                               Delete
                             </button>
 
                             <!-- Modal -->
-                            <div
-                              class="modal fade"
-                              id="exampleModal"
-                              tabindex="-1"
-                              role="dialog"
-                              aria-labelledby="exampleModalLabel"
-                              aria-hidden="true"
-                            >
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog" role="document">
                                 <div class="modal-content" style="width: 40vw">
                                   <div class="modal-header">
-                                    <h5
-                                      class="modal-title"
-                                      id="exampleModalLabel"
-                                    >
+                                    <h5 class="modal-title" id="exampleModalLabel">
                                       Employee Details
                                     </h5>
-                                    <button
-                                      type="button"
-                                      class="close"
-                                      data-dismiss="modal"
-                                      aria-label="Close"
-                                    >
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
                                   <div class="modal-body">
                                     <div class="card" style="width: 100%">
                                       <div class="card-body">
-                                        <h1
-                                          class="card-title"
-                                          style="font-size: 28px"
-                                        >
+                                        <h1 class="card-title" style="font-size: 28px">
                                           Basic Information
                                         </h1>
                                         <br />
@@ -137,19 +106,16 @@
                                     </div>
                                     <div class="card">
                                       <div class="card-body">
-                                        <h1
-                                          class="card-title"
-                                          style="font-size: 28px"
-                                        >
-                                        Present  Address
+                                        <h1 class="card-title" style="font-size: 28px">
+                                          Present Address
                                         </h1>
-                                      
+
                                         <br />
                                         <br />
                                         <hr>
                                         <p>House Address : {{ emp.present_addr_houseno }}</p>
                                         <p>Road No : {{ emp.present_addr_roadno }}</p>
-                                        <p>Area/Word:	 : {{ emp.present_addr_area }}</p>
+                                        <p>Area/Word: : {{ emp.present_addr_area }}</p>
                                         <p>
                                           Upazila : {{ emp.present_addr_upazila }}
                                         </p>
@@ -166,19 +132,16 @@
 
                                     <div class="card">
                                       <div class="card-body">
-                                        <h1
-                                          class="card-title"
-                                          style="font-size: 28px"
-                                        >
-                                        Permanent  Address
+                                        <h1 class="card-title" style="font-size: 28px">
+                                          Permanent Address
                                         </h1>
-                                      
+
                                         <br />
                                         <br />
                                         <hr>
                                         <p>House Address : {{ emp.permanent_addr_houseno }}</p>
                                         <p>Road No : {{ emp.permanent_addr_roadno }}</p>
-                                        <p>Area/Word:	 : {{ emp.permanent_addr_area }}</p>
+                                        <p>Area/Word: : {{ emp.permanent_addr_area }}</p>
                                         <p>
                                           Upazila : {{ emp.permanent_addr_upazila }}
                                         </p>
@@ -194,35 +157,28 @@
                                     </div>
                                     <div class="card">
                                       <div class="card-body">
-                                        <h1
-                                          class="card-title"
-                                          style="font-size: 28px"
-                                        >
-                                        Job
+                                        <h1 class="card-title" style="font-size: 28px">
+                                          Job
                                         </h1>
-                                      
+
                                         <br />
                                         <br />
                                         <hr>
                                         <p>Location : {{ emp.job_location }}</p>
                                         <p>Department : {{ emp.department_name }}</p>
-                                        <p>Designation:	 : {{ emp.designation_name }}</p>
+                                        <p>Designation: : {{ emp.designation_name }}</p>
                                         <p>
                                           Joining Date : {{ emp.joining_date }}
                                         </p>
-                                        
+
                                       </div>
                                     </div>
                                   </div>
                                   <div class="modal-footer">
-                                    <button
-                                      type="button"
-                                      class="btn btn-secondary"
-                                      data-dismiss="modal"
-                                    >
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                       Close
                                     </button>
-                                  
+
                                   </div>
                                 </div>
                               </div>
@@ -240,13 +196,8 @@
             <!-- Insert Pagination Part -->
 
             <div v-if="employees !== null" class="vertical-center mt-3 mb-5">
-              <v-pagination
-                v-model="query.current_page"
-                :pages="query.page"
-                :range-size="1"
-                active-color="#DCEDFF"
-                @update:modelValue="getEmployees"
-              />
+              <v-pagination v-model="query.current_page" :pages="query.page" :range-size="1" active-color="#DCEDFF"
+                @update:modelValue="getEmployees" />
             </div>
           </div>
         </div>
@@ -254,11 +205,7 @@
     </div>
 
     <div>
-      <vue-final-modal
-        v-model="showModal"
-        classes="modal-container"
-        content-class="modal-content"
-      >
+      <vue-final-modal v-model="showModal" classes="modal-container" content-class="modal-content">
         <button class="modal__close" @click="showModal = false">
           <mdi-close></mdi-close>
         </button>
@@ -313,6 +260,30 @@ export default {
   },
 
   methods: {
+    activeStatus(id) {
+      this.axios
+        .get(this.backend_url + `user/activeEmployeeType/${id}`)
+        .then((response) => {
+          console.log(response);
+          this.getEmployees();
+          this.$toast.success(`Active status Successfully!!`);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    inactiveStatus(id) {
+      this.axios
+        .get(this.backend_url + `user/inactiveEmployeeType/${id}`)
+        .then((response) => {
+          console.log(response);
+          this.getEmployees();
+          this.$toast.error(`Inactive status!!`);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     getEmployees(query = null) {
       let page = 1;
       let search = "";
@@ -486,6 +457,7 @@ export default {
   display: block;
   cursor: pointer;
 }
+
 .file-btn input {
   position: absolute;
   height: 100%;
@@ -503,6 +475,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 ::v-deep .modal-content {
   position: relative;
   display: flex;
@@ -513,11 +486,13 @@ export default {
   border-radius: 0.25rem;
   background: #fff;
 }
+
 .modal__title {
   margin: 0 2rem 0 0;
   font-size: 1.5rem;
   font-weight: 700;
 }
+
 .modal__close {
   position: absolute;
   top: 0.5rem;
@@ -525,7 +500,7 @@ export default {
 }
 </style>
   
-  <style scoped>
+<style scoped>
 .dark-mode div::v-deep .modal-content {
   border-color: #2d3748;
   background-color: #1a202c;

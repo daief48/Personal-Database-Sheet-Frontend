@@ -239,19 +239,6 @@
                                                 <i class="fa fa-eye"
                                                     style="color: rgb(244, 221, 18);border: 2px solid rgb(244, 221, 18);padding: 3px;font-size: 16px;cursor: pointer;"></i>
                                             </a>
-                                            <i class="fas fa-edit"
-                                                style="color: darkgreen; border: 2px solid #57b75e; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                data-toggle="modal" data-target="#exampleModal1"
-                                                @click="editbutton(item)"></i>
-                                            <!-- Corrected edit icon class -->
-                                            <i class="fa-solid fa-trash ml-1"
-                                                style="color: red; border: 2px solid red; padding: 3px; font-size: 16px; cursor: pointer;"
-                                                @click="deletebutton(item.id)"></i>
-
-
-
-
-
 
                                         </td>
 

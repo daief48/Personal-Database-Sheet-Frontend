@@ -198,7 +198,7 @@
                     <div class="modal-footer d-flex justify-content-center">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         @click="resetForm()">Cancel</button>
-                      <button type="submit" class="btn btn-primary" @click="saveTranfer()">Add</button>
+                      <button type="submit" class="btn btn-primary" @click="saveTranfer()">Save</button>
                     </div>
                   </Form>
                 </div>
@@ -396,7 +396,7 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-primary" @click="EditTranfer()">Edit</button>
+                      <button type="submit" class="btn btn-primary" @click="EditTranfer()">Update</button>
                     </div>
                   </Form>
                 </div>

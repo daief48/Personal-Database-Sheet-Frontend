@@ -42,7 +42,7 @@
                                                     <label for="exampleFormControlSelect1">Designation:</label>
                                                     <Field as="select" class="form-control" id="exampleFormControlSelect1"
                                                         v-model="Acr.designation" name="designation"
-                                                        :class="{ 'is-invalid': errors.designation }">
+                                                        :class="{ 'is-invalid': errors.designation }" readonly>
 
                                                         <option v-for="designation in designations" :key="designation.id"
                                                             :value="designation.id">
@@ -57,7 +57,7 @@
                                                     <label for="exampleFormControlSelect1">Department:</label>
                                                     <Field class="form-control" as="select" id="exampleFormControlSelect1"
                                                         v-model="Acr.department" name="department"
-                                                        :class="{ 'is-invalid': errors.department }">
+                                                        :class="{ 'is-invalid': errors.department }" readonly>
                                                         <option v-for="department in departments" :key="department.id"
                                                             :value="department.id">
                                                             {{ department.dept_name }}
@@ -71,7 +71,7 @@
                                                     <label for="exampleFormControlSelect1">Office Name:</label>
                                                     <Field as="select" class="form-control" id="exampleFormControlSelect1"
                                                         v-model="Acr.office_name" name="office_name"
-                                                        :class="{ 'is-invalid': errors.office_name }">
+                                                        :class="{ 'is-invalid': errors.office_name }" readonly>
 
                                                         <option v-for="office in office" :key="office.id"
                                                             :value="office.id">
@@ -105,8 +105,8 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">ACR Year:</label>
-                                                    <Field type="date" class="form-control" id="exampleInputEmail1"
-                                                        aria-describedby="emailHelp" placeholder="Enter email"
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
+                                                        aria-describedby="emailHelp" placeholder="Enter ACR Year"
                                                         v-model="Acr.acr_year" name="acr_year"
                                                         :class="{ 'is-invalid': errors.acr_year }" />
                                                     <div class="invalid-feedback">{{ errors.acr_year }}</div>
@@ -253,7 +253,7 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">ACR Year:</label>
-                                                    <Field type="date" class="form-control" id="exampleInputEmail1"
+                                                    <Field type="number" class="form-control" id="exampleInputEmail1"
                                                         aria-describedby="emailHelp" placeholder="Enter email"
                                                         v-model="editAcr.acr_year" name="acr_year"
                                                         :class="{ 'is-invalid': errors.acr_year }" />
@@ -513,15 +513,15 @@ export default {
         const storageData = JSON.parse(localStorage.getItem('user'));
 
         const schema = Yup.object().shape({
-            designation: Yup.string().required("Designation is required"),
-            department: Yup.string().required("Department is required"),
-            office_name: Yup.string().required("Office Name is required"),
+            // designation: Yup.string().required("Designation is required"),
+            // department: Yup.string().required("Department is required"),
+            // office_name: Yup.string().required("Office Name is required"),
             score: Yup.string().required("Score is required"),
-            remarks: Yup.string().required("Remarks is required"),
-            file: Yup.mixed().required("File is required"), // Assuming it's a file upload
-            rack_number: Yup.string().required("Rack Number is required"),
-            bin_number: Yup.string().required("Bin Number is required"),
-            file_number: Yup.string().required("File Number is required"),
+            // remarks: Yup.string().required("Remarks is required"),
+            // file: Yup.mixed().required("File is required"), // Assuming it's a file upload
+            // rack_number: Yup.string().required("Rack Number is required"),
+            // bin_number: Yup.string().required("Bin Number is required"),
+            // file_number: Yup.string().required("File Number is required"),
             acr_year: Yup.string().required("ACR Year is required"),
         });
 
@@ -563,7 +563,7 @@ export default {
                 file_number: "",
                 acr_year: "",
                 score: "",
-                acr_date:""
+                acr_date: ""
             },
             editAcr: {
                 employee_id: "",
@@ -578,7 +578,7 @@ export default {
                 file_number: "",
                 acr_year: "",
                 score: "",
-                acr_date:""
+                acr_date: ""
             }
 
         };
@@ -587,6 +587,19 @@ export default {
     computed: {},
 
     methods: {
+        change1() {
+            console.log(this.value.id);
+            this.axios
+                .get(this.backend_url + `user/getEmployeeById/${this.value.id}`)
+                .then((res) => {
+                    console.log(res.data.data.office);  
+                    this.Acr.designation = res.data.data.designation;
+                    this.Acr.department = res.data.data.department;
+                    this.Acr.office_name = res.data.data.office;
+
+                });
+        }
+        ,
         activestatus(id) {
             this.axios
                 .patch(this.backend_url + `activeAcrRecord/${id}`)
@@ -750,17 +763,17 @@ export default {
 
 
             formData.append('employee_id', this.value.id);
-            formData.append('remarks', this.Acr.remarks);
-            formData.append('designation', this.Acr.designation);
-            formData.append('department', this.Acr.department);
-            formData.append('office_name', this.Acr.office_name);
-            formData.append('rack_number', this.Acr.rack_number);
-            formData.append('bin_number', this.Acr.bin_number);
-            formData.append('file', this.Acr.file);
-            formData.append('file_number', this.Acr.file_number);
-            formData.append('acr_year', this.Acr.acr_year);
-            formData.append('score', this.Acr.score);
-            formData.append('acr_date', this.Acr.acr_year);
+            formData.append('remarks', this.Acr.remarks !== undefined ? this.Acr.remarks : '');
+            formData.append('designation', this.Acr.designation !== undefined ? this.Acr.designation : '');
+            formData.append('department', this.Acr.department !== undefined ? this.Acr.department : '');
+            formData.append('office_name', this.Acr.office_name !== undefined ? this.Acr.office_name : '');
+            formData.append('rack_number', this.Acr.rack_number !== undefined ? this.Acr.rack_number : '');
+            formData.append('bin_number', this.Acr.bin_number !== undefined ? this.Acr.bin_number : '');
+            formData.append('file', this.Acr.file !== undefined ? this.Acr.file : '');
+            formData.append('file_number', this.Acr.file_number !== undefined ? this.Acr.file_number : '');
+            formData.append('acr_year', this.Acr.acr_year !== undefined ? this.Acr.acr_year : '');
+            formData.append('score', this.Acr.score !== undefined ? this.Acr.score : '');
+            formData.append('acr_date', this.Acr.acr_year !== undefined ? this.Acr.acr_year : '');
 
 
             try {
@@ -789,16 +802,17 @@ export default {
             let formData = new FormData;
 
             formData.append('employee_id', this.editAcr.employee_id);
-            formData.append('remarks', this.editAcr.remarks);
-            formData.append('designation', this.editAcr.designation);
-            formData.append('department', this.editAcr.department);
-            formData.append('office_name', this.editAcr.office_name);
-            formData.append('rack_number', this.editAcr.rack_number);
-            formData.append('bin_number', this.editAcr.bin_number);
-            formData.append('file', this.editAcr.file);
-            formData.append('file_number', this.editAcr.file_number);
-            formData.append('acr_year', this.editAcr.acr_year);
-            formData.append('score', this.editAcr.score);
+            formData.append('remarks', this.editAcr.remarks !== null ? this.editAcr.remarks : '');
+            formData.append('designation', this.editAcr.designation !== null ? this.editAcr.designation : '');
+            formData.append('department', this.editAcr.department !== null ? this.editAcr.department : '');
+            formData.append('office_name', this.editAcr.office_name !== null ? this.editAcr.office_name : '');
+            formData.append('rack_number', this.editAcr.rack_number !== null ? this.editAcr.rack_number : '');
+            formData.append('bin_number', this.editAcr.bin_number !== null ? this.editAcr.bin_number : '');
+            formData.append('file', this.editAcr.file !== null ? this.editAcr.file : '');
+            formData.append('file_number', this.editAcr.file_number !== null ? this.editAcr.file_number : '');
+            formData.append('acr_year', this.editAcr.acr_year !== null ? this.editAcr.acr_year : '');
+            formData.append('score', this.editAcr.score !== null ? this.editAcr.score : '');
+            formData.append('acr_date', this.editAcr.acr_year !== null ? this.editAcr.acr_year : '');
 
 
             try {

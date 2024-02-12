@@ -231,7 +231,7 @@
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                                 @click="resetForm()">Cancel</button>
                                             <button type="submit" class="btn btn-primary"
-                                                @click="saveTranfer()">Add</button>
+                                                @click="saveTranfer()">Save</button>
                                         </div>
                                     </Form>
                                 </div>
@@ -462,7 +462,7 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
                                             <button type="submit" class="btn btn-primary"
-                                                @click="EditTranfer()">Edit</button>
+                                                @click="EditTranfer()">Update</button>
                                         </div>
                                     </Form>
                                 </div>

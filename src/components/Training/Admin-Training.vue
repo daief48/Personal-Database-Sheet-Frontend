@@ -156,7 +156,7 @@
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                                 @click="resetForm()">Cancel</button>
                                             <button type="submit" class="btn btn-primary"
-                                                @click="saveTraining()">Add</button>
+                                                @click="saveTraining()">Save</button>
                                         </div>
                                     </Form>
                                 </div>
@@ -308,7 +308,7 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancel</button>
                                             <button type="submit" class="btn btn-primary"
-                                                @click="EditTraining()">Edit</button>
+                                                @click="EditTraining()">Upldate</button>
                                         </div>
                                     </Form>
                                 </div>
